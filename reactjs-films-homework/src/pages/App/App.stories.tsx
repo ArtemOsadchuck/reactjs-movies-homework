@@ -1,4 +1,4 @@
-import React, { ComponentProps } from 'react';
+import React from 'react';
 
 import { Story } from '@storybook/react';
 import App from './App';
