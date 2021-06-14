@@ -79,6 +79,7 @@
     "stylelint-config-standard-scss": "^1.1.0",
     "stylelint-order": "^4.1.0",
     "stylelint-prettier": "^1.2.0",
-    "stylelint-scss": "^3.19.0"
+    "stylelint-scss": "^3.19.0",
+    "@types/sass": "^1.16.0"
   }
 }

@@ -1,0 +1,48 @@
+.form {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  // padding-right: 15%;
+  margin-right: 20%;
+  position: relative;
+  text-align: start;
+
+  @media screen and (max-width: 760px) {
+    margin-right: 0.5rem;
+  }
+
+  .input {
+    border: 0;
+    border-radius: 3px;
+    height: 2rem;
+    padding-left: 0.5rem;
+    text-align: start;
+    width: 28rem;
+
+    @media screen and (max-width: 760px) {
+      width: 18rem;
+    }
+  }
+
+  .search {
+    align-items: center;
+    background-color: #fff;
+    display: flex;
+    height: 80%;
+    justify-content: center;
+    margin: auto;
+    position: absolute;
+    right: 0.1rem;
+    width: 2rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.formWrapper {
+  @media screen and (max-width: 760px) {
+    flex-grow: 3;
+  }
+}

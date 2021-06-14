@@ -1,0 +1,31 @@
+$wite: rgb(255, 255, 255);
+$black: rgb(0, 0, 0);
+$gray: rgba(231, 231, 231, 0.775);
+$green: rgb(41, 186, 41);
+
+.paginationWrapper {
+  bottom: 1rem;
+  color: $gray;
+  display: flex;
+  height: 2rem;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  margin-top: 1rem;
+  width: 20rem;
+
+  div {
+    align-items: center;
+    display: flex;
+    height: 2rem;
+    justify-content: center;
+    transition: 0.1s;
+    width: 2rem;
+
+    &:hover {
+      background-color: $green;
+      border-radius: 50%;
+      color: $wite;
+      cursor: pointer;
+    }
+  }
+}
