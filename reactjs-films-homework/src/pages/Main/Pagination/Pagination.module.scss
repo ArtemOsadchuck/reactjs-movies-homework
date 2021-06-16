@@ -13,6 +13,13 @@ $green: rgb(41, 186, 41);
   margin-top: 1rem;
   width: 20rem;
 
+  .active {
+    background-color: $green;
+    border-radius: 50%;
+    color: $wite;
+    cursor: pointer;
+  }
+
   div {
     align-items: center;
     display: flex;

@@ -5,17 +5,27 @@ import CategoriesTabs from './CategoriesTabs';
 
 import styles from './Main.module.scss';
 import Pagination from './Pagination';
+import asyncGetTopRated from '../../mocks/topRated.js';
+import { useState } from 'react';
 
 const Main = () => {
-  const pagNum = ['1', '2', '3', '4', '5'];
+  const [state, setState]: any = useState([]);
+  asyncGetTopRated.then((res) => {
+    setState(res);
+    return res;
+  });
+
   return (
     <div className={styles.mainWrapper}>
       <CategoriesTabs />
       <div className={styles.cardsWrapper}>
-        {pagNum.map(() => {
-          return <MovieCard key={Date.now() - Math.random()} />;
-        })}
-        {/* <MovieCard /> */}
+        {state.length ? (
+          state.map((e: typeof state) => {
+            return <MovieCard props={e} key={Date.now() - Math.random()} />;
+          })
+        ) : (
+          <h2>Loading...</h2>
+        )}
       </div>
       <Pagination />
     </div>
