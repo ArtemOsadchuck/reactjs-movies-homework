@@ -88,6 +88,6 @@ const delay = (ms) => {
     }, ms)
   );
 };
-const mockGenres = delay(550).then(() => genres);
+const mockGenres = delay(150).then(() => genres);
 
 export default mockGenres;

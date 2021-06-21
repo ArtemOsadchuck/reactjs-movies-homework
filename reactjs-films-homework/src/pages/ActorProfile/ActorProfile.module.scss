@@ -1,0 +1,13 @@
+$background-color: rgb(37, 37, 37);
+$h2-loading-color: rgb(121, 121, 121);
+
+.mainWrapper {
+  align-items: center;
+  background: $background-color;
+  color: $h2-loading-color;
+  margin: 0 auto;
+  max-width: 1100px;
+  min-height: calc(100vh - 5rem);
+  position: relative;
+  width: 90%;
+}

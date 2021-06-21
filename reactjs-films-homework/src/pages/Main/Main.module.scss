@@ -1,5 +1,5 @@
 $background-color: rgb(37, 37, 37);
-$h2-loadind-color: rgb(121, 121, 121);
+$h2-loading-color: rgb(121, 121, 121);
 
 .mainWrapper {
   align-items: center;
@@ -24,6 +24,6 @@ $h2-loadind-color: rgb(121, 121, 121);
   }
 
   h2 {
-    color: $h2-loadind-color;
+    color: $h2-loading-color;
   }
 }

@@ -1,13 +1,14 @@
+/* eslint-disable array-callback-return */
 import React, { useState, useEffect } from 'react';
 import img from './img/Movie-card.png';
 import styles from './MovieCard.module.scss';
 import mockGenres from '../../mocks/genresIDs';
 
-interface ICard {
+export interface ICard {
   props: IMovieCard;
 }
 
-interface IMovieCard {
+export interface IMovieCard {
   id: number;
   title: string;
   vote_average: number;
@@ -16,7 +17,7 @@ interface IMovieCard {
   key?: number;
 }
 
-interface IGenre {
+export interface IGenre {
   genres?: {
     id: number;
     name: string;
@@ -71,9 +72,11 @@ const MovieCard: React.FC<ICard> = ({ props }) => {
         </div>
         <h4>{title}</h4>
         <p className={styles.genre}>
-          {genreName.map((el: string) => {
-            return <span key={el}>{` ${el}`}</span>;
-          })}
+          {genreName
+            ? genreName.map((el: string) => {
+                return <span key={el}>{` ${el}`}</span>;
+              })
+            : null}
         </p>
       </div>
     </a>

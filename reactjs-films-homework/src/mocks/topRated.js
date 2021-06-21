@@ -358,6 +358,6 @@ const delay = (ms) => {
     }, ms)
   );
 };
-const mock = delay(500).then(() => responseTopRated);
+const mock = delay(100).then(() => responseTopRated);
 
 export default mock;
