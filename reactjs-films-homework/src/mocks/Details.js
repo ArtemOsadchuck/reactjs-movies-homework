@@ -68,7 +68,7 @@ const delay = (ms) => {
 const imgS =
   'https://api.themoviedb.org/3/movie/278/images?api_key=8fa5bc53bb4a09dfb6560253edf33030&language=en-US&include_image_language=null';
 const mockDetails = delay(400).then(() => details);
-const nnn = fetch(imgS)
+fetch(imgS)
   .then((res) => {
     return res.json();
   })
