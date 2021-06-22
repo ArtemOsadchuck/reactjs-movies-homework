@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './Pagination.module.scss';
 import asyncGetTopRated from '../../../mocks/topRated.js';
 
-const Pagination = () => {
+const Pagination: React.FC = () => {
   const pagNum = ['1', '2', '3', '4', '5'];
   const [currentPage, setCurrentPage] = useState('1');
 

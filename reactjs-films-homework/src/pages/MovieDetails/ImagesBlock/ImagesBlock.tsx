@@ -1,18 +1,20 @@
 import React from 'react';
-
 import styles from './ImagesBlock.module.scss';
+
 export interface IImagesBlock {
-  backdrops: {
-    aspect_ratio?: number;
-    file_path: string;
-    height?: number;
-    iso_639_1?: null;
-    vote_average?: number;
-    vote_count?: number;
-    width?: number;
-  }[];
+  props: IImagesBlockProps[];
 }
-const ImagesBlock: React.FC<IImagesBlock> = ({ backdrops }) => {
+export interface IImagesBlockProps {
+  aspect_ratio?: number;
+  file_path: string;
+  height?: number;
+  iso_639_1?: null;
+  vote_average?: number;
+  vote_count?: number;
+  width?: number;
+}
+
+const ImagesBlock: React.FC<IImagesBlock> = ({ props }) => {
   const imgWidth = '172px';
   const imagesQuality = 8;
 
@@ -22,8 +24,8 @@ const ImagesBlock: React.FC<IImagesBlock> = ({ backdrops }) => {
         <h3 className={styles.imagesTitle}>Images</h3>
       </div>
       <div className={styles.imagesWrapper}>
-        {backdrops
-          ? backdrops.slice(0, imagesQuality).map((el) => {
+        {props
+          ? props.slice(0, imagesQuality).map((el) => {
               return (
                 <img
                   className={styles.image}

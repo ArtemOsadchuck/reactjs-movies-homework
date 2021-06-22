@@ -1,45 +1,44 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import MovieTitleCard from './MovieTitleCard';
-
 import styles from './MovieDetails.module.scss';
+
 import mockDetails from '../../mocks/Details.js';
 import MovieTeam from '../../mocks/MovieTeam';
 import images from '../../mocks/images';
+
 import recommendationsMock from '../../mocks/recommendations';
 import TopBilledCast from './TopBilledCast';
-import { ITopBilledCast } from './TopBilledCast/TopBilledCast';
+import { ITopBilledCastProp } from './TopBilledCast/TopBilledCast';
 import ImagesBlock from './ImagesBlock';
 import MovieCard from '../../components/MovieCard';
 import { IMovieCard } from '../../components/MovieCard/MovieCard';
+import { ITitleMovieProps } from './MovieTitleCard/MovieTitleCard';
+import { IImagesBlockProps } from './ImagesBlock/ImagesBlock';
 
 const MovieDetails: React.FC = () => {
-  const [state, setState]: any = useState([]);
-  const [cast, setCast]: any = useState([]);
-  const [sortCast, setSortCast]: any = useState([]);
-  const [stateImg, setStateImg]: any = useState();
-  const [recommendations, setRecommendations]: any = useState([]);
+  const [titleInfoState, setTitleInfoState] = useState<ITitleMovieProps>();
+  const [cast, setCast] = useState<Array<ITopBilledCastProp>>([]);
+  const [sortCast, setSortCast] = useState<Array<ITopBilledCastProp>>([]);
+  const [stateImg, setStateImg] = useState<Array<IImagesBlockProps>>();
+  const [recommendations, setRecommendations] = useState<Array<IMovieCard>>([]);
   const recommendationsQuality = 5;
 
   useEffect(() => {
     mockDetails.then((res) => {
-      setState(res);
-      return;
+      setTitleInfoState((): ITitleMovieProps => res);
     });
     MovieTeam.then((res) => {
-      setCast(res.cast);
-      return;
+      setCast((): any[] => res.cast);
     });
     images.then((res) => {
-      setStateImg(res.backdrops);
-      return res;
+      setStateImg((): IImagesBlockProps[] => res.backdrops);
     });
     recommendationsMock.then((res) => {
-      const result = res.results;
-      setRecommendations(result);
+      setRecommendations(() => res.results);
     });
   });
 
-  const sortCastBySix = (cast: Array<{ popularity: number }>) => {
+  const sortCastBySix = (cast: Array<any>) => {
     const castLength = 6;
     const resultCast = [...cast].sort((a, b) => {
       return a.popularity > b.popularity ? -1 : 1;
@@ -53,7 +52,7 @@ const MovieDetails: React.FC = () => {
 
   return (
     <div className={styles.mainWrapper}>
-      <MovieTitleCard props={state} />
+      {titleInfoState ? <MovieTitleCard props={titleInfoState} /> : null}
 
       <div className={styles.castWrapper}>
         <div className={styles.castNameWrapper}>
@@ -62,12 +61,12 @@ const MovieDetails: React.FC = () => {
         </div>
         <div className={styles.castGrid}>
           {sortCast.length
-            ? sortCast.map((el: ITopBilledCast) => {
+            ? sortCast.map((el: ITopBilledCastProp) => {
                 return <TopBilledCast key={el.id} props={el} />;
               })
             : null}
         </div>
-        <ImagesBlock backdrops={stateImg} />
+        {stateImg ? <ImagesBlock props={stateImg} /> : null}
       </div>
       <div className={styles.recommendationsWrapper}>
         <h2 className={styles.recommendationsTitle}>

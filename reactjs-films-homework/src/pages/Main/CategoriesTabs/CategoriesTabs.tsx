@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './CategoriesTabs.module.scss';
 
-const CategoriesTabs = () => {
+const CategoriesTabs: React.FC = () => {
   return (
     <div className={styles.categoriesWrapper}>
       <div>Popular</div>

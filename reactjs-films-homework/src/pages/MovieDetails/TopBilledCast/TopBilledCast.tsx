@@ -1,18 +1,17 @@
 import React from 'react';
-
 import styles from './TopBilledCast.module.scss';
 
-export interface ITopBilledCast {
+export interface ITopBilledCastProp {
   id: number;
   name: string;
   profile_path: string;
   character: string;
 }
-
-interface ITopBilledCastProp {
-  props: ITopBilledCast;
+export interface ITopBilledCast {
+  props: ITopBilledCastProp;
 }
-const TopBilledCast: React.FC<ITopBilledCastProp> = ({ props }) => {
+
+const TopBilledCast: React.FC<ITopBilledCast> = ({ props }) => {
   const { id, name, profile_path, character } = props;
   const urlImg = `https://image.tmdb.org/t/p/w200/${profile_path}`;
 

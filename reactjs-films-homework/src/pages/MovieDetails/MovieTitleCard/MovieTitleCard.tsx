@@ -4,28 +4,24 @@ import styles from './MovieTitleCard.module.scss';
 import MovieTitleInfo from './MovieTitleInfo';
 
 export interface ICard {
-  props: IMovieCard;
+  props: ITitleMovieProps;
 }
-
-export interface IMovieCard {
-  props: {
+export interface ITitleMovieProps {
+  id: number;
+  title: string;
+  vote_average: number;
+  poster_path: string;
+  overview: string;
+  release_date: string;
+  runtime: number;
+  revenue: number;
+  genres?: {
     id: number;
-    title: string;
-    vote_average: number;
-    poster_path: string;
-    genre_ids: number[];
-    overview: string;
-    release_date: string;
-    runtime: number;
-    revenue: number;
-    genres: {
-      id: number;
-      name: string;
-    }[];
-  };
+    name: string;
+  }[];
 }
 
-const MovieTitleCard: React.FC<IMovieCard> = ({ props }) => {
+const MovieTitleCard: React.FC<ICard> = ({ props }) => {
   const {
     id,
     title,

@@ -1,11 +1,11 @@
 import React from 'react';
-
 import styles from './MovieTitleInfo.module.scss';
 
 export interface IMovieTitleInfo {
   heading: string;
   infoField: string;
 }
+
 const MovieTitleInfo: React.FC<IMovieTitleInfo> = ({ heading, infoField }) => {
   return heading === 'Title:' ? (
     <div className={styles.titleWrapper}>
