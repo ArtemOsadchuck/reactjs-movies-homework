@@ -384,15 +384,7 @@ const recommendations = {
   total_results: 40,
 };
 
-// const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=8fa5bc53bb4a09dfb6560253edf33030&language=en-US&page=${e}`;
-// const mock = fetch(`${url}`)
-//   .then((res) => {
-//     return res.json();
-//   })
-//   .then((mock) => {
-//     // JSON.stringify(mock);
-//     console.log(mock.results);
-//   });
+// const url = `https://api.themoviedb.org/3/movie/278/recommendations?api_key=8fa5bc53bb4a09dfb6560253edf33030&language=en-US&page=1`;
 
 const delay = (ms) => {
   return new Promise((res) =>
