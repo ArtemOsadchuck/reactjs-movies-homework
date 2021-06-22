@@ -12,15 +12,17 @@ export interface IPhotos {
 }
 export interface IActorPhotos {
   props: IPhotos[];
+  photosLength: number;
 }
 
 const ActorPhotos: React.FC<IActorPhotos> = ({ props }) => {
+  const photosLength = 4;
   return (
     <div className={styles.PhotosWrapper}>
       {props.length ? <h3 className={styles.photosTitle}>Photos</h3> : null}
       <div className={styles.photosGrid}>
         {props.length
-          ? props.slice(0, 4).map((el) => {
+          ? props.slice(0, photosLength).map((el) => {
               return (
                 <img
                   width="120px"

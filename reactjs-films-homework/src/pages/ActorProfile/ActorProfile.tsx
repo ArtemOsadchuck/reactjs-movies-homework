@@ -16,6 +16,7 @@ const ActorProfile: React.FC = () => {
   const [photos, setPhotos] = useState<Array<IPhotos>>([]);
   const [knownBy, setKnownBy] = useState<Array<IMovieCard>>([]);
   const [sortKnownBy, setSortKnownBy] = useState<Array<IMovieCard>>([]);
+  const actorGridPhotosLength = 4;
 
   useEffect(() => {
     actorInfo.then((res) => {
@@ -45,7 +46,7 @@ const ActorProfile: React.FC = () => {
   return (
     <div className={styles.mainWrapper}>
       {info ? <ActorTitle props={info} /> : null}
-      <ActorPhotos props={photos} />
+      <ActorPhotos props={photos} photosLength={actorGridPhotosLength} />
       <div className={styles.cardsWrapper}>
         {sortKnownBy.map((el: IMovieCard) => {
           return <MovieCard key={el.id} props={el} />;
