@@ -7,8 +7,10 @@ import MovieTeam from '../../mocks/MovieTeam';
 import images from '../../mocks/images';
 import recommendationsMock from '../../mocks/recommendations';
 import TopBilledCast from './TopBilledCast';
+import { ITopBilledCast } from './TopBilledCast/TopBilledCast';
 import ImagesBlock from './ImagesBlock';
 import MovieCard from '../../components/MovieCard';
+import { IMovieCard } from '../../components/MovieCard/MovieCard';
 
 const MovieDetails: React.FC = () => {
   const [state, setState]: any = useState([]);
@@ -60,8 +62,8 @@ const MovieDetails: React.FC = () => {
         </div>
         <div className={styles.castGrid}>
           {sortCast.length
-            ? sortCast.map((el: any) => {
-                return <TopBilledCast key={el.id} cast={el} />;
+            ? sortCast.map((el: ITopBilledCast) => {
+                return <TopBilledCast key={el.id} props={el} />;
               })
             : null}
         </div>
@@ -75,8 +77,10 @@ const MovieDetails: React.FC = () => {
           {recommendations.length ? (
             recommendations
               .slice(0, recommendationsQuality)
-              .map((e: typeof recommendations) => {
-                return <MovieCard props={e} key={Date.now() - Math.random()} />;
+              .map((el: IMovieCard) => {
+                return (
+                  <MovieCard props={el} key={Date.now() - Math.random()} />
+                );
               })
           ) : (
             <h2>Loading...</h2>
