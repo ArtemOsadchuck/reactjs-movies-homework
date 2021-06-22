@@ -1,0 +1,66 @@
+$background-color: rgb(37, 37, 37);
+$h2-loading-color: rgb(121, 121, 121);
+$wite-color: rgb(255, 255, 255);
+
+.titleWrapper {
+  color: $wite-color;
+  display: flex;
+  padding-right: 1.5rem;
+  width: 100%;
+
+  @media screen and (max-width: 1200px) {
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.titleImageWrapper {
+  display: flex;
+  float: left;
+  height: 29rem;
+  padding-left: 1.5rem;
+  width: 22rem;
+
+  .titleImage {
+    border-radius: 5px;
+    flex-shrink: 0;
+  }
+}
+
+.titleInfoWrapper {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 68%;
+
+  .Info {
+    margin-top: 1rem;
+    text-align: start;
+
+    strong {
+      display: block;
+      margin-bottom: 0.2rem;
+      text-align: start;
+    }
+
+    p {
+      text-align: start;
+    }
+
+    .biographyTitle {
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .biography {
+      width: 80vw;
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    padding: 0 1.5rem;
+    width: 100%;
+  }
+}
