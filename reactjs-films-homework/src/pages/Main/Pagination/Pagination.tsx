@@ -1,12 +1,10 @@
-import React from 'react';
-
+import React, { useState } from 'react';
 import styles from './Pagination.module.scss';
 import asyncGetTopRated from '../../../mocks/topRated.js';
-import { useState } from 'react';
 
 const Pagination = () => {
   const pagNum = ['1', '2', '3', '4', '5'];
-  const [currentPage, setCurrentPage]: any = useState('1');
+  const [currentPage, setCurrentPage] = useState('1');
 
   const getPage = async (e: string) => {
     const mock = await asyncGetTopRated;
