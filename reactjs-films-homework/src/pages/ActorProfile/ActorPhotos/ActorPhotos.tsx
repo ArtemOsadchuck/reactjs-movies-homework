@@ -1,16 +1,17 @@
 import React from 'react';
 import styles from './ActorPhotos.module.scss';
 
-interface IActorPhotos {
-  props: {
-    aspect_ratio: number;
-    file_path: string;
-    height: number;
-    iso_639_1: null;
-    vote_average: number;
-    vote_count: number;
-    width: number;
-  }[];
+export interface IPhotos {
+  aspect_ratio: number;
+  file_path: string;
+  height: number;
+  iso_639_1: null;
+  vote_average: number;
+  vote_count: number;
+  width: number;
+}
+export interface IActorPhotos {
+  props: IPhotos[];
 }
 
 const ActorPhotos: React.FC<IActorPhotos> = ({ props }) => {

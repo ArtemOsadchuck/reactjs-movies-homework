@@ -1,19 +1,19 @@
 import React from 'react';
-
 import styles from './ActorTitleInfo.module.scss';
 
-interface IActorTitle {
-  props: {
-    also_known_as?: string[];
-    biography: string;
-    birthday: string;
-    gender: number;
-    id: number;
-    known_for_department?: string;
-    name: string;
-    place_of_birth: string;
-    profile_path: string;
-  };
+export interface IActorTitle {
+  props: IActorTitleProps;
+}
+export interface IActorTitleProps {
+  also_known_as?: string[];
+  biography: string;
+  birthday: string;
+  gender: number;
+  id: number;
+  known_for_department?: string;
+  name: string;
+  place_of_birth: string;
+  profile_path: string;
 }
 
 const ActorTitle: React.FC<IActorTitle> = ({ props }) => {

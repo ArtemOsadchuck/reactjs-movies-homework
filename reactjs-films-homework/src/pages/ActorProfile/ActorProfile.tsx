@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import actorInfo from '../../mocks/actorInfo';
 import actorPhotosMock from '../../mocks/actorPhotos';
 import filmsWithActor from '../../mocks/filmsWithActor';
@@ -6,29 +6,31 @@ import filmsWithActor from '../../mocks/filmsWithActor';
 import ActorTitle from './ActorTitleInfo';
 import ActorPhotos from './ActorPhotos';
 import styles from './ActorProfile.module.scss';
-import { useEffect } from 'react';
 import MovieCard from '../../components/MovieCard';
 import { IMovieCard } from '../../components/MovieCard/MovieCard';
+import { IPhotos } from './ActorPhotos/ActorPhotos';
+import { IActorTitleProps } from './ActorTitleInfo/ActorTitleInfo';
 
 const ActorProfile: React.FC = () => {
-  const [info, setInfo]: any[] = useState([]);
-  const [photos, setPhotos]: any[] = useState([]);
-  const [knownBy, setKnownBy] = useState<any>([]);
-  const [sortKnownBy, setSortKnownBy] = useState<any>([]);
+  const [info, setInfo] = useState<IActorTitleProps>();
+  const [photos, setPhotos] = useState<Array<IPhotos>>([]);
+  const [knownBy, setKnownBy] = useState<Array<IMovieCard>>([]);
+  const [sortKnownBy, setSortKnownBy] = useState<Array<IMovieCard>>([]);
+
   useEffect(() => {
     actorInfo.then((res) => {
-      setInfo(() => res);
+      setInfo((): IActorTitleProps => res);
       return;
     });
     actorPhotosMock.then((res) => {
-      setPhotos(() => res.profiles);
+      setPhotos((): IPhotos[] => res.profiles);
     });
     filmsWithActor.then((res) => {
-      setKnownBy(() => res.cast);
+      setKnownBy((): any[] => res.cast);
     });
   });
 
-  const sortFilmPopularity = (arr: Array<{ vote_average: number }>) => {
+  const sortFilmPopularity = (arr: Array<IMovieCard>) => {
     const filmsLength = 10;
     const resultFilmsLength = [...arr].sort((a, b) => {
       return a.vote_average > b.vote_average ? -1 : 1;
@@ -42,7 +44,7 @@ const ActorProfile: React.FC = () => {
 
   return (
     <div className={styles.mainWrapper}>
-      <ActorTitle props={info} />
+      {info ? <ActorTitle props={info} /> : null}
       <ActorPhotos props={photos} />
       <div className={styles.cardsWrapper}>
         {sortKnownBy.map((el: IMovieCard) => {
