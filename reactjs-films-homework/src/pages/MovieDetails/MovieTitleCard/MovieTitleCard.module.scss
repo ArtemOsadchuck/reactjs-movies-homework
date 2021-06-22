@@ -39,10 +39,13 @@ $wite-color: rgb(255, 255, 255);
   }
 
   .ratingMovie {
+    align-items: center;
     background-color: $background-rating-color;
     border-radius: 3px;
     color: $wite-color;
+    display: flex;
     height: 1.3rem;
+    justify-content: center;
     left: 1rem;
     overflow: hidden;
     position: absolute;
@@ -51,8 +54,7 @@ $wite-color: rgb(255, 255, 255);
     z-index: 11;
 
     .rating {
-      font-size: 1rem;
-      margin: 10% auto;
+      font-size: 0.8rem;
       opacity: 1;
     }
   }
