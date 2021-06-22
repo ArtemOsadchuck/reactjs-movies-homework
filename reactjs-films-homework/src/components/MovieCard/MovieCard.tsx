@@ -57,7 +57,9 @@ const MovieCard: React.FC<ICard> = ({ props }) => {
   return (
     <a id={`${id}`} className={styles.movieCardLink} href={'/'}>
       <div className={styles.ratingMovie}>
-        <p>{Math.ceil(vote_average * 10) / 10}</p>
+        <p className={styles.voteAverage}>
+          {Math.ceil(vote_average * 10) / 10}
+        </p>
       </div>
       <div className={styles.playIcon}>
         <div className={styles.playIconInner}></div>

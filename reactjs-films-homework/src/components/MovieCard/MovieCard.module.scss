@@ -13,16 +13,21 @@ $wite-color: rgb(255, 255, 255);
   min-height: 22rem;
   overflow: hidden;
   position: relative;
-  width: 12rem;
+  width: 13rem;
 
   span {
     font-size: 0.6rem;
     text-align: start;
   }
 
-  p {
+  // p {
+  //   font-size: 0.6rem;
+  //   margin: 10% auto;
+  //   opacity: 1;
+  // }
+
+  .voteAverage {
     font-size: 0.6rem;
-    margin: 10% auto;
     opacity: 1;
   }
 
@@ -46,10 +51,13 @@ $wite-color: rgb(255, 255, 255);
   }
 
   .ratingMovie {
+    align-items: center;
     background-color: $background-rating-color;
     border-radius: 3px;
     color: $wite-color;
+    display: flex;
     height: 1rem;
+    justify-content: center;
     left: 0.5rem;
     overflow: hidden;
     position: absolute;
