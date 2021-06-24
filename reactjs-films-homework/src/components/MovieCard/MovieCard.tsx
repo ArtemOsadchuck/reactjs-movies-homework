@@ -13,7 +13,7 @@ export interface IMovieCard {
   title: string;
   vote_average: number;
   poster_path: string;
-  genre_ids: number[];
+  genre_ids?: number[];
   key?: number;
 }
 
@@ -38,7 +38,7 @@ const MovieCard: React.FC<ICard> = ({ props }) => {
   useEffect(() => {
     if (genre.genres) {
       genre.genres.map((genre): void => {
-        genre_ids.map((el): void => {
+        genre_ids!.map((el): void => {
           if (genre.id === el) {
             setGenreName((prev) => {
               prev.push(genre.name);
