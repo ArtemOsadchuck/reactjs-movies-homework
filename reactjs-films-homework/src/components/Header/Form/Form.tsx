@@ -14,6 +14,7 @@ const Form: React.FC = () => {
     <div className={styles.formWrapper}>
       <form className={styles.form}>
         <input
+          defaultValue=""
           ref={ref}
           type="search"
           className={styles.input}
