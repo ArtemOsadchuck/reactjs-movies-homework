@@ -24,7 +24,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "test:coverage": "CI=true npm test -- --env=jsdom --coverage"
   },
   "eslintConfig": {
     "extends": [
@@ -72,6 +73,7 @@
     "@storybook/preset-create-react-app": "^3.1.7",
     "@storybook/react": "^6.2.9",
     "@types/jest": "^26.0.23",
+    "@types/sass": "^1.16.0",
     "prettier": "^2.3.1",
     "stylelint": "^13.13.1",
     "stylelint-config-css-modules": "^2.2.0",
@@ -79,7 +81,6 @@
     "stylelint-config-standard-scss": "^1.1.0",
     "stylelint-order": "^4.1.0",
     "stylelint-prettier": "^1.2.0",
-    "stylelint-scss": "^3.19.0",
-    "@types/sass": "^1.16.0"
+    "stylelint-scss": "^3.19.0"
   }
 }

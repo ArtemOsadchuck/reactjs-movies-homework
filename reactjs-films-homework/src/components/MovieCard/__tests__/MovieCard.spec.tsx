@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import MovieCard from '../MovieCard';
 
 describe('MovieCard', () => {
@@ -15,6 +15,10 @@ describe('MovieCard', () => {
     vote_average: 8.7,
   };
 
+  afterEach(() => {
+    cleanup();
+  });
+
   it('MovieCard snapshot', () => {
     const { asFragment } = render(<MovieCard props={mockProps} />);
     expect(asFragment).toMatchSnapshot();
@@ -24,8 +28,12 @@ describe('MovieCard', () => {
     render(<MovieCard props={mockProps} />);
     expect(screen.getByText(/[0-9]/i)).toBeInTheDocument();
   });
-  it('LanguageToggler Must include text RU or EN', () => {
+  it('MovieCard Must include class movieCardLink', () => {
     render(<MovieCard props={mockProps} />);
-    expect(screen.getByRole('link')).toBeInTheDocument();
+    expect(screen.getByRole('link')).toHaveClass('movieCardLink');
+  });
+  it('MovieCard IMG Must include attr alt', () => {
+    render(<MovieCard props={mockProps} />);
+    expect(screen.getByRole('img')).toHaveAttribute('alt');
   });
 });
