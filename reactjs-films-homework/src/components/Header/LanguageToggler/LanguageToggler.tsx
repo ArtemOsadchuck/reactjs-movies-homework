@@ -1,29 +1,22 @@
 import React, { useState } from 'react';
 import styles from './LanguageToggler.module.scss';
 
-import { setLang } from '../../../store/rootStore/langStore/languageSlice';
-
-import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
-
-const LanguageToggler: React.FC = () => {
+const LanguageToggler = () => {
   const [isDropDownShow, setIsDropDownShow] = useState(false);
-  const appLang = useAppSelector((state) => state.languageReducer.lang);
-
-  const dispatch = useAppDispatch();
-
+  const [langState, setLangState] = useState('EN');
   const langArr = ['RU', 'EN'];
   const downShow = () => {
     setIsDropDownShow(() => !isDropDownShow);
   };
   const changeLang = (lang: string) => {
+    setLangState(lang);
     setIsDropDownShow(() => !isDropDownShow);
-    dispatch(setLang(lang));
   };
 
   return (
     <div className={styles.dropdownWrapper}>
       <button onClick={downShow} className={styles.dropdownBtn}>
-        {appLang}
+        {langState}
       </button>
       {isDropDownShow ? (
         <>
