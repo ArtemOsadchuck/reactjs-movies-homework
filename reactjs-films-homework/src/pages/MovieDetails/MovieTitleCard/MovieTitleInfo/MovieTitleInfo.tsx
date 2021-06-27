@@ -7,7 +7,11 @@ export interface IMovieTitleInfo {
 }
 
 const MovieTitleInfo: React.FC<IMovieTitleInfo> = ({ heading, infoField }) => {
-  return heading === 'Title:' ? (
+  const getHeading = () => {
+    return heading === 'Title:' ? 'Title:' : 'Название фильма:';
+  };
+
+  return heading === getHeading() ? (
     <div className={styles.titleWrapper}>
       <p className={styles.heading}>{heading}</p>
       <h2 className={styles.title}>{infoField}</h2>

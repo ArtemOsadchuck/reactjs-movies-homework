@@ -15,6 +15,9 @@ import { IMovieCard } from '../../components/MovieCard/MovieCard';
 import { ITitleMovieProps } from './MovieTitleCard/MovieTitleCard';
 import { IImagesBlockProps } from './ImagesBlock/ImagesBlock';
 
+import lang from '../../languages/getLanguage';
+import { useAppSelector } from '../../hooks/hooks';
+
 const MovieDetails: React.FC = () => {
   const [titleInfoState, setTitleInfoState] = useState<ITitleMovieProps>();
   const [cast, setCast] = useState<Array<ITopBilledCastProp>>([]);
@@ -23,6 +26,8 @@ const MovieDetails: React.FC = () => {
   const [recommendations, setRecommendations] = useState<Array<IMovieCard>>([]);
   const recommendationsQuality = 5;
 
+  const appLang = useAppSelector((state) => state.languageReducer.lang);
+  const ImagesBlockTitle = lang(appLang).images;
   useEffect(() => {
     mockDetails.then((res) => {
       setTitleInfoState((): ITitleMovieProps => res);
@@ -56,8 +61,10 @@ const MovieDetails: React.FC = () => {
 
       <div className={styles.castWrapper}>
         <div className={styles.castNameWrapper}>
-          <h3 className={styles.castName}>Top Billed Cast</h3>
-          <div className={styles.castNameShowAllBtn}>Show all</div>
+          <h3 className={styles.castName}>{lang(appLang).topBilledCast}</h3>
+          <div className={styles.castNameShowAllBtn}>
+            {lang(appLang).showAll}
+          </div>
         </div>
         <div className={styles.castGrid}>
           {sortCast.length
@@ -66,11 +73,13 @@ const MovieDetails: React.FC = () => {
               })
             : null}
         </div>
-        {stateImg ? <ImagesBlock props={stateImg} /> : null}
+        {stateImg ? (
+          <ImagesBlock props={stateImg} title={ImagesBlockTitle} />
+        ) : null}
       </div>
       <div className={styles.recommendationsWrapper}>
         <h2 className={styles.recommendationsTitle}>
-          {'Recommendations'.toUpperCase()}
+          {lang(appLang).recommendations}
         </h2>
         <div className={styles.recommendationsCardsWrapper}>
           {recommendations.length ? (

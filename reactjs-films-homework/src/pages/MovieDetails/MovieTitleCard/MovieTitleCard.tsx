@@ -3,6 +3,9 @@ import img from '../../../components/MovieCard/img/Movie-card.png';
 import styles from './MovieTitleCard.module.scss';
 import MovieTitleInfo from './MovieTitleInfo';
 
+import lang from '../../../languages/getLanguage';
+import { useAppSelector } from '../../../hooks/hooks';
+
 export interface ICard {
   props: ITitleMovieProps;
 }
@@ -35,6 +38,13 @@ const MovieTitleCard: React.FC<ICard> = ({ props }) => {
   } = props;
   const urlImg = `https://image.tmdb.org/t/p/w500/${poster_path}`;
   const imgWidth = '52px';
+  const appLang = useAppSelector((state) => state.languageReducer.lang);
+  const titleText = lang(appLang).titleName + ':';
+  const overviewText = lang(appLang).overview + ':';
+  const releaseText = lang(appLang).releaseDate + ':';
+  const revenueText = lang(appLang).revenue + ':';
+  const durationText = lang(appLang).duration + ':';
+  const durationTimeMin = lang(appLang).min;
 
   const revenueFormat = (revenue: number) => {
     if (revenue) {
@@ -68,14 +78,17 @@ const MovieTitleCard: React.FC<ICard> = ({ props }) => {
         </div>
       </div>
       <div className={styles.infoWrapper}>
-        <MovieTitleInfo heading="Title:" infoField={title} />
-        <MovieTitleInfo heading="Overview:" infoField={overview} />
-        <MovieTitleInfo heading="Release date:" infoField={release_date} />
+        <MovieTitleInfo heading={titleText} infoField={title} />
+        <MovieTitleInfo heading={overviewText} infoField={overview} />
+        <MovieTitleInfo heading={releaseText} infoField={release_date} />
         <MovieTitleInfo
-          heading="Revenue:"
+          heading={revenueText}
           infoField={`$ ${revenueFormat(revenue)}`}
         />
-        <MovieTitleInfo heading="Duration:" infoField={`${runtime} min`} />
+        <MovieTitleInfo
+          heading={durationText}
+          infoField={`${runtime} ${durationTimeMin}`}
+        />
         <div className={styles.genreWrapper}>
           {genres
             ? genres.map((el) => {
