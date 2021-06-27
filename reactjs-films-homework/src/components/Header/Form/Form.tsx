@@ -1,8 +1,12 @@
 import React, { useRef } from 'react';
 import search from './assets/search.png';
 import styles from './Form.module.scss';
-const Form: React.FC = () => {
-  const placeholder = 'Movies, person, movie theaters';
+
+type IFormProps = {
+  placeholder: any;
+};
+
+const Form: React.FC<IFormProps> = ({ placeholder }) => {
   const ref: any = useRef();
   const loc = () => {
     let inputValue = ref.current.value;
