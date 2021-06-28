@@ -20,7 +20,6 @@ describe('Main', () => {
 
   it('Main snapshot', () => {
     expect(Fragment).toMatchSnapshot();
-    screen.debug();
   });
 
   it('Main heading must include text Loading...', () => {

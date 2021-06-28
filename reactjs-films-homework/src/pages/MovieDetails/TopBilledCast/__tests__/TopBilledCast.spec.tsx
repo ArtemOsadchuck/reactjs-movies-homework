@@ -1,6 +1,8 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
 import TopBilledCast from '../TopBilledCast';
+import { Provider } from 'react-redux';
+import store from '../../../../store/store';
 
 describe('TopBilledCast', () => {
   const mockProps = {
@@ -21,23 +23,32 @@ describe('TopBilledCast', () => {
   afterEach(() => {
     cleanup();
   });
+  let fragment: any;
+  beforeEach(() => {
+    const asFragment = render(
+      <Provider store={store}>
+        <TopBilledCast props={mockProps} />{' '}
+      </Provider>
+    );
+    fragment = asFragment;
+  });
+
+  afterEach(() => {
+    cleanup();
+  });
 
   it('TopBilledCast snapshot', () => {
-    const { asFragment } = render(<TopBilledCast props={mockProps} />);
-    expect(asFragment).toMatchSnapshot();
+    expect(fragment).toMatchSnapshot();
   });
 
   it('TopBilledCast link must have attribute:', () => {
-    render(<TopBilledCast props={mockProps} />);
     expect(screen.getByRole(/link/i)).toHaveAttribute('id');
     expect(screen.getByRole(/link/i)).toHaveAttribute('href');
   });
   it('TopBilledCast link must have text content:', () => {
-    render(<TopBilledCast props={mockProps} />);
     expect(screen.getByRole(/link/i)).toHaveTextContent(/Red/i);
   });
   it('TopBilledCast img must have attribute:', () => {
-    render(<TopBilledCast props={mockProps} />);
     expect(screen.getByRole(/img/i)).toHaveAttribute('alt');
     expect(screen.getByRole(/img/i)).toHaveAttribute('height');
     expect(screen.getByRole(/img/i)).toHaveAttribute('src');
