@@ -1,6 +1,8 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
 import ActorTitleInfo from '../ActorTitleInfo';
+import { Provider } from 'react-redux';
+import store from '../../../../store/store';
 
 describe('ActorTitleInfo', () => {
   const mockProps = {
@@ -34,33 +36,34 @@ describe('ActorTitleInfo', () => {
     profile_path: '/oIciQWr8VwKoR8TmAw1owaiZFyb.jpg',
   };
 
+  let Fragment: any;
+  beforeEach(() => {
+    const asFragment = render(
+      <Provider store={store}>
+        (<ActorTitleInfo props={mockProps} />{' '}
+      </Provider>
+    );
+    Fragment = asFragment;
+  });
+
   afterEach(() => {
     cleanup();
   });
 
   it('ActorTitleInfo snapshot', () => {
-    const { asFragment } = render(<ActorTitleInfo props={mockProps} />);
-    expect(asFragment).toMatchSnapshot();
+    expect(Fragment).toMatchSnapshot();
   });
 
-  it('ActorTitleInfo Must have class titleWrapper', () => {
-    const { container } = render(<ActorTitleInfo props={mockProps} />);
-    expect(container.firstChild).toHaveClass('titleWrapper');
-  });
   it('ActorTitleInfo IMG Must include attr alt', () => {
-    render(<ActorTitleInfo props={mockProps} />);
     expect(screen.getByRole('img')).toHaveAttribute('alt');
   });
   it('ActorTitleInfo article include class titleInfoWrapper', () => {
-    render(<ActorTitleInfo props={mockProps} />);
     expect(screen.getByRole('article')).toHaveClass('titleInfoWrapper');
   });
   it('ActorTitleInfo heading must include text Morgan Freeman', () => {
-    render(<ActorTitleInfo props={mockProps} />);
     expect(screen.getByRole('heading')).toHaveTextContent('Morgan Freeman');
   });
   it('ActorTitleInfo Biography include class biographyTitle', () => {
-    render(<ActorTitleInfo props={mockProps} />);
     expect(screen.getByText(/Biography/i)).toHaveClass('biographyTitle');
   });
 });

@@ -1,6 +1,8 @@
 import React from 'react';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import ActorPhotos from '../ActorPhotos';
+import { Provider } from 'react-redux';
+import store from '../../../../store/store';
 
 describe('ActorPhotos', () => {
   const mockProps = [
@@ -28,25 +30,27 @@ describe('ActorPhotos', () => {
     cleanup();
   });
 
-  it('ActorPhotos snapshot', () => {
-    const { asFragment } = render(
-      <ActorPhotos props={mockProps} photosLength={2} />
+  let Fragment: any;
+  beforeEach(() => {
+    const asFragment = render(
+      <Provider store={store}>
+        <ActorPhotos props={mockProps} photosLength={2} />
+      </Provider>
     );
-    expect(asFragment).toMatchSnapshot();
+    Fragment = asFragment;
   });
 
-  it('ActorPhotos Must have class PhotosWrapper', () => {
-    const { container } = render(
-      <ActorPhotos props={mockProps} photosLength={2} />
-    );
-    expect(container.firstChild).toHaveClass('PhotosWrapper');
+  afterEach(() => {
+    cleanup();
   });
+  it('ActorPhotos snapshot', () => {
+    expect(Fragment).toMatchSnapshot();
+  });
+
   it('ActorPhotos IMG Must include attr alt', () => {
-    render(<ActorPhotos props={mockProps} photosLength={2} />);
     expect(screen.getAllByRole('img')[0]).toHaveAttribute('alt');
   });
   it('ActorPhotos heading include class photosTitle', () => {
-    render(<ActorPhotos props={mockProps} photosLength={2} />);
     expect(screen.getByRole('heading')).toHaveClass('photosTitle');
   });
 });

@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './ActorTitleInfo.module.scss';
+import getLang from '../../../languages/getLanguage';
+import { useAppSelector } from '../../../hooks/hooks';
 
 export interface IActorTitle {
   props: IActorTitleProps;
@@ -19,6 +21,9 @@ export interface IActorTitleProps {
 const ActorTitle: React.FC<IActorTitle> = ({ props }) => {
   const { birthday, name, profile_path, biography, place_of_birth } = props;
   const urlImg = `https://image.tmdb.org/t/p/w500/${profile_path}`;
+
+  const appLang = useAppSelector((state) => state.languageReducer.lang);
+
   return (
     <div className={styles.titleWrapper}>
       <div className={styles.titleImageWrapper}>
@@ -30,15 +35,17 @@ const ActorTitle: React.FC<IActorTitle> = ({ props }) => {
         <article className={styles.titleInfoWrapper}>
           <h1 className={styles.titleName}>{name}</h1>
           <div className={styles.Info}>
-            <strong>Birthday</strong>
+            <strong>{getLang(appLang).birthday}</strong>
             <p>{birthday}</p>
           </div>
           <div className={styles.Info}>
-            <strong>place of birth</strong>
+            <strong>{getLang(appLang).placeOfBirth}</strong>
             <p>{place_of_birth}</p>
           </div>
           <div className={styles.Info}>
-            <strong className={styles.biographyTitle}>Biography:</strong>
+            <strong className={styles.biographyTitle}>
+              {getLang(appLang).biography}:
+            </strong>
             <p className={styles.biography}>{biography}</p>
           </div>
         </article>

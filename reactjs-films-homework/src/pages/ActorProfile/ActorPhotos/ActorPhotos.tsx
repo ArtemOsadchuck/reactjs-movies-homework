@@ -1,6 +1,9 @@
 import React from 'react';
 import styles from './ActorPhotos.module.scss';
 
+import getLang from '../../../languages/getLanguage';
+import { useAppSelector } from '../../../hooks/hooks';
+
 export interface IPhotos {
   aspect_ratio: number;
   file_path: string;
@@ -17,9 +20,13 @@ export interface IActorPhotos {
 
 const ActorPhotos: React.FC<IActorPhotos> = ({ props }) => {
   const photosLength = 4;
+  const appLang = useAppSelector((state) => state.languageReducer.lang);
+  const titilePhotos = getLang(appLang).photos;
   return (
     <div className={styles.PhotosWrapper}>
-      {props.length ? <h3 className={styles.photosTitle}>Photos</h3> : null}
+      {props.length ? (
+        <h3 className={styles.photosTitle}>{titilePhotos}</h3>
+      ) : null}
       <div className={styles.photosGrid}>
         {props.length
           ? props.slice(0, photosLength).map((el) => {
