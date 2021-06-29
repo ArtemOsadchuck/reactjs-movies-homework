@@ -2,7 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import img from './img/Movie-card.png';
 import styles from './MovieCard.module.scss';
-import mockGenres from '../../mocks/genresIDs';
+
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
+import fetchGenres from '../../store/rootStore/langStore/fetchGenres';
 
 export interface ICard {
   props: IMovieCard;
@@ -28,21 +30,27 @@ const MovieCard: React.FC<ICard> = ({ props }) => {
   const { id, title, vote_average, poster_path, genre_ids } = props;
   const movieTitle = 'Movie Title';
   const urlImg = `https://image.tmdb.org/t/p/w500/${poster_path}`;
-  const [genre, setGenre] = useState<IGenre>({});
   const [genreName, setGenreName] = useState<Array<string>>([]);
 
-  mockGenres.then((res) => {
-    return setGenre(res);
-  });
+  const dispatch = useAppDispatch();
+  const appFetchMovieGenre = useAppSelector(
+    (state) => state.languageReducer.genre
+  );
+  const lang = useAppSelector((state) => state.languageReducer.lang);
 
   useEffect(() => {
-    if (genre.genres) {
-      genre.genres.map((genre): void => {
+    dispatch(fetchGenres(lang));
+  }, [dispatch, lang]);
+
+  useEffect(() => {
+    const arrToSort: string[] = [];
+    if (appFetchMovieGenre!.genres) {
+      appFetchMovieGenre!.genres.map((genre): void => {
         genre_ids!.map((el): void => {
-          if (genre.id === el) {
+          if (genre!.id === el) {
             setGenreName((prev) => {
-              prev.push(genre.name);
-              const set = new Set(prev);
+              arrToSort.push(genre.name);
+              const set = new Set(arrToSort);
               const arr = Array.from(set);
               prev = arr;
               return prev;
@@ -51,7 +59,7 @@ const MovieCard: React.FC<ICard> = ({ props }) => {
         });
       });
     }
-  }, [genre, genre_ids]);
+  }, [appFetchMovieGenre, genre_ids]);
 
   const imgWidth = '52px';
   return (
