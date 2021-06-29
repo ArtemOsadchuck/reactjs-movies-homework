@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import MovieCard from '../../components/MovieCard';
 import { IMovieCard } from '../../components/MovieCard/MovieCard';
 
@@ -6,24 +6,41 @@ import CategoriesTabs from './CategoriesTabs';
 
 import styles from './Main.module.scss';
 import Pagination from './Pagination';
-import asyncGetTopRated from '../../mocks/topRated.js';
+// import asyncGetTopRated from '../../mocks/topRated.js';
 
-const Main = () => {
-  const [state, setState] = useState<Array<IMovieCard>>([]);
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
+// import { fetchCategory } from '../../store/rootStore/langStore/fetchMainData';
+import fetchMovieData from '../../store/rootStore/langStore/fetchMainData';
+
+// import { setLang } from '../../../store/rootStore/langStore/languageSlice';
+
+const Main: React.FC = () => {
+  const dispatch = useAppDispatch();
+
+  const appFetchMovie = useAppSelector(
+    (state) => state.languageReducer.mainState
+  );
+
+  const mainLang = useAppSelector((state) => state.languageReducer.lang);
+
+  const mainState = {
+    lang: `${mainLang.toLowerCase()}-${mainLang}`,
+    page: useAppSelector((state) => state.languageReducer.page),
+    category: useAppSelector((state) => state.languageReducer.category),
+  };
+
   useEffect(() => {
-    asyncGetTopRated.then((res) => {
-      setState(res);
-      return res;
-    });
-  });
+    console.log(mainState, '------------------------------');
+    dispatch(fetchMovieData(mainState));
+  }, [dispatch]);
 
-  return (
+  return appFetchMovie.length ? (
     <div className={styles.mainWrapper}>
       <CategoriesTabs />
       <div className={styles.cardsWrapper}>
-        {state.length ? (
-          state.map((e: IMovieCard) => {
-            return <MovieCard props={e} key={Date.now() - Math.random()} />;
+        {appFetchMovie.length ? (
+          appFetchMovie.map((e: IMovieCard) => {
+            return <MovieCard props={e} key={Date.now() * Math.random()} />;
           })
         ) : (
           <h2>Loading...</h2>
@@ -31,7 +48,7 @@ const Main = () => {
       </div>
       <Pagination />
     </div>
-  );
+  ) : null;
 };
 
 export default Main;
