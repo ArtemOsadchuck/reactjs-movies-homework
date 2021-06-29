@@ -5,19 +5,29 @@ import { setLang } from '../../../store/rootStore/langStore/languageSlice';
 
 import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
 
+import fetchMainData from '../../../store/rootStore/langStore/fetchMainData';
+
 const LanguageToggler: React.FC = () => {
   const [isDropDownShow, setIsDropDownShow] = useState(false);
   const appLang = useAppSelector((state) => state.languageReducer.lang);
 
   const dispatch = useAppDispatch();
 
+  const mainState = {
+    // lang: useAppSelector((state) => state.languageReducer.lang),
+    page: useAppSelector((state) => state.languageReducer.page),
+    category: useAppSelector((state) => state.languageReducer.category),
+  };
+
   const langArr = ['RU', 'EN'];
   const downShow = () => {
     setIsDropDownShow(() => !isDropDownShow);
   };
   const changeLang = (lang: string) => {
-    setIsDropDownShow(() => !isDropDownShow);
+    const dd = { ...mainState, lang: `${lang.toLowerCase()}-${lang}` };
     dispatch(setLang(lang));
+    setIsDropDownShow(() => !isDropDownShow);
+    dispatch(fetchMainData(dd));
   };
 
   return (
