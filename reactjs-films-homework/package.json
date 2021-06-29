@@ -10,6 +10,7 @@
     "@types/node": "^12.20.15",
     "@types/react": "^17.0.9",
     "@types/react-dom": "^17.0.6",
+    "axios": "^0.21.1",
     "husky": "^6.0.0",
     "lint-staged": "^11.0.0",
     "node-sass": "^6.0.0",
