@@ -4,6 +4,8 @@ import styles from './LanguageToggler.module.scss';
 import { setLang } from '../../../store/rootStore/mainStore/mainSlice';
 import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
 import fetchMainData from '../../../store/rootStore/mainStore/fetchMainData';
+import getMovieDetailsData from '../../../store/rootStore/movieDetailsPageStore/getMoviePageData/getMovieDetailsData';
+import getTopBilletCastData from '../../../store/rootStore/movieDetailsPageStore/getMoviePageData/getTopBilletCastData';
 
 const LanguageToggler: React.FC = () => {
   const [isDropDownShow, setIsDropDownShow] = useState(false);
@@ -17,6 +19,11 @@ const LanguageToggler: React.FC = () => {
     query: useAppSelector((state) => state.mainReducer.query),
   };
 
+  const moviePageState = {
+    lang: appLang,
+    movie_id: useAppSelector((state) => state.movieDetailsReducer.movie_id),
+  };
+
   const langArr = ['RU', 'EN'];
   const downShow = () => {
     setIsDropDownShow(() => !isDropDownShow);
@@ -26,6 +33,8 @@ const LanguageToggler: React.FC = () => {
     dispatch(setLang(lang));
     setIsDropDownShow(() => !isDropDownShow);
     dispatch(fetchMainData(dd));
+    dispatch(getMovieDetailsData(moviePageState));
+    dispatch(getTopBilletCastData(moviePageState));
   };
 
   return (
