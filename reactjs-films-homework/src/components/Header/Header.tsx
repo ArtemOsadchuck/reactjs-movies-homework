@@ -7,7 +7,7 @@ import lang from '../../languages/getLanguage';
 import { useAppSelector } from '../../hooks/hooks';
 
 const Header: React.FC = () => {
-  const appLang = useAppSelector((state) => state.languageReducer.lang);
+  const appLang = useAppSelector((state) => state.mainReducer.lang);
   return (
     <header className={style.header}>
       <h1>{lang(appLang).title.toUpperCase()}</h1>

@@ -20,7 +20,7 @@ export interface IActorPhotos {
 
 const ActorPhotos: React.FC<IActorPhotos> = ({ props }) => {
   const photosLength = 4;
-  const appLang = useAppSelector((state) => state.languageReducer.lang);
+  const appLang = useAppSelector((state) => state.mainReducer.lang);
   const titilePhotos = getLang(appLang).photos;
   return (
     <div className={styles.PhotosWrapper}>

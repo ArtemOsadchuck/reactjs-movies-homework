@@ -22,7 +22,7 @@ const ActorTitle: React.FC<IActorTitle> = ({ props }) => {
   const { birthday, name, profile_path, biography, place_of_birth } = props;
   const urlImg = `https://image.tmdb.org/t/p/w500/${profile_path}`;
 
-  const appLang = useAppSelector((state) => state.languageReducer.lang);
+  const appLang = useAppSelector((state) => state.mainReducer.lang);
 
   return (
     <div className={styles.titleWrapper}>

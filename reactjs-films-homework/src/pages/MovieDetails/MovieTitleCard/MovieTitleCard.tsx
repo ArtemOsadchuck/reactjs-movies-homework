@@ -38,7 +38,7 @@ const MovieTitleCard: React.FC<ICard> = ({ props }) => {
   } = props;
   const urlImg = `https://image.tmdb.org/t/p/w500/${poster_path}`;
   const imgWidth = '52px';
-  const appLang = useAppSelector((state) => state.languageReducer.lang);
+  const appLang = useAppSelector((state) => state.mainReducer.lang);
   const titleText = lang(appLang).titleName + ':';
   const overviewText = lang(appLang).overview + ':';
   const releaseText = lang(appLang).releaseDate + ':';

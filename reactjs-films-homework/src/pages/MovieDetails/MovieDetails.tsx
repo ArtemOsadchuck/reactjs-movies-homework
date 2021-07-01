@@ -26,7 +26,7 @@ const MovieDetails: React.FC = () => {
   const [recommendations, setRecommendations] = useState<Array<IMovieCard>>([]);
   const recommendationsQuality = 5;
 
-  const appLang = useAppSelector((state) => state.languageReducer.lang);
+  const appLang = useAppSelector((state) => state.mainReducer.lang);
   const ImagesBlockTitle = lang(appLang).images;
   useEffect(() => {
     mockDetails.then((res) => {
