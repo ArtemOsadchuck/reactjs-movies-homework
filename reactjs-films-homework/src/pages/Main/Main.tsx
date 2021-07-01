@@ -3,36 +3,27 @@ import MovieCard from '../../components/MovieCard';
 import { IMovieCard } from '../../components/MovieCard/MovieCard';
 
 import CategoriesTabs from './CategoriesTabs';
-
 import styles from './Main.module.scss';
 import Pagination from './Pagination';
-// import asyncGetTopRated from '../../mocks/topRated.js';
 
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
-// import { fetchCategory } from '../../store/rootStore/langStore/fetchMainData';
-import fetchMovieData from '../../store/rootStore/langStore/fetchMainData';
-
-// import { setLang } from '../../../store/rootStore/langStore/languageSlice';
+import fetchMovieData from '../../store/rootStore/mainStore/fetchMainData';
 
 const Main: React.FC = () => {
   const dispatch = useAppDispatch();
-
-  const appFetchMovie = useAppSelector(
-    (state) => state.languageReducer.mainState
-  );
-
-  const mainLang = useAppSelector((state) => state.languageReducer.lang);
+  const appFetchMovie = useAppSelector((state) => state.mainReducer.mainState);
 
   const mainState = {
-    lang: `${mainLang.toLowerCase()}-${mainLang}`,
-    page: useAppSelector((state) => state.languageReducer.page),
-    category: useAppSelector((state) => state.languageReducer.category),
+    lang: useAppSelector((state) => state.mainReducer.lang),
+    page: useAppSelector((state) => state.mainReducer.page),
+    category: useAppSelector((state) => state.mainReducer.category),
+    query: useAppSelector((state) => state.mainReducer.query),
   };
 
   useEffect(() => {
-    console.log(mainState, '------------------------------');
     dispatch(fetchMovieData(mainState));
-  }, [dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return appFetchMovie.length ? (
     <div className={styles.mainWrapper}>
@@ -48,7 +39,11 @@ const Main: React.FC = () => {
       </div>
       <Pagination />
     </div>
-  ) : null;
+  ) : (
+    <div className={styles.mainWrapper}>
+      return <h2>NO RESULTS FOUND</h2>;
+    </div>
+  );
 };
 
 export default Main;

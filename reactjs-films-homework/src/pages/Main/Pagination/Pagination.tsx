@@ -1,17 +1,42 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Pagination.module.scss';
-import asyncGetTopRated from '../../../mocks/topRated.js';
+import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
+import fetchMovieData from '../../../store/rootStore/mainStore/fetchMainData';
+
+import {
+  setPage,
+  setActivePage,
+} from '../../../store/rootStore/mainStore/mainSlice';
+
+const getPagesFromTotal = (totalPages: number) => {
+  const resultArr: string[] = [];
+  for (let i = 1; i <= totalPages; i += 1) {
+    resultArr.push(`${i}`);
+  }
+  return resultArr.slice(0, 5);
+};
 
 const Pagination: React.FC = () => {
-  const pagNum = ['1', '2', '3', '4', '5'];
-  const [currentPage, setCurrentPage] = useState('1');
+  const [pagNum, setPugNum] = useState<Array<string>>([]);
+  const dispatch = useAppDispatch();
+  const mainState = {
+    lang: useAppSelector((state) => state.mainReducer.lang),
+    category: useAppSelector((state) => state.mainReducer.category),
+    query: useAppSelector((state) => state.mainReducer.query),
+    activePage: useAppSelector((state) => state.mainReducer.activePage),
+    totalPages: useAppSelector((state) => state.mainReducer.totalPages),
+  };
 
-  const getPage = async (e: string) => {
-    const mock = await asyncGetTopRated;
-    console.log(mock);
-    setCurrentPage(() => e);
-    console.log(currentPage);
-    return mock;
+  useEffect(() => {
+    setPugNum(() => getPagesFromTotal(mainState.totalPages));
+    console.log(mainState.totalPages);
+  }, [dispatch, mainState.totalPages]);
+
+  const getPage = (page: string) => {
+    dispatch(setActivePage(page));
+    dispatch(setPage(page));
+    dispatch(fetchMovieData({ ...mainState, page: page }));
+    return;
   };
 
   return (
@@ -23,7 +48,9 @@ const Pagination: React.FC = () => {
             onClick={() => {
               getPage(page);
             }}
-            className={currentPage === page ? styles.active : ''}
+            className={
+              `${mainState.activePage}` === `${page}` ? styles.active : ''
+            }
           >
             {page}
           </div>

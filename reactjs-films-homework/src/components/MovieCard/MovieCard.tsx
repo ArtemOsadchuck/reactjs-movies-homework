@@ -4,7 +4,7 @@ import img from './img/Movie-card.png';
 import styles from './MovieCard.module.scss';
 
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
-import fetchGenres from '../../store/rootStore/langStore/fetchGenres';
+import fetchGenres from '../../store/rootStore/mainStore/fetchGenres';
 
 export interface ICard {
   props: IMovieCard;
@@ -33,10 +33,8 @@ const MovieCard: React.FC<ICard> = ({ props }) => {
   const [genreName, setGenreName] = useState<Array<string>>([]);
 
   const dispatch = useAppDispatch();
-  const appFetchMovieGenre = useAppSelector(
-    (state) => state.languageReducer.genre
-  );
-  const lang = useAppSelector((state) => state.languageReducer.lang);
+  const appFetchMovieGenre = useAppSelector((state) => state.mainReducer.genre);
+  const lang = useAppSelector((state) => state.mainReducer.lang);
 
   useEffect(() => {
     dispatch(fetchGenres(lang));

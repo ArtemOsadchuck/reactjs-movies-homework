@@ -3,30 +3,37 @@ import styles from './CategoriesTabs.module.scss';
 
 import lang from '../../../languages/getLanguage';
 import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
-import { setCategory } from '../../../store/rootStore/langStore/languageSlice';
+import {
+  setCategory,
+  setActivePage,
+} from '../../../store/rootStore/mainStore/mainSlice';
 
-import fetchMainData from '../../../store/rootStore/langStore/fetchMainData';
+import fetchMainData from '../../../store/rootStore/mainStore/fetchMainData';
 
 const CategoriesTabs: React.FC = () => {
-  const appLang = useAppSelector((state) => state.languageReducer.lang);
+  const appLang = useAppSelector((state) => state.mainReducer.lang);
   const dispatch = useAppDispatch();
 
   const mainState = {
-    lang: useAppSelector((state) => state.languageReducer.lang),
-    page: useAppSelector((state) => state.languageReducer.page),
+    lang: useAppSelector((state) => state.mainReducer.lang),
+    page: '1',
+    activePage: '1',
   };
 
   const getPopular = async () => {
     const mainStateAddCategory = { ...mainState, category: 'popular' };
     await dispatch(setCategory('popular'));
     await dispatch(fetchMainData(mainStateAddCategory));
+    dispatch(setActivePage('1'));
   };
   const getTopRated = async () => {
+    dispatch(setActivePage('1'));
     const mainStateAddCategory = { ...mainState, category: 'top_rated' };
     await dispatch(setCategory('top_rated'));
     await dispatch(fetchMainData(mainStateAddCategory));
   };
   const getUpcoming = async () => {
+    dispatch(setActivePage('1'));
     const mainStateAddCategory = { ...mainState, category: 'upcoming' };
     await dispatch(setCategory('upcoming'));
     await dispatch(fetchMainData(mainStateAddCategory));

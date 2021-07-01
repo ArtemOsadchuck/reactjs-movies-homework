@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
 import styles from './LanguageToggler.module.scss';
 
-import { setLang } from '../../../store/rootStore/langStore/languageSlice';
-
+import { setLang } from '../../../store/rootStore/mainStore/mainSlice';
 import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
-
-import fetchMainData from '../../../store/rootStore/langStore/fetchMainData';
+import fetchMainData from '../../../store/rootStore/mainStore/fetchMainData';
 
 const LanguageToggler: React.FC = () => {
   const [isDropDownShow, setIsDropDownShow] = useState(false);
-  const appLang = useAppSelector((state) => state.languageReducer.lang);
+  const appLang = useAppSelector((state) => state.mainReducer.lang);
 
   const dispatch = useAppDispatch();
 
   const mainState = {
-    // lang: useAppSelector((state) => state.languageReducer.lang),
-    page: useAppSelector((state) => state.languageReducer.page),
-    category: useAppSelector((state) => state.languageReducer.category),
+    page: useAppSelector((state) => state.mainReducer.page),
+    category: useAppSelector((state) => state.mainReducer.category),
+    query: useAppSelector((state) => state.mainReducer.query),
   };
 
   const langArr = ['RU', 'EN'];
