@@ -4,7 +4,7 @@ import fetchGenres from './fetchGenres';
 import fetchMainData from './fetchMainData';
 
 interface IInitialState {
-  mainState: any;
+  mainState: any[];
   lang: string;
   activePage?: string;
   totalPages: number;
@@ -48,15 +48,15 @@ const mainSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       fetchGenres.fulfilled,
-      (langState, action: PayloadAction<IGenre>) => {
-        langState.genre = action.payload;
+      (rootState, action: PayloadAction<IGenre>) => {
+        rootState.genre = action.payload;
       }
     );
     builder.addCase(
       fetchMainData.fulfilled,
-      (langState, action: PayloadAction<any>) => {
-        langState.mainState = action.payload.results;
-        langState.totalPages = action.payload.total_pages;
+      (rootState, action: PayloadAction<any>) => {
+        rootState.mainState = action.payload.results;
+        rootState.totalPages = action.payload.total_pages;
       }
     );
   },

@@ -6,6 +6,7 @@ export interface ITopBilledCastProp {
   name: string;
   profile_path: string;
   character: string;
+  popularity: number;
 }
 export interface ITopBilledCast {
   props: ITopBilledCastProp;
