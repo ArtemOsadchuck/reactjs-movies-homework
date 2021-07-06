@@ -16,6 +16,7 @@ Object {
         >
           <form
             class="form"
+            id="form"
           >
             <input
               autocomplete="off"
@@ -27,9 +28,11 @@ Object {
             />
             <div
               class="search"
+              id="search"
             >
               <img
                 alt=""
+                id="search"
                 src="search.png"
                 width="16px"
               />
@@ -60,6 +63,7 @@ Object {
       >
         <form
           class="form"
+          id="form"
         >
           <input
             autocomplete="off"
@@ -71,9 +75,11 @@ Object {
           />
           <div
             class="search"
+            id="search"
           >
             <img
               alt=""
+              id="search"
               src="search.png"
               width="16px"
             />
