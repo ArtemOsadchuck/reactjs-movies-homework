@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../../components/Header/Header';
 import Main from '../Main';
 import MovieDetails from '../MovieDetails';
-// import ActorProfile from '../ActorProfile';
+import ActorProfile from '../ActorProfile';
 import './App.scss';
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
       <Header />
       <Main />
       <MovieDetails />
-      {/* <ActorProfile /> */}
+      <ActorProfile />
     </div>
   );
 }

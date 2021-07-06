@@ -19,6 +19,7 @@ Object {
           >
             <form
               class="form"
+              id="form"
             >
               <input
                 autocomplete="off"
@@ -30,9 +31,11 @@ Object {
               />
               <div
                 class="search"
+                id="search"
               >
                 <img
                   alt=""
+                  id="search"
                   src="search.png"
                   width="16px"
                 />
@@ -52,55 +55,73 @@ Object {
         <div
           class="mainWrapper"
         >
+          return 
+          <h2>
+            NO RESULTS FOUND
+          </h2>
+          ;
+        </div>
+        <div
+          class="mainWrapper"
+        >
           <div
-            class="categoriesWrapper"
+            class="castWrapper"
           >
-            <div>
-              Popular
+            <div
+              class="castNameWrapper"
+            >
+              <h3
+                class="castName"
+              >
+                Top Billed Cast
+              </h3>
+              <div
+                class="castNameShowAllBtn"
+              >
+                Show all
+              </div>
             </div>
-            <div>
-              Top rated
+            <div
+              class="castGrid"
+            />
+          </div>
+          <div
+            class="recommendationsWrapper"
+          >
+            <h2
+              class="recommendationsTitle"
+            >
+              RECOMMENDATIONS
+            </h2>
+            <div
+              class="recommendationsCardsWrapper"
+            >
+              <h2>
+                Loading...
+              </h2>
             </div>
-            <div>
-              Upcoming
-            </div>
+          </div>
+        </div>
+        <div
+          class="mainWrapper"
+        >
+          <div
+            class="titleWrapper"
+          >
+            <div
+              class="titleImageWrapper"
+            />
+          </div>
+          <div
+            class="PhotosWrapper"
+          >
+            <div
+              class="photosGrid"
+            />
           </div>
           <div
             class="cardsWrapper"
-          >
-            <h2>
-              Loading...
-            </h2>
-          </div>
-          <div
-            class="paginationWrapper"
-          >
-            <div
-              class="active"
-            >
-              1
-            </div>
-            <div
-              class=""
-            >
-              2
-            </div>
-            <div
-              class=""
-            >
-              3
-            </div>
-            <div
-              class=""
-            >
-              4
-            </div>
-            <div
-              class=""
-            >
-              5
-            </div>
-          </div>
+          />
         </div>
       </div>
     </div>
@@ -120,6 +141,7 @@ Object {
         >
           <form
             class="form"
+            id="form"
           >
             <input
               autocomplete="off"
@@ -131,9 +153,11 @@ Object {
             />
             <div
               class="search"
+              id="search"
             >
               <img
                 alt=""
+                id="search"
                 src="search.png"
                 width="16px"
               />
@@ -153,55 +177,73 @@ Object {
       <div
         class="mainWrapper"
       >
+        return 
+        <h2>
+          NO RESULTS FOUND
+        </h2>
+        ;
+      </div>
+      <div
+        class="mainWrapper"
+      >
         <div
-          class="categoriesWrapper"
+          class="castWrapper"
         >
-          <div>
-            Popular
+          <div
+            class="castNameWrapper"
+          >
+            <h3
+              class="castName"
+            >
+              Top Billed Cast
+            </h3>
+            <div
+              class="castNameShowAllBtn"
+            >
+              Show all
+            </div>
           </div>
-          <div>
-            Top rated
+          <div
+            class="castGrid"
+          />
+        </div>
+        <div
+          class="recommendationsWrapper"
+        >
+          <h2
+            class="recommendationsTitle"
+          >
+            RECOMMENDATIONS
+          </h2>
+          <div
+            class="recommendationsCardsWrapper"
+          >
+            <h2>
+              Loading...
+            </h2>
           </div>
-          <div>
-            Upcoming
-          </div>
+        </div>
+      </div>
+      <div
+        class="mainWrapper"
+      >
+        <div
+          class="titleWrapper"
+        >
+          <div
+            class="titleImageWrapper"
+          />
+        </div>
+        <div
+          class="PhotosWrapper"
+        >
+          <div
+            class="photosGrid"
+          />
         </div>
         <div
           class="cardsWrapper"
-        >
-          <h2>
-            Loading...
-          </h2>
-        </div>
-        <div
-          class="paginationWrapper"
-        >
-          <div
-            class="active"
-          >
-            1
-          </div>
-          <div
-            class=""
-          >
-            2
-          </div>
-          <div
-            class=""
-          >
-            3
-          </div>
-          <div
-            class=""
-          >
-            4
-          </div>
-          <div
-            class=""
-          >
-            5
-          </div>
-        </div>
+        />
       </div>
     </div>
   </div>,
