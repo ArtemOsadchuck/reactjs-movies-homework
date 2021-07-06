@@ -1,9 +1,8 @@
 /* eslint-disable array-callback-return */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import img from './img/Movie-card.png';
 import styles from './MovieCard.module.scss';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
-import getGenres from '../../store/rootStore/mainStore/getGenres';
 import { setMovieID } from '../../store/rootStore/movieDetailsPageStore/movieDetailsPageSlice';
 
 export interface ICard {
@@ -34,13 +33,8 @@ const MovieCard: React.FC<ICard> = ({ props }) => {
   const [genreName, setGenreName] = useState<Array<string>>([]);
   const dispatch = useAppDispatch();
   const appFetchMovieGenre = useAppSelector((state) => state.mainReducer.genre);
-  const lang = useAppSelector((state) => state.mainReducer.lang);
 
-  useEffect(() => {
-    dispatch(getGenres(lang));
-  }, [dispatch, lang]);
-
-  useEffect(() => {
+  useMemo(() => {
     const arrToSort: string[] = [];
     if (appFetchMovieGenre!.genres) {
       appFetchMovieGenre!.genres.map((genre): void => {
@@ -57,7 +51,7 @@ const MovieCard: React.FC<ICard> = ({ props }) => {
         });
       });
     }
-  }, [appFetchMovieGenre, genre_ids]);
+  }, [genre_ids, appFetchMovieGenre]);
 
   const goToMovie = (movieID: string) => {
     console.log(movieID);
