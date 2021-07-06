@@ -12,7 +12,6 @@ const getMovieDetailsData = createAsyncThunk(
     try {
       const { lang, movie_id } = props;
       const baseUrl = `https://api.themoviedb.org/3/movie/${movie_id}?api_key=8fa5bc53bb4a09dfb6560253edf33030&language=${lang.toLowerCase()}-${lang}`;
-      console.log(baseUrl);
       const response = await axios.get(baseUrl);
       return response.data;
     } catch (error) {

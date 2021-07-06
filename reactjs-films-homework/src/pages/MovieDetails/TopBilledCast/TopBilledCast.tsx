@@ -30,7 +30,7 @@ const TopBilledCast: React.FC<ITopBilledCast> = ({ props }) => {
     <div
       className={styles.actorWrapper}
       id={`${id}`}
-      onClick={() => getActorInfo(`${id}`)}
+      onClick={() => getActorInfo(id)}
     >
       <img className={styles.actorImg} height="160px" src={urlImg} alt={name} />
       <p className={styles.actorName}>
