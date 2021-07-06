@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import img from './img/Movie-card.png';
 import styles from './MovieCard.module.scss';
-
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
-import fetchGenres from '../../store/rootStore/mainStore/fetchGenres';
+import getGenres from '../../store/rootStore/mainStore/getGenres';
+import { setMovieID } from '../../store/rootStore/movieDetailsPageStore/movieDetailsPageSlice';
 
 export interface ICard {
   props: IMovieCard;
@@ -28,16 +28,16 @@ export interface IGenre {
 
 const MovieCard: React.FC<ICard> = ({ props }) => {
   const { id, title, vote_average, poster_path, genre_ids } = props;
+  const imgWidth = '52px';
   const movieTitle = 'Movie Title';
   const urlImg = `https://image.tmdb.org/t/p/w500/${poster_path}`;
   const [genreName, setGenreName] = useState<Array<string>>([]);
-
   const dispatch = useAppDispatch();
   const appFetchMovieGenre = useAppSelector((state) => state.mainReducer.genre);
   const lang = useAppSelector((state) => state.mainReducer.lang);
 
   useEffect(() => {
-    dispatch(fetchGenres(lang));
+    dispatch(getGenres(lang));
   }, [dispatch, lang]);
 
   useEffect(() => {
@@ -59,9 +59,17 @@ const MovieCard: React.FC<ICard> = ({ props }) => {
     }
   }, [appFetchMovieGenre, genre_ids]);
 
-  const imgWidth = '52px';
+  const goToMovie = (movieID: string) => {
+    console.log(movieID);
+    dispatch(setMovieID(movieID));
+  };
+
   return (
-    <a id={`${id}`} className={styles.movieCardLink} href={'/'}>
+    <div
+      id={`${id}`}
+      className={styles.movieCardLink}
+      onClick={() => goToMovie(`${id}`)}
+    >
       <div className={styles.ratingMovie}>
         <p className={styles.voteAverage}>
           {Math.ceil(vote_average * 10) / 10}
@@ -87,7 +95,7 @@ const MovieCard: React.FC<ICard> = ({ props }) => {
             : null}
         </p>
       </div>
-    </a>
+    </div>
   );
 };
 

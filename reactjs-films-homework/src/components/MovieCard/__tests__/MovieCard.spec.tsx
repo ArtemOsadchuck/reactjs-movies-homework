@@ -1,6 +1,8 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
 import MovieCard from '../MovieCard';
+import { Provider } from 'react-redux';
+import store from '../../../store/store';
 
 describe('MovieCard', () => {
   const mockProps = {
@@ -15,25 +17,29 @@ describe('MovieCard', () => {
     vote_average: 8.7,
   };
 
+  let Fragment: any;
+  beforeEach(() => {
+    const asFragment = render(
+      <Provider store={store}>
+        <MovieCard props={mockProps} />{' '}
+      </Provider>
+    );
+    Fragment = asFragment;
+  });
+
   afterEach(() => {
     cleanup();
   });
 
   it('MovieCard snapshot', () => {
-    const { asFragment } = render(<MovieCard props={mockProps} />);
-    expect(asFragment).toMatchSnapshot();
+    expect(Fragment).toMatchSnapshot();
   });
 
   it('MovieCard Must include rating', () => {
-    render(<MovieCard props={mockProps} />);
     expect(screen.getByText(/[0-9]/i)).toBeInTheDocument();
   });
-  it('MovieCard Must include class movieCardLink', () => {
-    render(<MovieCard props={mockProps} />);
-    expect(screen.getByRole('link')).toHaveClass('movieCardLink');
-  });
+
   it('MovieCard IMG Must include attr alt', () => {
-    render(<MovieCard props={mockProps} />);
     expect(screen.getByRole('img')).toHaveAttribute('alt');
   });
 });
