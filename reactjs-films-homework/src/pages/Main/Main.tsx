@@ -28,7 +28,7 @@ const Main: React.FC = () => {
       <div className={styles.cardsWrapper}>
         {appFetchMovie.length ? (
           appFetchMovie.map((e: IMovieCard) => {
-            return <MovieCard props={e} key={Date.now() * Math.random()} />;
+            return <MovieCard props={e} key={e.id + 0.1} />;
           })
         ) : (
           <h2>Loading...</h2>
