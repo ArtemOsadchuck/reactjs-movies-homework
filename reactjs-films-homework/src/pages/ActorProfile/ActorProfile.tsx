@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 import ActorTitle from './ActorTitleInfo';
 import ActorPhotos from './ActorPhotos';
@@ -19,6 +19,7 @@ const ActorProfile: React.FC = () => {
   const [knownBy, setKnownBy] = useState<Array<IMovieCard>>([]);
   const [sortKnownBy, setSortKnownBy] = useState<Array<IMovieCard>>([]);
   const actorGridPhotosLength = 4;
+  const filmsLength = 10;
   const dispatch = useAppDispatch();
 
   const actorInfoStore = useAppSelector((state) => state.actorPageReducer);
@@ -26,15 +27,15 @@ const ActorProfile: React.FC = () => {
   const id = useAppSelector((state) => state.actorPageReducer.id);
   const cast = useAppSelector((state) => state.actorPageReducer.cast);
 
-  const sortFilmPopularity = (arr: Array<IMovieCard>) => {
-    const filmsLength = 10;
-    const resultFilmsLength = [...arr].sort((a, b) => {
-      return a.vote_average > b.vote_average ? -1 : 1;
-    });
-    return resultFilmsLength.slice(0, filmsLength);
+  const sortFilmPopularity = (arr: Array<IMovieCard>, filmsLength: number) => {
+    // const resultFilmsLength = [...arr].sort((a, b) => {
+    //   return a.vote_average > b.vote_average ? -1 : 1;
+    // });
+    // не знаю как будет лучше
+    return arr.slice(0, filmsLength);
   };
 
-  useEffect(() => {
+  useMemo(() => {
     const requestInfoProperties = {
       lang: lang,
       id: id,
@@ -42,7 +43,7 @@ const ActorProfile: React.FC = () => {
     dispatch(getActorInfo(requestInfoProperties));
     dispatch(getFilmsWithActor(requestInfoProperties));
     dispatch(getActorImages(id));
-  }, [dispatch, lang, id]);
+  }, [lang, id, dispatch]);
 
   useEffect(() => {
     setInfo(() => actorInfoStore.actorInfo);
@@ -50,8 +51,8 @@ const ActorProfile: React.FC = () => {
     setKnownBy((): any[] => actorInfoStore.cast);
   }, [dispatch, lang, actorInfoStore, cast]);
 
-  useEffect(() => {
-    setSortKnownBy(sortFilmPopularity(knownBy));
+  useMemo(() => {
+    setSortKnownBy(sortFilmPopularity(knownBy, filmsLength));
   }, [knownBy]);
 
   return (
@@ -60,7 +61,7 @@ const ActorProfile: React.FC = () => {
       <ActorPhotos props={photos} photosLength={actorGridPhotosLength} />
       <div className={styles.cardsWrapper}>
         {sortKnownBy.map((el: IMovieCard) => {
-          return <MovieCard key={Math.random() * Date.now()} props={el} />;
+          return <MovieCard key={Math.random() / 1.321} props={el} />;
         })}
       </div>
     </div>
