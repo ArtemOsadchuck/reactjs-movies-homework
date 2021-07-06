@@ -11,12 +11,11 @@ import { ITitleMovieProps } from './MovieTitleCard/MovieTitleCard';
 import { IImagesBlockProps } from './ImagesBlock/ImagesBlock';
 
 import lang from '../../languages/getLanguage';
-
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
-import fetchMovieDetailsData from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getMovieDetailsData';
-import fetchTopBilletCastData from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getTopBilletCastData';
-import fetchMovieImages from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getMovieImages';
-import fetchRecommendations from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getRecommendations';
+import getMovieDetailsData from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getMovieDetailsData';
+import getTopBilletCastData from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getTopBilletCastData';
+import getMovieImages from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getMovieImages';
+import getRecommendations from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getRecommendations';
 
 const MovieDetails: React.FC = () => {
   const [titleInfoState, setTitleInfoState] = useState<ITitleMovieProps>();
@@ -30,10 +29,9 @@ const MovieDetails: React.FC = () => {
   const appLang = useAppSelector((state) => state.mainReducer.lang);
   const ImagesBlockTitle = lang(appLang).images;
 
-  const detailsState = {
-    lang: appLang,
-    movie_id: useAppSelector((state) => state.movieDetailsReducer.movie_id),
-  };
+  const movie_id = useAppSelector(
+    (state) => state.movieDetailsReducer.movie_id
+  );
   const appFetchInfo = useAppSelector(
     (state) => state.movieDetailsReducer.moviePageInfoResult
   );
@@ -47,16 +45,19 @@ const MovieDetails: React.FC = () => {
     (state) => state.movieDetailsReducer.cast
   );
   useEffect(() => {
+    const detailsState = {
+      lang: appLang,
+      movie_id: movie_id,
+    };
     const getData = async () => {
-      await dispatch(fetchMovieDetailsData(detailsState));
-      await dispatch(fetchTopBilletCastData(detailsState));
-      await dispatch(fetchMovieImages(detailsState.movie_id));
-      dispatch(fetchRecommendations(detailsState));
+      await dispatch(getMovieDetailsData(detailsState));
+      await dispatch(getTopBilletCastData(detailsState));
+      await dispatch(getMovieImages(detailsState.movie_id));
+      dispatch(getRecommendations(detailsState));
     };
 
     getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, appLang]);
+  }, [dispatch, appLang, movie_id]);
 
   useEffect(() => {
     setTitleInfoState(() => appFetchInfo);
