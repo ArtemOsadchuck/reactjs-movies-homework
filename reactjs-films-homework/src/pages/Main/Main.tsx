@@ -1,18 +1,15 @@
 import React, { useEffect } from 'react';
 import MovieCard from '../../components/MovieCard';
 import { IMovieCard } from '../../components/MovieCard/MovieCard';
-
 import CategoriesTabs from './CategoriesTabs';
 import styles from './Main.module.scss';
 import Pagination from './Pagination';
-
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
-import fetchMovieData from '../../store/rootStore/mainStore/fetchMainData';
+import getMainData from '../../store/rootStore/mainStore/getMainData';
 
 const Main: React.FC = () => {
   const dispatch = useAppDispatch();
   const appFetchMovie = useAppSelector((state) => state.mainReducer.mainState);
-
   const mainState = {
     lang: useAppSelector((state) => state.mainReducer.lang),
     page: useAppSelector((state) => state.mainReducer.page),
@@ -21,7 +18,7 @@ const Main: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchMovieData(mainState));
+    dispatch(getMainData(mainState));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

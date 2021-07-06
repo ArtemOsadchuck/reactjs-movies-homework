@@ -1,7 +1,7 @@
 import { IGenre } from '../../../components/MovieCard/MovieCard';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import fetchGenres from './fetchGenres';
-import fetchMainData from './fetchMainData';
+import getGenres from './getGenres';
+import getMainData from './getMainData';
 
 interface IInitialState {
   mainState: any[];
@@ -47,13 +47,13 @@ const mainSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(
-      fetchGenres.fulfilled,
+      getGenres.fulfilled,
       (rootState, action: PayloadAction<IGenre>) => {
         rootState.genre = action.payload;
       }
     );
     builder.addCase(
-      fetchMainData.fulfilled,
+      getMainData.fulfilled,
       (rootState, action: PayloadAction<any>) => {
         rootState.mainState = action.payload.results;
         rootState.totalPages = action.payload.total_pages;

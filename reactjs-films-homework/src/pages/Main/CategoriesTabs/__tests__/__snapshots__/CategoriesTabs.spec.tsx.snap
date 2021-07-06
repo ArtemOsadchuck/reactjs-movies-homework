@@ -8,13 +8,22 @@ Object {
       <div
         class="categoriesWrapper"
       >
-        <div>
+        <div
+          class="categoryBtn active"
+          id="popular"
+        >
           Popular
         </div>
-        <div>
+        <div
+          class="categoryBtn"
+          id="top_rated"
+        >
           Top rated
         </div>
-        <div>
+        <div
+          class="categoryBtn"
+          id="upcoming"
+        >
           Upcoming
         </div>
       </div>
@@ -24,13 +33,22 @@ Object {
     <div
       class="categoriesWrapper"
     >
-      <div>
+      <div
+        class="categoryBtn active"
+        id="popular"
+      >
         Popular
       </div>
-      <div>
+      <div
+        class="categoryBtn"
+        id="top_rated"
+      >
         Top rated
       </div>
-      <div>
+      <div
+        class="categoryBtn"
+        id="upcoming"
+      >
         Upcoming
       </div>
     </div>

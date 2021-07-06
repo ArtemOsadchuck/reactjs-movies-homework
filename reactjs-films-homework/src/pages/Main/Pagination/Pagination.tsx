@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Pagination.module.scss';
 import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
-import fetchMovieData from '../../../store/rootStore/mainStore/fetchMainData';
-
+import getMainData from '../../../store/rootStore/mainStore/getMainData';
 import {
   setPage,
   setActivePage,
@@ -35,7 +34,7 @@ const Pagination: React.FC = () => {
   const getPage = (page: string) => {
     dispatch(setActivePage(page));
     dispatch(setPage(page));
-    dispatch(fetchMovieData({ ...mainState, page: page }));
+    dispatch(getMainData({ ...mainState, page: page }));
     return;
   };
 
