@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import search from './assets/search.png';
 import styles from './Form.module.scss';
-
 import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
 import {
   setQuery,
   setActivePage,
 } from '../../../store/rootStore/mainStore/mainSlice';
-import fetchMainData from '../../../store/rootStore/mainStore/fetchMainData';
+import getMainData from '../../../store/rootStore/mainStore/getMainData';
 
 type IFormProps = {
   placeholder: string;
@@ -18,7 +17,6 @@ const Form: React.FC<IFormProps> = ({ placeholder }) => {
   const pageAfterSearch = '1';
   const dispatch = useAppDispatch();
   const [placeholderState, setPlaceholderState] = useState<string>(placeholder);
-
   const mainState = {
     lang: useAppSelector((state) => state.mainReducer.lang),
     category: useAppSelector((state) => state.mainReducer.category),
@@ -49,7 +47,7 @@ const Form: React.FC<IFormProps> = ({ placeholder }) => {
     });
     dispatch(setActivePage(pageAfterSearch));
     dispatch(setQuery(inputValue));
-    dispatch(fetchMainData({ ...mainState, query: inputValue }));
+    dispatch(getMainData({ ...mainState, query: inputValue }));
   };
 
   return (
