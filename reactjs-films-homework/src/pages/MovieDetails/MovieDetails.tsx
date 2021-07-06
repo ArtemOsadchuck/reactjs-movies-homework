@@ -16,6 +16,7 @@ import getMovieDetailsData from '../../store/rootStore/movieDetailsPageStore/get
 import getTopBilletCastData from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getTopBilletCastData';
 import getMovieImages from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getMovieImages';
 import getRecommendations from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getRecommendations';
+import getGenres from '../../store/rootStore/mainStore/getGenres';
 
 const MovieDetails: React.FC = () => {
   const [titleInfoState, setTitleInfoState] = useState<ITitleMovieProps>();
@@ -23,6 +24,8 @@ const MovieDetails: React.FC = () => {
   const [sortCast, setSortCast] = useState<Array<ITopBilledCastProp>>();
   const [stateImg, setStateImg] = useState<Array<IImagesBlockProps>>();
   const [recommended, setRecommended] = useState<Array<IMovieCard>>([]);
+  // const appFetchMovieGenre = useAppSelector((state) => state.mainReducer.genre);
+
   const recommendationsQuality = 5;
 
   const dispatch = useAppDispatch();
@@ -60,10 +63,14 @@ const MovieDetails: React.FC = () => {
   }, [dispatch, appLang, movie_id]);
 
   useEffect(() => {
+    dispatch(getGenres(appLang));
+  }, [dispatch, appLang]);
+
+  useEffect(() => {
     setTitleInfoState(() => appFetchInfo);
-    setCast(() => movieCastFromAPI);
-    setStateImg(() => imagesFromAPI);
-    setRecommended(() => recommendations);
+    setCast(() => movieCastFromAPI?.cast);
+    setStateImg(() => imagesFromAPI?.backdrops);
+    setRecommended(() => recommendations?.results);
   }, [
     appLang,
     cast,
@@ -115,9 +122,7 @@ const MovieDetails: React.FC = () => {
             recommended
               .slice(0, recommendationsQuality)
               .map((el: IMovieCard) => {
-                return (
-                  <MovieCard props={el} key={Date.now() - Math.random()} />
-                );
+                return <MovieCard props={el} key={el.id - 0.5} />;
               })
           ) : (
             <h2>Loading...</h2>

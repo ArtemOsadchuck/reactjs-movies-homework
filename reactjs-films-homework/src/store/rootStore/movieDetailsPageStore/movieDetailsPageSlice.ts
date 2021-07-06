@@ -21,6 +21,7 @@ interface IInitialState {
 const initialState: IInitialState = {
   movie_id: '277',
   lang: 'EN',
+
   genre: { genres: [] },
   moviePageInfoResult: null,
   result: [],
@@ -39,7 +40,7 @@ const moviePageSlice = createSlice({
     builder.addCase(
       getTopBilletCastData.fulfilled,
       (moviePageState, action: PayloadAction<IInitialState>) => {
-        moviePageState.cast = action.payload.cast;
+        moviePageState.cast = action.payload;
       }
     );
     builder.addCase(
@@ -51,13 +52,13 @@ const moviePageSlice = createSlice({
     builder.addCase(
       getMovieImages.fulfilled,
       (moviePageState, action: PayloadAction<any>) => {
-        moviePageState.images = action.payload.backdrops;
+        moviePageState.images = action.payload;
       }
     );
     builder.addCase(
       getRecommendations.fulfilled,
       (moviePageState, action: PayloadAction<any>) => {
-        moviePageState.recommendations = action.payload.results;
+        moviePageState.recommendations = action.payload;
       }
     );
   },
