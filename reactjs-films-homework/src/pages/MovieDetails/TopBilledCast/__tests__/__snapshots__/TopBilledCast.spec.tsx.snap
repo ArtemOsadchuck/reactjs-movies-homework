@@ -5,9 +5,8 @@ Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <a
+      <div
         class="actorWrapper"
-        href="/"
         id="192"
       >
         <img
@@ -28,14 +27,13 @@ Object {
         >
           Ellis Boyd 'Red' Redding
         </p>
-      </a>
+      </div>
        
     </div>
   </body>,
   "container": <div>
-    <a
+    <div
       class="actorWrapper"
-      href="/"
       id="192"
     >
       <img
@@ -56,7 +54,7 @@ Object {
       >
         Ellis Boyd 'Red' Redding
       </p>
-    </a>
+    </div>
      
   </div>,
   "debug": [Function],

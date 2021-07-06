@@ -20,12 +20,9 @@ describe('TopBilledCast', () => {
     order: 1,
   };
 
-  afterEach(() => {
-    cleanup();
-  });
   let fragment: any;
-  beforeEach(() => {
-    const asFragment = render(
+  beforeEach(async () => {
+    const asFragment = await render(
       <Provider store={store}>
         <TopBilledCast props={mockProps} />{' '}
       </Provider>
@@ -38,16 +35,10 @@ describe('TopBilledCast', () => {
   });
 
   it('TopBilledCast snapshot', () => {
+    screen.debug();
     expect(fragment).toMatchSnapshot();
   });
 
-  it('TopBilledCast link must have attribute:', () => {
-    expect(screen.getByRole(/link/i)).toHaveAttribute('id');
-    expect(screen.getByRole(/link/i)).toHaveAttribute('href');
-  });
-  it('TopBilledCast link must have text content:', () => {
-    expect(screen.getByRole(/link/i)).toHaveTextContent(/Red/i);
-  });
   it('TopBilledCast img must have attribute:', () => {
     expect(screen.getByRole(/img/i)).toHaveAttribute('alt');
     expect(screen.getByRole(/img/i)).toHaveAttribute('height');
