@@ -47,8 +47,8 @@ const ActorProfile: React.FC = () => {
 
   useEffect(() => {
     setInfo(() => actorInfoStore.actorInfo);
-    setPhotos((): IPhotos[] => actorInfoStore.profiles);
-    setKnownBy((): any[] => actorInfoStore.cast);
+    setPhotos(() => actorInfoStore.profiles);
+    setKnownBy(() => actorInfoStore.cast);
   }, [dispatch, lang, actorInfoStore, cast]);
 
   useMemo(() => {
@@ -57,7 +57,7 @@ const ActorProfile: React.FC = () => {
 
   return (
     <div className={styles.mainWrapper}>
-      {info ? <ActorTitle props={info} /> : null}
+      {info && <ActorTitle props={info} />}
       <ActorPhotos props={photos} photosLength={actorGridPhotosLength} />
       <div className={styles.cardsWrapper}>
         {sortKnownBy.map((el: IMovieCard) => {
