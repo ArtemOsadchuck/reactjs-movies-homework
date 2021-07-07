@@ -1,9 +1,11 @@
-import { IGenre, IMovieCard } from '../../../components/MovieCard/MovieCard';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import getMovieDetailsData from './getMoviePageData/getMovieDetailsData';
 import getTopBilletCastData from './getMoviePageData/getTopBilletCastData';
 import getMovieImages from './getMoviePageData/getMovieImages';
 import getRecommendations from './getMoviePageData/getRecommendations';
+
+import { IGenre, IMovieCard } from '../../../components/MovieCard/MovieCard';
 import { ITopBilledCastProp } from '../../../pages/MovieDetails/TopBilledCast/TopBilledCast';
 import { IImagesBlockProps } from '../../../pages/MovieDetails/ImagesBlock/ImagesBlock';
 import { ITitleMovieProps } from '../../../pages/MovieDetails/MovieTitleCard/MovieTitleCard';

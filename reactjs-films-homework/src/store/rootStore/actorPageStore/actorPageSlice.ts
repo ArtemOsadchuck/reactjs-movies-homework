@@ -1,9 +1,10 @@
-import { IPhotos } from './../../../pages/ActorProfile/ActorPhotos/ActorPhotos';
-import { IGenre, IMovieCard } from '../../../components/MovieCard/MovieCard';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import getActorInfo from './getActorData/getActorInfo';
 import getActorPhotos from './getActorData/getActorPhotos';
 import getFilmsWithActor from './getActorData/getFilmsWithActor';
+
+import { IPhotos } from './../../../pages/ActorProfile/ActorPhotos/ActorPhotos';
+import { IGenre, IMovieCard } from '../../../components/MovieCard/MovieCard';
 import { IActorTitleProps } from '../../../pages/ActorProfile/ActorTitleInfo/ActorTitleInfo';
 
 interface IInitialState {
