@@ -1,10 +1,10 @@
-import { IGenre } from '../../../components/MovieCard/MovieCard';
+import { IGenre, IMovieCard } from '../../../components/MovieCard/MovieCard';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import getGenres from './getGenres';
 import getMainData from './getMainData';
 
 interface IInitialState {
-  mainState: any[];
+  mainState: IMovieCard[];
   lang: string;
   activePage?: string;
   totalPages: number;
@@ -14,10 +14,15 @@ interface IInitialState {
   page: string;
 }
 
+interface IMainState {
+  results: IMovieCard[];
+  total_pages: number;
+}
+
 const initialState: IInitialState = {
   lang: 'EN',
   activePage: '1',
-  totalPages: 5,
+  totalPages: 0,
   genre: { genres: [] },
   query: '',
   page: '1',
@@ -54,7 +59,7 @@ const mainSlice = createSlice({
     );
     builder.addCase(
       getMainData.fulfilled,
-      (rootState, action: PayloadAction<any>) => {
+      (rootState, action: PayloadAction<IMainState>) => {
         rootState.mainState = action.payload.results;
         rootState.totalPages = action.payload.total_pages;
       }
