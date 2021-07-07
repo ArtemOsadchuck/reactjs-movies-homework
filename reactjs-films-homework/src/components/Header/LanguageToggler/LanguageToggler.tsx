@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './LanguageToggler.module.scss';
 import { setLang } from '../../../store/rootStore/mainStore/mainSlice';
 import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
-import getMainData from '../../../store/rootStore/mainStore/getMainData';
+import getMainData from '../../../store/rootStore/mainStore/getMaiData/getMainData';
 import getMovieDetailsData from '../../../store/rootStore/movieDetailsPageStore/getMoviePageData/getMovieDetailsData';
 import getTopBilletCastData from '../../../store/rootStore/movieDetailsPageStore/getMoviePageData/getTopBilletCastData';
 

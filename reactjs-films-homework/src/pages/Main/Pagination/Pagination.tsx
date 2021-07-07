@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Pagination.module.scss';
 import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
-import getMainData from '../../../store/rootStore/mainStore/getMainData';
+import getMainData from '../../../store/rootStore/mainStore/getMaiData/getMainData';
 import {
   setPage,
   setActivePage,

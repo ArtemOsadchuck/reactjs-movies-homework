@@ -6,7 +6,7 @@ import {
   setQuery,
   setActivePage,
 } from '../../../store/rootStore/mainStore/mainSlice';
-import getMainData from '../../../store/rootStore/mainStore/getMainData';
+import getMainData from '../../../store/rootStore/mainStore/getMaiData/getMainData';
 
 type IFormProps = {
   placeholder: string;

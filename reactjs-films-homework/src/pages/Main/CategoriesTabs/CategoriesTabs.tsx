@@ -6,7 +6,7 @@ import {
   setCategory,
   setActivePage,
 } from '../../../store/rootStore/mainStore/mainSlice';
-import getMainData from '../../../store/rootStore/mainStore/getMainData';
+import getMainData from '../../../store/rootStore/mainStore/getMaiData/getMainData';
 
 const CategoriesTabs: React.FC = () => {
   const startActivePage = 'popular';

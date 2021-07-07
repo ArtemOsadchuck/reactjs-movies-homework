@@ -31,7 +31,7 @@ const ActorProfile: React.FC = () => {
     // const resultFilmsLength = [...arr].sort((a, b) => {
     //   return a.vote_average > b.vote_average ? -1 : 1;
     // });
-    // не знаю как будет лучше
+    // I don't know how it will be better
     return arr.slice(0, filmsLength);
   };
 

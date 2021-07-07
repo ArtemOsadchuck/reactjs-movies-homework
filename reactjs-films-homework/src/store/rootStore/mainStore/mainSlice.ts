@@ -1,7 +1,7 @@
 import { IGenre, IMovieCard } from '../../../components/MovieCard/MovieCard';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import getGenres from './getGenres';
-import getMainData from './getMainData';
+import getGenres from './/getMaiData/getGenres';
+import getMainData from './getMaiData/getMainData';
 
 interface IInitialState {
   mainState: IMovieCard[];

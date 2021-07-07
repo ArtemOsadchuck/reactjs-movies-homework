@@ -16,7 +16,7 @@ import getMovieDetailsData from '../../store/rootStore/movieDetailsPageStore/get
 import getTopBilletCastData from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getTopBilletCastData';
 import getMovieImages from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getMovieImages';
 import getRecommendations from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getRecommendations';
-import getGenres from '../../store/rootStore/mainStore/getGenres';
+import getGenres from '../../store/rootStore/mainStore/getMaiData/getGenres';
 
 const MovieDetails: React.FC = () => {
   const [titleInfoState, setTitleInfoState] = useState<ITitleMovieProps>();

@@ -5,7 +5,7 @@ import CategoriesTabs from './CategoriesTabs';
 import styles from './Main.module.scss';
 import Pagination from './Pagination';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
-import getMainData from '../../store/rootStore/mainStore/getMainData';
+import getMainData from '../../store/rootStore/mainStore/getMaiData/getMainData';
 
 const Main: React.FC = () => {
   const dispatch = useAppDispatch();
