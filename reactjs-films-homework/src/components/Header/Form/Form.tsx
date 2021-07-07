@@ -64,6 +64,7 @@ const Form: React.FC<IFormProps> = ({ placeholder }) => {
           }}
           onKeyPress={(event) => {
             if (event.code === 'Enter') {
+              event.preventDefault();
               getSearchResults();
               setInputValue('');
               event.preventDefault();
@@ -74,7 +75,10 @@ const Form: React.FC<IFormProps> = ({ placeholder }) => {
         <div
           className={styles.search}
           id={'search'}
-          onClick={() => getSearchResults()}
+          onClick={(event) => {
+            event.preventDefault();
+            getSearchResults();
+          }}
         >
           <img src={search} id={'search'} alt="" width="16px" />
         </div>
