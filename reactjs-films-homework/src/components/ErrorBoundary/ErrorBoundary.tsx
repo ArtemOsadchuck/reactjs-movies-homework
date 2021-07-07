@@ -1,7 +1,9 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react';
+import styles from './ErrorBoundary.module.scss';
 
 interface Props {
   children: ReactNode;
+  title: string;
 }
 
 interface State {
@@ -22,7 +24,14 @@ class ErrorBoundary extends Component<Props, State> {
 
   public render() {
     if (this.state.hasError) {
-      return <h1>Sorry.. there was an error</h1>;
+      return (
+        <div className={styles.boundaryWrapper}>
+          <h2 color="wite">
+            An error has occurred on the {this.props.title}. Please try to
+            refresh the page
+          </h2>
+        </div>
+      );
     }
 
     return this.props.children;
