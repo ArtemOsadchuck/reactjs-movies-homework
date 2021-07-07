@@ -27,8 +27,8 @@ const Main: React.FC = () => {
       <CategoriesTabs />
       <div className={styles.cardsWrapper}>
         {appFetchMovie.length ? (
-          appFetchMovie.map((e: IMovieCard) => {
-            return <MovieCard props={e} key={e.id + 0.1} />;
+          appFetchMovie.map((card: IMovieCard) => {
+            return <MovieCard props={card} key={card.id + 0.1} />;
           })
         ) : (
           <h2>Loading...</h2>

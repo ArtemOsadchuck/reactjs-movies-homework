@@ -28,7 +28,6 @@ const Pagination: React.FC = () => {
 
   useEffect(() => {
     setPugNum(() => getPagesFromTotal(mainState.totalPages));
-    console.log(mainState.totalPages);
   }, [dispatch, mainState.totalPages]);
 
   const getPage = (page: string) => {

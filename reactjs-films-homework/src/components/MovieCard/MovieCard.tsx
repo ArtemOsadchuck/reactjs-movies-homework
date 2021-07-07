@@ -54,7 +54,6 @@ const MovieCard: React.FC<ICard> = ({ props }) => {
   }, [genre_ids, appFetchMovieGenre]);
 
   const goToMovie = (movieID: string) => {
-    console.log(movieID);
     dispatch(setMovieID(movieID));
   };
 
