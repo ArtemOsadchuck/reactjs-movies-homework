@@ -23,7 +23,7 @@ const MovieDetails: React.FC = () => {
   const [cast, setCast] = useState<Array<ITopBilledCastProp>>();
   const [sortCast, setSortCast] = useState<Array<ITopBilledCastProp>>();
   const [stateImg, setStateImg] = useState<Array<IImagesBlockProps>>();
-  const [recommended, setRecommended] = useState<Array<IMovieCard>>([]);
+  const [recommended, setRecommended] = useState<Array<IMovieCard>>();
   // const appFetchMovieGenre = useAppSelector((state) => state.mainReducer.genre);
 
   const recommendationsQuality = 5;
@@ -94,7 +94,7 @@ const MovieDetails: React.FC = () => {
 
   return (
     <div className={styles.mainWrapper}>
-      {titleInfoState ? <MovieTitleCard props={titleInfoState} /> : null}
+      {titleInfoState && <MovieTitleCard props={titleInfoState} />}
       <div className={styles.castWrapper}>
         <div className={styles.castNameWrapper}>
           <h3 className={styles.castName}>{lang(appLang).topBilledCast}</h3>

@@ -1,30 +1,38 @@
-import { IGenre } from '../../../components/MovieCard/MovieCard';
+import { IGenre, IMovieCard } from '../../../components/MovieCard/MovieCard';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import getMovieDetailsData, {
-  IGetMovieDetailsData,
-} from './getMoviePageData/getMovieDetailsData';
+import getMovieDetailsData from './getMoviePageData/getMovieDetailsData';
 import getTopBilletCastData from './getMoviePageData/getTopBilletCastData';
 import getMovieImages from './getMoviePageData/getMovieImages';
 import getRecommendations from './getMoviePageData/getRecommendations';
+import { ITopBilledCastProp } from '../../../pages/MovieDetails/TopBilledCast/TopBilledCast';
+import { IImagesBlockProps } from '../../../pages/MovieDetails/ImagesBlock/ImagesBlock';
+import { ITitleMovieProps } from '../../../pages/MovieDetails/MovieTitleCard/MovieTitleCard';
+
+interface ICast {
+  cast: ITopBilledCastProp[];
+}
+interface IImages {
+  backdrops: IImagesBlockProps[];
+}
 
 interface IInitialState {
   lang: string;
   movie_id: string;
   genre?: IGenre;
-  moviePageInfoResult?: any;
-  cast?: any;
-  result?: any;
-  images?: any;
-  recommendations?: any;
+  moviePageInfoResult?: ITitleMovieProps;
+  cast?: ICast;
+  images?: IImages;
+  recommendations?: IGetRecommendations;
+}
+
+interface IGetRecommendations {
+  results: IMovieCard[];
 }
 
 const initialState: IInitialState = {
   movie_id: '277',
   lang: 'EN',
-
   genre: { genres: [] },
-  moviePageInfoResult: null,
-  result: [],
 };
 
 const moviePageSlice = createSlice({
@@ -39,25 +47,25 @@ const moviePageSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       getTopBilletCastData.fulfilled,
-      (moviePageState, action: PayloadAction<IInitialState>) => {
+      (moviePageState, action: PayloadAction<ICast>) => {
         moviePageState.cast = action.payload;
       }
     );
     builder.addCase(
       getMovieDetailsData.fulfilled,
-      (moviePageState, action: PayloadAction<IGetMovieDetailsData>) => {
+      (moviePageState, action: PayloadAction<ITitleMovieProps>) => {
         moviePageState.moviePageInfoResult = action.payload;
       }
     );
     builder.addCase(
       getMovieImages.fulfilled,
-      (moviePageState, action: PayloadAction<any>) => {
+      (moviePageState, action: PayloadAction<IImages>) => {
         moviePageState.images = action.payload;
       }
     );
     builder.addCase(
       getRecommendations.fulfilled,
-      (moviePageState, action: PayloadAction<any>) => {
+      (moviePageState, action: PayloadAction<IGetRecommendations>) => {
         moviePageState.recommendations = action.payload;
       }
     );
