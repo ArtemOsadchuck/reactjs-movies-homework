@@ -38,7 +38,7 @@ const Pagination: React.FC = () => {
   };
 
   return (
-    <div className={styles.paginationWrapper}>
+    <div id="paginationWrapper_testID" className={styles.paginationWrapper}>
       {pagNum.map((page) => {
         return (
           <div

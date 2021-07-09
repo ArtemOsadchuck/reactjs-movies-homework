@@ -7,65 +7,15 @@ Object {
     <div>
       <div
         class="paginationWrapper"
-      >
-        <div
-          class="active"
-        >
-          1
-        </div>
-        <div
-          class=""
-        >
-          2
-        </div>
-        <div
-          class=""
-        >
-          3
-        </div>
-        <div
-          class=""
-        >
-          4
-        </div>
-        <div
-          class=""
-        >
-          5
-        </div>
-      </div>
+        id="paginationWrapper_testID"
+      />
     </div>
   </body>,
   "container": <div>
     <div
       class="paginationWrapper"
-    >
-      <div
-        class="active"
-      >
-        1
-      </div>
-      <div
-        class=""
-      >
-        2
-      </div>
-      <div
-        class=""
-      >
-        3
-      </div>
-      <div
-        class=""
-      >
-        4
-      </div>
-      <div
-        class=""
-      >
-        5
-      </div>
-    </div>
+      id="paginationWrapper_testID"
+    />
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

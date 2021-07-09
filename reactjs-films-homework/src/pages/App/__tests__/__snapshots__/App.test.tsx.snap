@@ -106,13 +106,6 @@ Object {
           class="mainWrapper"
         >
           <div
-            class="titleWrapper"
-          >
-            <div
-              class="titleImageWrapper"
-            />
-          </div>
-          <div
             class="PhotosWrapper"
           >
             <div
@@ -227,13 +220,6 @@ Object {
       <div
         class="mainWrapper"
       >
-        <div
-          class="titleWrapper"
-        >
-          <div
-            class="titleImageWrapper"
-          />
-        </div>
         <div
           class="PhotosWrapper"
         >

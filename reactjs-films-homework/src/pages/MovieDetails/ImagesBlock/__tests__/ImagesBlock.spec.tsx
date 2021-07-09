@@ -1,6 +1,8 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
 import ImagesBlock from '../ImagesBlock';
+import { Provider } from 'react-redux';
+import store from '../../../../store/store';
 
 describe('ImagesBlock', () => {
   const mockProps = [
@@ -23,26 +25,30 @@ describe('ImagesBlock', () => {
       width: 1920,
     },
   ];
-  afterEach(() => {
-    cleanup();
+  const title = 'images';
+  let Fragment: any;
+
+  beforeEach(() => {
+    const asFragment = render(
+      <Provider store={store}>
+        <ImagesBlock props={mockProps} title={title} />
+      </Provider>
+    );
+    Fragment = asFragment;
   });
 
+  afterEach(() => cleanup());
+
   it('ImagesBlock snapshot', () => {
-    const { asFragment } = render(<ImagesBlock props={mockProps} />);
-    expect(asFragment).toMatchSnapshot();
+    expect(Fragment).toMatchSnapshot();
   });
 
   it('ImagesBlock Must have class:', () => {
-    const { container } = render(<ImagesBlock props={mockProps} />);
-    expect(container.firstChild).toHaveClass('imagesBlockWrapper');
-    expect(container.firstChild!.childNodes[0]).toHaveClass(
-      'imagesTitleWrapper'
-    );
-    expect(container.firstChild!.childNodes[1]).toHaveClass('imagesWrapper');
+    expect(screen.getByText(/images/i)).toBeInTheDocument();
+    expect(screen.getByText(/images/i)).toHaveClass('imagesTitle');
   });
 
   it('ImagesBlock must heave attribute:', () => {
-    render(<ImagesBlock props={mockProps} />);
     screen.getAllByRole('img').forEach((el) => {
       expect(el).toHaveAttribute('src');
       expect(el).toHaveAttribute('alt');
@@ -52,7 +58,6 @@ describe('ImagesBlock', () => {
   });
 
   it('ImagesBlock Loading... must be in the document:', () => {
-    render(<ImagesBlock props={mockProps} />);
     expect(screen.getByText(/Images/i)).toBeInTheDocument();
   });
 });

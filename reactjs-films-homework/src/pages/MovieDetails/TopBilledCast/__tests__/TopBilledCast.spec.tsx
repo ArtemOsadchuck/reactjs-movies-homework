@@ -35,7 +35,6 @@ describe('TopBilledCast', () => {
   });
 
   it('TopBilledCast snapshot', () => {
-    screen.debug();
     expect(fragment).toMatchSnapshot();
   });
 
