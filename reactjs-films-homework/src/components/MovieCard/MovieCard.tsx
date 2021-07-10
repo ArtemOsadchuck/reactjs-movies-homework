@@ -4,6 +4,7 @@ import img from './img/Movie-card.png';
 import styles from './MovieCard.module.scss';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { setMovieID } from '../../store/rootStore/movieDetailsPageStore/movieDetailsPageSlice';
+import GenresList from './GenresList';
 
 export interface ICard {
   props: IMovieCard;
@@ -25,14 +26,20 @@ export interface IGenre {
   }[];
 }
 
-const MovieCard: React.FC<ICard> = ({ props }) => {
-  const { id, title, vote_average, poster_path, genre_ids } = props;
+const MovieCard: React.FC<ICard> = ({
+  props: { id, title, vote_average, poster_path, genre_ids },
+}) => {
   const imgWidth = '52px';
   const movieTitle = 'Movie Title';
   const urlImg = `https://image.tmdb.org/t/p/w500/${poster_path}`;
-  const [genreName, setGenreName] = useState<Array<string>>([]);
+  const [genreName, setGenreName] = useState<string[]>([]);
   const dispatch = useAppDispatch();
   const appFetchMovieGenre = useAppSelector((state) => state.mainReducer.genre);
+
+  const voteAverage = useMemo(
+    () => Math.ceil(vote_average * 10) / 10,
+    [vote_average]
+  );
 
   useMemo(() => {
     const arrToSort: string[] = [];
@@ -64,9 +71,7 @@ const MovieCard: React.FC<ICard> = ({ props }) => {
       onClick={() => goToMovie(`${id}`)}
     >
       <div className={styles.ratingMovie}>
-        <p className={styles.voteAverage}>
-          {Math.ceil(vote_average * 10) / 10}
-        </p>
+        <p className={styles.voteAverage}>{voteAverage}</p>
       </div>
       <div className={styles.playIcon}>
         <div className={styles.playIconInner}></div>
@@ -80,13 +85,7 @@ const MovieCard: React.FC<ICard> = ({ props }) => {
           )}
         </div>
         <h4>{title}</h4>
-        <p className={styles.genre}>
-          {genreName
-            ? genreName.map((el: string) => {
-                return <span key={el}>{` ${el}`}</span>;
-              })
-            : null}
-        </p>
+        {genreName && <GenresList genreName={genreName} />}
       </div>
     </div>
   );
