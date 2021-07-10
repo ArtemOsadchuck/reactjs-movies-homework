@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './LanguageToggler.module.scss';
+import { langArr } from '../../../languages/getLanguage';
 import { setLang } from '../../../store/rootStore/mainStore/mainSlice';
 import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
 import getMainData from '../../../store/rootStore/mainStore/getMaiData/getMainData';
@@ -20,11 +21,11 @@ const LanguageToggler: React.FC = () => {
     lang: appLang,
     movie_id: useAppSelector((state) => state.movieDetailsReducer.movie_id),
   };
-  const langArr = ['RU', 'EN'];
 
-  const downShow = () => {
+  const showDropDown = () => {
     setIsDropDownShow(() => !isDropDownShow);
   };
+
   const changeLang = (lang: string) => {
     const dd = { ...mainState, lang: `${lang.toLowerCase()}-${lang}` };
     dispatch(setLang(lang));
@@ -36,27 +37,23 @@ const LanguageToggler: React.FC = () => {
 
   return (
     <div className={styles.dropdownWrapper}>
-      <button onClick={downShow} className={styles.dropdownBtn}>
+      <button onClick={showDropDown} className={styles.dropdownBtn}>
         {appLang}
       </button>
-      {isDropDownShow ? (
-        <>
-          <div className={styles.modal}>
-            <div className={styles.arrow}></div>
-            {langArr.map((e) => {
-              return (
-                <div
-                  className={styles.modalButton}
-                  key={e}
-                  onClick={() => changeLang(e)}
-                >
-                  {e}
-                </div>
-              );
-            })}
-          </div>
-        </>
-      ) : null}
+      {isDropDownShow && (
+        <div className={styles.modal}>
+          <div className={styles.arrow}></div>
+          {langArr.map((e) => (
+            <div
+              className={styles.modalButton}
+              key={e}
+              onClick={() => changeLang(e)}
+            >
+              {e}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

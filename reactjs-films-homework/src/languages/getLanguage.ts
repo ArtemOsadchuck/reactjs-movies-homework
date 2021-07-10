@@ -20,4 +20,6 @@ const lang = (language: string) => {
   return globalLang;
 };
 
+export const langArr = ['RU', 'EN'];
+
 export default lang;
