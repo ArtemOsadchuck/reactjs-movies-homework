@@ -5,25 +5,29 @@ import { Provider } from 'react-redux';
 import store from '../../../../store/store';
 
 describe('Form', () => {
-  let Fragment: any;
+  let fragment: any;
+
   beforeEach(() => {
-    const asFragment = render(
+    const { asFragment } = render(
       <Provider store={store}>
         <Form placeholder="Movies" />
       </Provider>
     );
-    Fragment = asFragment;
+    fragment = asFragment();
   });
+
   afterEach(() => {
     cleanup();
   });
 
-  it('Form snapshot', () => {
-    expect(Fragment).toMatchSnapshot();
+  it('Snapshot', () => {
+    expect(fragment).toMatchSnapshot();
   });
-  it('placeholder text', () => {
+
+  it('Should render placeholder', () => {
     expect(screen.getByPlaceholderText(/Movies/i)).toBeInTheDocument();
   });
+
   it('Must has not default value', () => {
     expect(screen.getByDisplayValue('')).toBeInTheDocument();
   });
