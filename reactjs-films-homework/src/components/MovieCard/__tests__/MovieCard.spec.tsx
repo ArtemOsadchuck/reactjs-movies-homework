@@ -19,12 +19,12 @@ describe('MovieCard', () => {
 
   let Fragment: any;
   beforeEach(() => {
-    const asFragment = render(
+    const { asFragment } = render(
       <Provider store={store}>
         <MovieCard props={mockProps} />{' '}
       </Provider>
     );
-    Fragment = asFragment;
+    Fragment = asFragment();
   });
 
   afterEach(() => {

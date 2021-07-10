@@ -1,146 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MovieCard MovieCard snapshot 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        class="movieCardLink"
-        id="724089"
-      >
-        <div
-          class="ratingMovie"
-        >
-          <p
-            class="voteAverage"
-          >
-            8.7
-          </p>
-        </div>
-        <div
-          class="playIcon"
-        >
-          <div
-            class="playIconInner"
-          />
-        </div>
-        <div
-          class="movieCardWrapper"
-        >
-          <div
-            class="imgCardWrapper"
-          >
-            <img
-              alt="Movie Title"
-              height="100%"
-              src="https://image.tmdb.org/t/p/w500//x5o8cLZfEXMoZczTYWLrUo1P7UJ.jpg"
-            />
-          </div>
-          <h4>
-            Gabriel's Inferno Part II
-          </h4>
-          <p
-            class="genre"
-          />
-        </div>
-      </div>
-       
-    </div>
-  </body>,
-  "container": <div>
+<DocumentFragment>
+  <div
+    class="movieCardLink"
+    id="724089"
+  >
     <div
-      class="movieCardLink"
-      id="724089"
+      class="ratingMovie"
+    >
+      <p
+        class="voteAverage"
+      >
+        8.7
+      </p>
+    </div>
+    <div
+      class="playIcon"
     >
       <div
-        class="ratingMovie"
-      >
-        <p
-          class="voteAverage"
-        >
-          8.7
-        </p>
-      </div>
-      <div
-        class="playIcon"
-      >
-        <div
-          class="playIconInner"
-        />
-      </div>
-      <div
-        class="movieCardWrapper"
-      >
-        <div
-          class="imgCardWrapper"
-        >
-          <img
-            alt="Movie Title"
-            height="100%"
-            src="https://image.tmdb.org/t/p/w500//x5o8cLZfEXMoZczTYWLrUo1P7UJ.jpg"
-          />
-        </div>
-        <h4>
-          Gabriel's Inferno Part II
-        </h4>
-        <p
-          class="genre"
-        />
-      </div>
+        class="playIconInner"
+      />
     </div>
-     
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+    <div
+      class="movieCardWrapper"
+    >
+      <div
+        class="imgCardWrapper"
+      >
+        <img
+          alt="Movie Title"
+          height="100%"
+          src="https://image.tmdb.org/t/p/w500//x5o8cLZfEXMoZczTYWLrUo1P7UJ.jpg"
+        />
+      </div>
+      <h4>
+        Gabriel's Inferno Part II
+      </h4>
+      <p
+        class="genre"
+      />
+    </div>
+  </div>
+   
+</DocumentFragment>
 `;
