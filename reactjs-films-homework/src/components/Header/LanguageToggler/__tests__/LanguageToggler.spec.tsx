@@ -6,29 +6,33 @@ import store from '../../../../store/store';
 
 describe('LanguageToggler', () => {
   let Fragment: any;
+
   beforeEach(() => {
-    const asFragment = render(
+    const { asFragment } = render(
       <Provider store={store}>
         <LanguageToggler />
       </Provider>
     );
-    Fragment = asFragment;
+    Fragment = asFragment();
   });
+
   afterEach(() => {
     cleanup();
   });
-  it('LanguageToggler snapshot', () => {
+
+  it('Snapshot', () => {
     expect(Fragment).toMatchSnapshot();
   });
 
-  it('LanguageToggler Must include text RU or EN', () => {
+  it('Must include text RU or EN', () => {
     expect(screen.getByText(/en|ru/i)).not.toBeNull();
   });
 
-  it('LanguageToggler Must be clickable', () => {
+  it('Must be clickable', () => {
     fireEvent.click(screen.getByText(/en|ru/i));
     fireEvent.click(screen.getByText(/ru/i), {
       target: <div>RU</div>,
     });
+    expect(screen.getByText(/ru/i)).toBeInTheDocument();
   });
 });
