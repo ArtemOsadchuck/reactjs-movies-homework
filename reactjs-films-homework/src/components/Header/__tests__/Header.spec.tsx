@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import store from '../../../store/store';
 
 describe('Header', () => {
-  let Fragment: any;
+  let fragment: any;
 
   beforeEach(() => {
     const { asFragment } = render(
@@ -13,7 +13,7 @@ describe('Header', () => {
         <Header />
       </Provider>
     );
-    Fragment = asFragment();
+    fragment = asFragment();
   });
 
   afterEach(() => {
@@ -21,7 +21,7 @@ describe('Header', () => {
   });
 
   it('Snapshot', () => {
-    expect(Fragment).toMatchSnapshot();
+    expect(fragment).toMatchSnapshot();
   });
 
   it('Must include img', () => {
