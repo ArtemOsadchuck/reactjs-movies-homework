@@ -74,4 +74,5 @@ const CategoriesTabs: React.FC = () => {
     </div>
   );
 };
+
 export default CategoriesTabs;
