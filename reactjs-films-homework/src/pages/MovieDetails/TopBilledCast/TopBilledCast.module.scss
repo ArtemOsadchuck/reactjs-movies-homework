@@ -1,0 +1,23 @@
+.actorWrapper {
+  color: rgb(247, 247, 247);
+  display: flex;
+  flex-direction: column;
+  height: 13rem;
+  justify-content: space-between;
+  width: 7rem;
+
+  .actorImg {
+    border-radius: 5%;
+  }
+
+  .actorName {
+    font-size: 0.8rem;
+    text-align: left;
+  }
+
+  .actorCharacter {
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+    text-align: left;
+  }
+}

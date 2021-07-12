@@ -1,0 +1,36 @@
+$wite: rgb(255, 255, 255);
+$black: rgb(0, 0, 0);
+
+.categoriesWrapper {
+  border: 1px solid $wite;
+  border-radius: 5px;
+  color: $wite;
+  display: flex;
+  font-size: 0.8rem;
+  height: 2rem;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  transition: 0.3s ease-in-out;
+  width: 20rem;
+
+  div {
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+    justify-content: center;
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+      background-color: $wite;
+      color: $black;
+      cursor: pointer;
+    }
+  }
+
+  :nth-child(2) {
+    border-left: 2px solid $wite;
+    border-right: 2px solid $wite;
+  }
+}

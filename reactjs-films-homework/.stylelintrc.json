@@ -1,0 +1,21 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-css-modules",
+    "stylelint-config-sass-guidelines",
+    "stylelint-config-standard-scss"
+  ],
+  "string": "single",
+  "prettier/prettier": [
+    true,
+    {
+      "doubleQuote": true,
+      "tabWidth": 2
+    }
+  ],
+  "rules": {
+    "string-quotes": "double",
+    "max-nesting-depth": 4,
+    "selector-class-pattern": "[a-zA-Z0-9]+"
+  }
+}

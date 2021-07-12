@@ -1,0 +1,31 @@
+$start-text-align: start;
+
+.titleWrapper {
+  .heading {
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+    text-align: $start-text-align;
+  }
+
+  .title {
+    text-align: $start-text-align;
+  }
+}
+
+.otherInfoWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .heading {
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.2rem;
+    text-align: $start-text-align;
+  }
+
+  .infoField {
+    text-align: $start-text-align;
+  }
+}
