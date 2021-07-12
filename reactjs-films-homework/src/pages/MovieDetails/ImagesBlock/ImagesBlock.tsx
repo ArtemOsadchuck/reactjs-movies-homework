@@ -2,8 +2,10 @@ import React from 'react';
 import styles from './ImagesBlock.module.scss';
 
 export interface IImagesBlock {
-  props: IImagesBlockProps[];
+  images: IImagesBlockProps[];
   title: string;
+  imgWidth: string;
+  imagesQuality: number;
 }
 export interface IImagesBlockProps {
   aspect_ratio?: number;
@@ -15,18 +17,20 @@ export interface IImagesBlockProps {
   width?: number;
 }
 
-const ImagesBlock: React.FC<IImagesBlock> = ({ props, title }) => {
-  const imgWidth = '172px';
-  const imagesQuality = 8;
-
+const ImagesBlock: React.FC<IImagesBlock> = ({
+  images,
+  title,
+  imagesQuality,
+  imgWidth,
+}) => {
   return (
     <div className={styles.imagesBlockWrapper}>
       <div className={styles.imagesTitleWrapper}>
         <h3 className={styles.imagesTitle}>{title}</h3>
       </div>
       <div className={styles.imagesWrapper}>
-        {props.length
-          ? props.slice(0, imagesQuality).map((el) => {
+        {images.length
+          ? images.slice(0, imagesQuality).map((el) => {
               return (
                 <img
                   className={styles.image}

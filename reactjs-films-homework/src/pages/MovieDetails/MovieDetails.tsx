@@ -34,6 +34,8 @@ const MovieDetails: React.FC = () => {
   const [recommended, setRecommended] = useState<Array<IMovieCard>>();
 
   const recommendationsQuality = 5;
+  const imagesBlockQuality = 8;
+  const imagesWidth = '172px';
 
   const dispatch = useAppDispatch();
   const appLang = useAppSelector((state) => state.mainReducer.lang);
@@ -109,7 +111,12 @@ const MovieDetails: React.FC = () => {
             : null}
         </div>
         {stateImg ? (
-          <ImagesBlock props={stateImg} title={ImagesBlockTitle} />
+          <ImagesBlock
+            images={stateImg}
+            title={ImagesBlockTitle}
+            imgWidth={imagesWidth}
+            imagesQuality={imagesBlockQuality}
+          />
         ) : null}
       </div>
       <div className={styles.recommendationsWrapper}>
