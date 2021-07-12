@@ -18,13 +18,20 @@ import getMovieImages from '../../store/rootStore/movieDetailsPageStore/getMovie
 import getRecommendations from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getRecommendations';
 import getGenres from '../../store/rootStore/mainStore/getMaiData/getGenres';
 
+const sortCastBySix = (cast: Array<ITopBilledCastProp>) => {
+  const castLength = 6;
+  const resultCast = [...cast].sort((a, b) => {
+    return a.popularity > b.popularity ? -1 : 1;
+  });
+  return resultCast.slice(0, castLength);
+};
+
 const MovieDetails: React.FC = () => {
   const [titleInfoState, setTitleInfoState] = useState<ITitleMovieProps>();
   const [cast, setCast] = useState<Array<ITopBilledCastProp>>();
   const [sortCast, setSortCast] = useState<Array<ITopBilledCastProp>>();
   const [stateImg, setStateImg] = useState<Array<IImagesBlockProps>>();
   const [recommended, setRecommended] = useState<Array<IMovieCard>>();
-  // const appFetchMovieGenre = useAppSelector((state) => state.mainReducer.genre);
 
   const recommendationsQuality = 5;
 
@@ -80,14 +87,6 @@ const MovieDetails: React.FC = () => {
     recommendations,
   ]);
 
-  const sortCastBySix = (cast: Array<ITopBilledCastProp>) => {
-    const castLength = 6;
-    const resultCast = [...cast].sort((a, b) => {
-      return a.popularity > b.popularity ? -1 : 1;
-    });
-    return resultCast.slice(0, castLength);
-  };
-
   useEffect(() => {
     cast?.length !== undefined && setSortCast(sortCastBySix(cast));
   }, [cast, appLang, movieCastFromAPI]);
@@ -132,4 +131,5 @@ const MovieDetails: React.FC = () => {
     </div>
   );
 };
+
 export default MovieDetails;
