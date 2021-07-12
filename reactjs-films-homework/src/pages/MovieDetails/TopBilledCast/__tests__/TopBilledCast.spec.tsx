@@ -2,32 +2,18 @@ import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
 
 import TopBilledCast from '../TopBilledCast';
+import TopBilledCastMocks from '../mocks';
 
 import { Provider } from 'react-redux';
 import store from '../../../../store/store';
 
 describe('TopBilledCast', () => {
-  const mockProps = {
-    adult: false,
-    gender: 2,
-    id: 192,
-    known_for_department: 'Acting',
-    name: 'Morgan Freeman',
-    original_name: 'Morgan Freeman',
-    popularity: 17.844,
-    profile_path: '/oIciQWr8VwKoR8TmAw1owaiZFyb.jpg',
-    cast_id: 4,
-    character: "Ellis Boyd 'Red' Redding",
-    credit_id: '52fe4231c3a36847f800b135',
-    order: 1,
-  };
-
   let fragment: any;
 
   beforeEach(async () => {
     const { asFragment } = await render(
       <Provider store={store}>
-        <TopBilledCast props={mockProps} />
+        <TopBilledCast props={TopBilledCastMocks} />
       </Provider>
     );
     fragment = asFragment();
