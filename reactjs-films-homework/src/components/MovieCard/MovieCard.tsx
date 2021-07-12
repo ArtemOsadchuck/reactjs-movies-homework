@@ -38,19 +38,20 @@ const MovieCard: React.FC<ICard> = ({
 
   useMemo(() => {
     const arrToSort: string[] = [];
-    if (appFetchMovieGenre!.genres) {
+    if (appFetchMovieGenre!.genres?.length) {
       appFetchMovieGenre!.genres.map((genre): void => {
-        genre_ids!.map((el): void => {
-          if (genre!.id === el) {
-            setGenreName((prev) => {
-              arrToSort.push(genre.name);
-              const set = new Set(arrToSort);
-              const arr = Array.from(set);
-              prev = arr;
-              return prev;
-            });
-          }
-        });
+        genre_ids?.length &&
+          genre_ids!.map((el): void => {
+            if (genre!.id === el) {
+              setGenreName((prev) => {
+                arrToSort.push(genre.name);
+                const set = new Set(arrToSort);
+                const arr = Array.from(set);
+                prev = arr;
+                return prev;
+              });
+            }
+          });
       });
     }
   }, [genre_ids, appFetchMovieGenre]);
