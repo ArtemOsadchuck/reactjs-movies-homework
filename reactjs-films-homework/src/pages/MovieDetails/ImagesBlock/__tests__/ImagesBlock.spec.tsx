@@ -9,13 +9,19 @@ import store from '../../../../store/store';
 
 describe('ImagesBlock', () => {
   const title = 'images';
-
+  const imagesQuality = 8;
+  const imgWidth = '172px';
   let Fragment: any;
 
   beforeEach(() => {
     const { asFragment } = render(
       <Provider store={store}>
-        <ImagesBlock props={ImagesBlockMocks} title={title} />
+        <ImagesBlock
+          images={ImagesBlockMocks}
+          title={title}
+          imgWidth={imgWidth}
+          imagesQuality={imagesQuality}
+        />
       </Provider>
     );
     Fragment = asFragment();
