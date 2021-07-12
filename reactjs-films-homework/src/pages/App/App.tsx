@@ -1,10 +1,12 @@
 import React from 'react';
+
 import Header from '../../components/Header/Header';
 import Main from '../Main';
 import MovieDetails from '../MovieDetails';
 import ActorProfile from '../ActorProfile';
-import './App.scss';
 import ErrorBoundary from '../../components/ErrorBoundary';
+
+import './App.scss';
 
 function App() {
   return (
