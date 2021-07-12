@@ -1,20 +1,34 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
 import Form from '../Form';
+import { Provider } from 'react-redux';
+import store from '../../../../store/store';
 
 describe('Form', () => {
-  render(<Form />);
-  it('Form snapshot', () => {
-    const { asFragment } = render(<Form />);
-    //   screen.debug();
-    expect(asFragment).toMatchSnapshot();
+  let fragment: any;
+
+  beforeEach(() => {
+    const { asFragment } = render(
+      <Provider store={store}>
+        <Form placeholder="Movies" />
+      </Provider>
+    );
+    fragment = asFragment();
   });
-  it('placeholder text', () => {
-    render(<Form />);
+
+  afterEach(() => {
+    cleanup();
+  });
+
+  it('Snapshot', () => {
+    expect(fragment).toMatchSnapshot();
+  });
+
+  it('Should render placeholder', () => {
     expect(screen.getByPlaceholderText(/Movies/i)).toBeInTheDocument();
   });
+
   it('Must has not default value', () => {
-    render(<Form />);
     expect(screen.getByDisplayValue('')).toBeInTheDocument();
   });
 });

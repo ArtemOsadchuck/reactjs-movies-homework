@@ -1,35 +1,45 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import MovieCard from '../../components/MovieCard';
 import { IMovieCard } from '../../components/MovieCard/MovieCard';
-
 import CategoriesTabs from './CategoriesTabs';
-
 import styles from './Main.module.scss';
 import Pagination from './Pagination';
-import asyncGetTopRated from '../../mocks/topRated.js';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
+import getMainData from '../../store/rootStore/mainStore/getMaiData/getMainData';
 
-const Main = () => {
-  const [state, setState] = useState<Array<IMovieCard>>([]);
+const Main: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const appFetchMovie = useAppSelector((state) => state.mainReducer.mainState);
+  const mainState = {
+    lang: useAppSelector((state) => state.mainReducer.lang),
+    page: useAppSelector((state) => state.mainReducer.page),
+    category: useAppSelector((state) => state.mainReducer.category),
+    query: useAppSelector((state) => state.mainReducer.query),
+  };
+  const neededPages = 5;
+
   useEffect(() => {
-    asyncGetTopRated.then((res) => {
-      setState(res);
-      return res;
-    });
-  });
+    dispatch(getMainData(mainState));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  return (
+  return appFetchMovie.length ? (
     <div className={styles.mainWrapper}>
       <CategoriesTabs />
       <div className={styles.cardsWrapper}>
-        {state.length ? (
-          state.map((e: IMovieCard) => {
-            return <MovieCard props={e} key={Date.now() - Math.random()} />;
+        {appFetchMovie.length ? (
+          appFetchMovie.map((card: IMovieCard) => {
+            return <MovieCard props={card} key={card.id + 0.1} />;
           })
         ) : (
           <h2>Loading...</h2>
         )}
       </div>
-      <Pagination />
+      <Pagination neededPages={neededPages} />
+    </div>
+  ) : (
+    <div className={styles.mainWrapper}>
+      return <h2>NO RESULTS FOUND</h2>;
     </div>
   );
 };

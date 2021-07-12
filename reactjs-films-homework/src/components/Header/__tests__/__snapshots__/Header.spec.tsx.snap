@@ -1,3 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Header Header snapshot 1`] = `[Function]`;
+exports[`Header Snapshot 1`] = `
+<DocumentFragment>
+  <header
+    class="header"
+  >
+    <h1>
+      TITLE
+    </h1>
+    <div
+      class="formWrapper"
+    >
+      <form
+        class="form"
+        id="form"
+      >
+        <input
+          autocomplete="off"
+          class="input"
+          id="input_search"
+          placeholder="Movies, person, movie theaters"
+          type="search"
+          value=""
+        />
+        <div
+          class="search"
+          id="search"
+        >
+          <img
+            alt=""
+            id="search"
+            src="search.png"
+            width="16px"
+          />
+        </div>
+      </form>
+    </div>
+    <div
+      class="dropdownWrapper"
+    >
+      <button
+        class="dropdownBtn"
+      >
+        EN
+      </button>
+    </div>
+  </header>
+</DocumentFragment>
+`;

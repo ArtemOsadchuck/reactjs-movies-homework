@@ -1,6 +1,9 @@
 import React from 'react';
 import styles from './ActorPhotos.module.scss';
 
+import getLang from '../../../languages/getLanguage';
+import { useAppSelector } from '../../../hooks/hooks';
+
 export interface IPhotos {
   aspect_ratio: number;
   file_path: string;
@@ -11,18 +14,22 @@ export interface IPhotos {
   width: number;
 }
 export interface IActorPhotos {
-  props: IPhotos[];
-  photosLength: number;
+  photos?: IPhotos[];
+  photosLength?: number;
 }
 
-const ActorPhotos: React.FC<IActorPhotos> = ({ props }) => {
-  const photosLength = 4;
+const ActorPhotos: React.FC<IActorPhotos> = ({ photos, photosLength }) => {
+  const appLang = useAppSelector((state) => state.mainReducer.lang);
+  const titlePhotos = getLang(appLang).photos;
+
   return (
-    <div className={styles.PhotosWrapper}>
-      {props.length ? <h3 className={styles.photosTitle}>Photos</h3> : null}
+    <div className={styles.photosWrapper}>
+      {photos?.length ? (
+        <h3 className={styles.photosTitle}>{titlePhotos}</h3>
+      ) : null}
       <div className={styles.photosGrid}>
-        {props.length
-          ? props.slice(0, photosLength).map((el) => {
+        {photos?.length
+          ? photos.slice(0, photosLength).map((el) => {
               return (
                 <img
                   width="120px"
@@ -38,4 +45,5 @@ const ActorPhotos: React.FC<IActorPhotos> = ({ props }) => {
     </div>
   );
 };
+
 export default ActorPhotos;

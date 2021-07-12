@@ -15,6 +15,10 @@ const data = {
     showAll: 'Все',
     titleName: 'Название фильма',
     min: 'мин',
+    birthday: 'Дата рождения',
+    placeOfBirth: 'Место рождения',
+    biography: 'Биография',
+    photos: 'Фотографии',
   },
   EN: {
     title: 'Title',
@@ -32,7 +36,12 @@ const data = {
     showAll: 'Show all',
     titleName: 'Title',
     min: 'min',
+    birthday: 'Birthday',
+    placeOfBirth: 'Place of birth',
+    biography: 'Biography',
+    photos: 'Photos',
   },
 };
 
 export default data;
+//

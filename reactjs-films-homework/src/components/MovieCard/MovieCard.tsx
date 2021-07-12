@@ -1,8 +1,10 @@
 /* eslint-disable array-callback-return */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import img from './img/Movie-card.png';
 import styles from './MovieCard.module.scss';
-import mockGenres from '../../mocks/genresIDs';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
+import { setMovieID } from '../../store/rootStore/movieDetailsPageStore/movieDetailsPageSlice';
+import GenresList from './GenresList';
 
 export interface ICard {
   props: IMovieCard;
@@ -24,42 +26,53 @@ export interface IGenre {
   }[];
 }
 
-const MovieCard: React.FC<ICard> = ({ props }) => {
-  const { id, title, vote_average, poster_path, genre_ids } = props;
+const MovieCard: React.FC<ICard> = ({
+  props: { id, title, vote_average, poster_path, genre_ids },
+}) => {
+  const imgWidth = '52px';
   const movieTitle = 'Movie Title';
   const urlImg = `https://image.tmdb.org/t/p/w500/${poster_path}`;
-  const [genre, setGenre] = useState<IGenre>({});
-  const [genreName, setGenreName] = useState<Array<string>>([]);
+  const [genreName, setGenreName] = useState<string[]>([]);
+  const dispatch = useAppDispatch();
+  const appFetchMovieGenre = useAppSelector((state) => state.mainReducer.genre);
 
-  mockGenres.then((res) => {
-    return setGenre(res);
-  });
-
-  useEffect(() => {
-    if (genre.genres) {
-      genre.genres.map((genre): void => {
-        genre_ids!.map((el): void => {
-          if (genre.id === el) {
-            setGenreName((prev) => {
-              prev.push(genre.name);
-              const set = new Set(prev);
-              const arr = Array.from(set);
-              prev = arr;
-              return prev;
-            });
-          }
-        });
+  useMemo(() => {
+    const arrToSort: string[] = [];
+    if (appFetchMovieGenre!.genres?.length) {
+      appFetchMovieGenre!.genres.map((genre): void => {
+        genre_ids?.length &&
+          genre_ids!.map((el): void => {
+            if (genre!.id === el) {
+              setGenreName((prev) => {
+                arrToSort.push(genre.name);
+                const set = new Set(arrToSort);
+                const arr = Array.from(set);
+                prev = arr;
+                return prev;
+              });
+            }
+          });
       });
     }
-  }, [genre, genre_ids]);
+  }, [genre_ids, appFetchMovieGenre]);
 
-  const imgWidth = '52px';
+  const voteAverage = useMemo(
+    () => Math.ceil(vote_average * 10) / 10,
+    [vote_average]
+  );
+
+  const goToMovie = (movieID: string) => {
+    dispatch(setMovieID(movieID));
+  };
+
   return (
-    <a id={`${id}`} className={styles.movieCardLink} href={'/'}>
+    <div
+      id={`${id}`}
+      className={styles.movieCardLink}
+      onClick={() => goToMovie(`${id}`)}
+    >
       <div className={styles.ratingMovie}>
-        <p className={styles.voteAverage}>
-          {Math.ceil(vote_average * 10) / 10}
-        </p>
+        <p className={styles.voteAverage}>{voteAverage}</p>
       </div>
       <div className={styles.playIcon}>
         <div className={styles.playIconInner}></div>
@@ -73,15 +86,9 @@ const MovieCard: React.FC<ICard> = ({ props }) => {
           )}
         </div>
         <h4>{title}</h4>
-        <p className={styles.genre}>
-          {genreName
-            ? genreName.map((el: string) => {
-                return <span key={el}>{` ${el}`}</span>;
-              })
-            : null}
-        </p>
+        {genreName && <GenresList genreName={genreName} />}
       </div>
-    </a>
+    </div>
   );
 };
 

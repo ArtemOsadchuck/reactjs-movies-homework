@@ -1,3 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ImagesBlock ImagesBlock snapshot 1`] = `[Function]`;
+exports[`ImagesBlock Snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="imagesBlockWrapper"
+  >
+    <div
+      class="imagesTitleWrapper"
+    >
+      <h3
+        class="imagesTitle"
+      >
+        images
+      </h3>
+    </div>
+    <div
+      class="imagesWrapper"
+    >
+      <img
+        alt="images"
+        class="image"
+        src="https://image.tmdb.org/t/p/w500//irlfhYtHfhZuYpsq2LAoh308NFe.jpg"
+        width="172px"
+      />
+      <img
+        alt="images"
+        class="image"
+        src="https://image.tmdb.org/t/p/w500//iNh3BivHyg5sQRPP1KOkzguEX0H.jpg"
+        width="172px"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

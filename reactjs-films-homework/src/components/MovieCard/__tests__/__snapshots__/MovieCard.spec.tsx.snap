@@ -1,3 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MovieCard MovieCard snapshot 1`] = `[Function]`;
+exports[`MovieCard MovieCard snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="movieCardLink"
+    id="724089"
+  >
+    <div
+      class="ratingMovie"
+    >
+      <p
+        class="voteAverage"
+      >
+        8.7
+      </p>
+    </div>
+    <div
+      class="playIcon"
+    >
+      <div
+        class="playIconInner"
+      />
+    </div>
+    <div
+      class="movieCardWrapper"
+    >
+      <div
+        class="imgCardWrapper"
+      >
+        <img
+          alt="Movie Title"
+          height="100%"
+          src="https://image.tmdb.org/t/p/w500//x5o8cLZfEXMoZczTYWLrUo1P7UJ.jpg"
+        />
+      </div>
+      <h4>
+        Gabriel's Inferno Part II
+      </h4>
+      <p
+        class="genre"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

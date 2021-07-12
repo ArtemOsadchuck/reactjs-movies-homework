@@ -1,26 +1,38 @@
 import React from 'react';
 import { cleanup, render, screen } from '@testing-library/react';
 import Header from '../Header';
+import { Provider } from 'react-redux';
+import store from '../../../store/store';
 
 describe('Header', () => {
+  let fragment: any;
+
+  beforeEach(() => {
+    const { asFragment } = render(
+      <Provider store={store}>
+        <Header />
+      </Provider>
+    );
+    fragment = asFragment();
+  });
+
   afterEach(() => {
     cleanup();
   });
 
-  it('Header snapshot', () => {
-    const { asFragment } = render(<Header />);
-    expect(asFragment).toMatchSnapshot();
+  it('Snapshot', () => {
+    expect(fragment).toMatchSnapshot();
   });
-  it('Header Must include img', () => {
-    render(<Header />);
+
+  it('Must include img', () => {
     expect(screen.getByRole('img')).toBeInTheDocument();
   });
-  it('Header Must include h1', () => {
-    render(<Header />);
+
+  it('Must include h1', () => {
     expect(screen.getByRole('heading')).toBeInTheDocument();
   });
-  it('Header Must include button', () => {
-    render(<Header />);
+
+  it('Must include button', () => {
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 });

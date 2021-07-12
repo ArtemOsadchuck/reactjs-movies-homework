@@ -1,3 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ActorPhotos ActorPhotos snapshot 1`] = `[Function]`;
+exports[`ActorPhotos ActorPhotos snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="photosWrapper"
+  >
+    <h3
+      class="photosTitle"
+    >
+      Photos
+    </h3>
+    <div
+      class="photosGrid"
+    >
+      <img
+        alt=""
+        class="photo"
+        src="https://image.tmdb.org/t/p/w500//oIciQWr8VwKoR8TmAw1owaiZFyb.jpg"
+        width="120px"
+      />
+      <img
+        alt=""
+        class="photo"
+        src="https://image.tmdb.org/t/p/w500//1ahENoyEgKSbRUd0IsydIff7rt1.jpg"
+        width="120px"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

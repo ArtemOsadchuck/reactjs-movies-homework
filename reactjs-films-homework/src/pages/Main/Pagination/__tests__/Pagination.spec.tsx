@@ -1,15 +1,26 @@
 import React from 'react';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, cleanup } from '@testing-library/react';
+
 import Pagination from '../Pagination';
 
+import { Provider } from 'react-redux';
+import store from '../../../../store/store';
+
 describe('Pagination', () => {
-  it('Pagination snapshot', () => {
-    const { container } = render(<Pagination />);
-    expect(container).toMatchSnapshot();
+  let Fragment: any;
+
+  beforeEach(() => {
+    const { asFragment } = render(
+      <Provider store={store}>
+        <Pagination />
+      </Provider>
+    );
+    Fragment = asFragment();
   });
-  it('Pagination must include class', () => {
-    render(<Pagination />);
-    expect(screen.getByText(/1/i)).toHaveClass('active');
-    expect(screen.getByText(/2/i)).not.toHaveClass('active');
+
+  afterEach(() => cleanup());
+
+  it('Pagination snapshot', () => {
+    expect(Fragment).toMatchSnapshot();
   });
 });

@@ -1,17 +1,31 @@
 import React from 'react';
+
 import Header from '../../components/Header/Header';
-// import Main from '../Main';
-// import ActorProfile from '../ActorProfile';
+import Main from '../Main';
 import MovieDetails from '../MovieDetails';
+import ActorProfile from '../ActorProfile';
+import ErrorBoundary from '../../components/ErrorBoundary';
+
 import './App.scss';
 
 function App() {
   return (
     <div className="wrapper">
-      <Header />
-      {/* <Main /> */}
-      {/* <ActorProfile /> */}
-      <MovieDetails />
+      <ErrorBoundary title="header component">
+        <Header />
+      </ErrorBoundary>
+
+      <ErrorBoundary title="main page">
+        <Main />
+      </ErrorBoundary>
+
+      <ErrorBoundary title="movie details page">
+        <MovieDetails />
+      </ErrorBoundary>
+
+      <ErrorBoundary title="actor profile page">
+        <ActorProfile />
+      </ErrorBoundary>
     </div>
   );
 }

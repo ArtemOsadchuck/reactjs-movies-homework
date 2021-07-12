@@ -1,4 +1,4 @@
-const responseTopRated = {
+const ActorTitleInfoMocks = {
   adult: false,
   also_known_as: [
     'Morgan Porterfield Freeman Jr.',
@@ -29,15 +29,4 @@ const responseTopRated = {
   profile_path: '/oIciQWr8VwKoR8TmAw1owaiZFyb.jpg',
 };
 
-// const url = `https://api.themoviedb.org/3/person/192?api_key=8fa5bc53bb4a09dfb6560253edf33030&language=en-US`;
-
-const delay = (ms) => {
-  return new Promise((res) =>
-    setTimeout(() => {
-      res();
-    }, ms)
-  );
-};
-const mock = delay(1000).then(() => responseTopRated);
-
-export default mock;
+export default ActorTitleInfoMocks;

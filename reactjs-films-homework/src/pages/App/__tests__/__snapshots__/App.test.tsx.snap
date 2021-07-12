@@ -1,3 +1,118 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App test 1`] = `[Function]`;
+exports[`App test 1`] = `
+<DocumentFragment>
+  <div
+    class="wrapper"
+  >
+    <header
+      class="header"
+    >
+      <h1>
+        TITLE
+      </h1>
+      <div
+        class="formWrapper"
+      >
+        <form
+          class="form"
+          id="form"
+        >
+          <input
+            autocomplete="off"
+            class="input"
+            id="input_search"
+            placeholder="Movies, person, movie theaters"
+            type="search"
+            value=""
+          />
+          <div
+            class="search"
+            id="search"
+          >
+            <img
+              alt=""
+              id="search"
+              src="search.png"
+              width="16px"
+            />
+          </div>
+        </form>
+      </div>
+      <div
+        class="dropdownWrapper"
+      >
+        <button
+          class="dropdownBtn"
+        >
+          EN
+        </button>
+      </div>
+    </header>
+    <div
+      class="mainWrapper"
+    >
+      return 
+      <h2>
+        NO RESULTS FOUND
+      </h2>
+      ;
+    </div>
+    <div
+      class="mainWrapper"
+    >
+      <div
+        class="castWrapper"
+      >
+        <div
+          class="castNameWrapper"
+        >
+          <h3
+            class="castName"
+          >
+            Top Billed Cast
+          </h3>
+          <div
+            class="castNameShowAllBtn"
+          >
+            Show all
+          </div>
+        </div>
+        <div
+          class="castGrid"
+        />
+      </div>
+      <div
+        class="recommendationsWrapper"
+      >
+        <h2
+          class="recommendationsTitle"
+        >
+          RECOMMENDATIONS
+        </h2>
+        <div
+          class="recommendationsCardsWrapper"
+        >
+          <h2>
+            Loading...
+          </h2>
+        </div>
+      </div>
+    </div>
+    <div
+      class="mainWrapper"
+    >
+      <div
+        class="photosWrapper"
+      >
+        <div
+          class="photosGrid"
+        />
+      </div>
+      <div
+        class="cardsWrapper"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

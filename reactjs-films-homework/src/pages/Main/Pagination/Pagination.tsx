@@ -1,17 +1,38 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import styles from './Pagination.module.scss';
-import asyncGetTopRated from '../../../mocks/topRated.js';
 
-const Pagination: React.FC = () => {
-  const pagNum = ['1', '2', '3', '4', '5'];
-  const [currentPage, setCurrentPage] = useState('1');
+import getPagesFromTotal from './utils/getPagesFromTotal';
+import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
 
-  const getPage = async (e: string) => {
-    const mock = await asyncGetTopRated;
-    console.log(mock);
-    setCurrentPage(() => e);
-    console.log(currentPage);
-    return mock;
+import getMainData from '../../../store/rootStore/mainStore/getMaiData/getMainData';
+import {
+  setPage,
+  setActivePage,
+} from '../../../store/rootStore/mainStore/mainSlice';
+
+interface IPagination {
+  neededPages: number;
+}
+const Pagination: React.FC<IPagination> = ({ neededPages }) => {
+  const [pagNum, setPugNum] = useState<Array<string>>([]);
+  const dispatch = useAppDispatch();
+  const mainState = {
+    lang: useAppSelector((state) => state.mainReducer.lang),
+    category: useAppSelector((state) => state.mainReducer.category),
+    query: useAppSelector((state) => state.mainReducer.query),
+    activePage: useAppSelector((state) => state.mainReducer.activePage),
+    totalPages: useAppSelector((state) => state.mainReducer.totalPages),
+  };
+
+  useMemo(() => {
+    setPugNum(() => getPagesFromTotal(mainState.totalPages, neededPages));
+  }, [mainState.totalPages, neededPages]);
+
+  const getPage = (page: string) => {
+    dispatch(setActivePage(page));
+    dispatch(setPage(page));
+    dispatch(getMainData({ ...mainState, page: page }));
+    return;
   };
 
   return (
@@ -23,7 +44,9 @@ const Pagination: React.FC = () => {
             onClick={() => {
               getPage(page);
             }}
-            className={currentPage === page ? styles.active : ''}
+            className={
+              `${mainState.activePage}` === `${page}` ? styles.active : ''
+            }
           >
             {page}
           </div>
@@ -32,4 +55,5 @@ const Pagination: React.FC = () => {
     </div>
   );
 };
+
 export default Pagination;

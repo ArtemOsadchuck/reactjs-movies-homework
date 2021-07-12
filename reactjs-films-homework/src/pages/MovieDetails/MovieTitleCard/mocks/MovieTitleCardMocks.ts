@@ -1,4 +1,4 @@
-const details = {
+const MovieTitleCardMocks = {
   adult: false,
   backdrop_path: '/irlfhYtHfhZuYpsq2LAoh308NFe.jpg',
   belongs_to_collection: null,
@@ -54,27 +54,4 @@ const details = {
   vote_count: 19085,
 };
 
-// const url =
-//   'https://api.themoviedb.org/3/movie/278/credits?api_key=8fa5bc53bb4a09dfb6560253edf33030&language=en-US';
-
-// https://api.themoviedb.org/3/person/155/combined_credits?api_key=8fa5bc53bb4a09dfb6560253edf33030&language=en-US => actor film list
-const delay = (ms) => {
-  return new Promise((res) =>
-    setTimeout(() => {
-      res();
-    }, ms)
-  );
-};
-const imgS =
-  'https://api.themoviedb.org/3/movie/278/images?api_key=8fa5bc53bb4a09dfb6560253edf33030&language=en-US&include_image_language=null';
-const mockDetails = delay(400).then(() => details);
-fetch(imgS)
-  .then((res) => {
-    return res.json();
-  })
-  .then((mock) => {
-    // JSON.stringify(mock);
-    // console.log(mock);
-  });
-
-export default mockDetails;
+export default MovieTitleCardMocks;

@@ -14,18 +14,30 @@ $black: rgb(0, 0, 0);
   transition: 0.3s ease-in-out;
   width: 20rem;
 
-  div {
+  .categoryBtn {
     align-items: center;
     display: flex;
     flex-grow: 1;
     height: 100%;
     justify-content: center;
     transition: 0.2s ease-in-out;
+    user-select: none;
 
     &:hover {
       background-color: $wite;
       color: $black;
       cursor: pointer;
+    }
+  }
+
+  .active {
+    background-color: $wite;
+    color: $black;
+
+    &:hover {
+      color: $black;
+      cursor: inherit;
+      opacity: 0.9;
     }
   }
 
