@@ -25,6 +25,7 @@ const getMainData = createAsyncThunk(
           console.error('getMainData_search', error);
         }
       }
+
       const response = await axios.get(baseUrl);
       return response.data;
     } catch (error) {
