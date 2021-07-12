@@ -1,6 +1,6 @@
 import React from 'react';
-
 import { Story } from '@storybook/react';
+
 import ActorPhotos from './ActorPhotos';
 
 import { Provider } from 'react-redux';

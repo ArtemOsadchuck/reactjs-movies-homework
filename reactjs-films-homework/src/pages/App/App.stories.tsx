@@ -1,11 +1,18 @@
 import React from 'react';
-
 import { Story } from '@storybook/react';
+
 import App from './App';
 
-const Template: Story<typeof App> = () => <App />;
+import { Provider } from 'react-redux';
+import store from '../../store/store';
 
-export const FirstStory = Template.bind({});
+const Template: Story<typeof App> = () => (
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
+
+export const AppStory = Template.bind({});
 
 export default {
   title: 'App',

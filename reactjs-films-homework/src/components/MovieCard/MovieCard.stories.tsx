@@ -1,15 +1,10 @@
 import React from 'react';
-
 import { Story } from '@storybook/react';
+
 import MovieCard from './MovieCard';
 
 import { Provider } from 'react-redux';
 import store from '../../store/store';
-
-export default {
-  title: 'MovieCard',
-  component: MovieCard,
-};
 
 const MovieCardMocks = {
   adult: false,
@@ -46,3 +41,8 @@ const Template: Story<typeof MovieCard> = () => (
 
 export const MovieCardImg = TemplateUrl.bind({});
 export const MovieCardMocksWithoutImgUrl = Template.bind({});
+
+export default {
+  title: 'MovieCard',
+  component: MovieCard,
+};

@@ -1,6 +1,10 @@
 import React from 'react';
 import { Story } from '@storybook/react';
+
 import TopBilledCast from './TopBilledCast';
+
+import { Provider } from 'react-redux';
+import store from '../../../store/store';
 
 export default {
   title: 'TopBilledCast',
@@ -23,7 +27,9 @@ const Mocks = {
 };
 
 const TemplateUrl: Story<typeof TopBilledCast> = () => (
-  <TopBilledCast props={Mocks} />
+  <Provider store={store}>
+    <TopBilledCast props={Mocks} />
+  </Provider>
 );
 
 export const TopBilledCastStory = TemplateUrl.bind({});
