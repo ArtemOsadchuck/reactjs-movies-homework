@@ -36,11 +36,6 @@ const MovieCard: React.FC<ICard> = ({
   const dispatch = useAppDispatch();
   const appFetchMovieGenre = useAppSelector((state) => state.mainReducer.genre);
 
-  const voteAverage = useMemo(
-    () => Math.ceil(vote_average * 10) / 10,
-    [vote_average]
-  );
-
   useMemo(() => {
     const arrToSort: string[] = [];
     if (appFetchMovieGenre!.genres) {
@@ -59,6 +54,11 @@ const MovieCard: React.FC<ICard> = ({
       });
     }
   }, [genre_ids, appFetchMovieGenre]);
+
+  const voteAverage = useMemo(
+    () => Math.ceil(vote_average * 10) / 10,
+    [vote_average]
+  );
 
   const goToMovie = (movieID: string) => {
     dispatch(setMovieID(movieID));
