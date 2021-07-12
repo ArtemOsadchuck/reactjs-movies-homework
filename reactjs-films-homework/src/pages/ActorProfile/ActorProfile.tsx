@@ -58,7 +58,7 @@ const ActorProfile: React.FC = () => {
   return (
     <div className={styles.mainWrapper}>
       {info && <ActorTitle props={info} />}
-      <ActorPhotos props={photos} photosLength={actorGridPhotosLength} />
+      <ActorPhotos photos={photos} photosLength={actorGridPhotosLength} />
       <div className={styles.cardsWrapper}>
         {sortKnownBy.map((el: IMovieCard) => {
           return <MovieCard key={Math.random() / 1.321} props={el} />;
@@ -67,4 +67,5 @@ const ActorProfile: React.FC = () => {
     </div>
   );
 };
+
 export default ActorProfile;

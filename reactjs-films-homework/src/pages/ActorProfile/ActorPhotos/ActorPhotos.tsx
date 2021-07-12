@@ -14,22 +14,22 @@ export interface IPhotos {
   width: number;
 }
 export interface IActorPhotos {
-  props: IPhotos[];
+  photos: IPhotos[];
   photosLength: number;
 }
 
-const ActorPhotos: React.FC<IActorPhotos> = ({ props }) => {
-  const photosLength = 4;
+const ActorPhotos: React.FC<IActorPhotos> = ({ photos, photosLength }) => {
   const appLang = useAppSelector((state) => state.mainReducer.lang);
-  const titilePhotos = getLang(appLang).photos;
+  const titlePhotos = getLang(appLang).photos;
+
   return (
-    <div className={styles.PhotosWrapper}>
-      {props.length ? (
-        <h3 className={styles.photosTitle}>{titilePhotos}</h3>
+    <div className={styles.photosWrapper}>
+      {photos.length ? (
+        <h3 className={styles.photosTitle}>{titlePhotos}</h3>
       ) : null}
       <div className={styles.photosGrid}>
-        {props.length
-          ? props.slice(0, photosLength).map((el) => {
+        {photos.length
+          ? photos.slice(0, photosLength).map((el) => {
               return (
                 <img
                   width="120px"
@@ -45,4 +45,5 @@ const ActorPhotos: React.FC<IActorPhotos> = ({ props }) => {
     </div>
   );
 };
+
 export default ActorPhotos;
