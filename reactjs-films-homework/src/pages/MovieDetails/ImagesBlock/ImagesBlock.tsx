@@ -29,7 +29,7 @@ const ImagesBlock: React.FC<IImagesBlock> = ({
         <h3 className={styles.imagesTitle}>{title}</h3>
       </div>
       <div className={styles.imagesWrapper}>
-        {images.length
+        {images?.length
           ? images.slice(0, imagesQuality).map((el) => {
               return (
                 <img
