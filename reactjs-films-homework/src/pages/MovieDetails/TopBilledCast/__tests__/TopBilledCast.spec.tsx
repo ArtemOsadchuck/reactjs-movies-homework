@@ -1,6 +1,8 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
+
 import TopBilledCast from '../TopBilledCast';
+
 import { Provider } from 'react-redux';
 import store from '../../../../store/store';
 
@@ -21,18 +23,17 @@ describe('TopBilledCast', () => {
   };
 
   let fragment: any;
+
   beforeEach(async () => {
-    const asFragment = await render(
+    const { asFragment } = await render(
       <Provider store={store}>
-        <TopBilledCast props={mockProps} />{' '}
+        <TopBilledCast props={mockProps} />
       </Provider>
     );
-    fragment = asFragment;
+    fragment = asFragment();
   });
 
-  afterEach(() => {
-    cleanup();
-  });
+  afterEach(() => cleanup());
 
   it('TopBilledCast snapshot', () => {
     expect(fragment).toMatchSnapshot();

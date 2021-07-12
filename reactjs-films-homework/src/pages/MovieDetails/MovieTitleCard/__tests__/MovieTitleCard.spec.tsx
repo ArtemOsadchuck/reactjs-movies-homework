@@ -1,6 +1,8 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
+
 import MovieTitleCard from '../MovieTitleCard';
+
 import { Provider } from 'react-redux';
 import store from '../../../../store/store';
 
@@ -62,18 +64,17 @@ describe('MovieTitleCard', () => {
   };
 
   let fragment: any;
+
   beforeEach(() => {
-    const asFragment = render(
+    const { asFragment } = render(
       <Provider store={store}>
         <MovieTitleCard props={mockProps} />{' '}
       </Provider>
     );
-    fragment = asFragment;
+    fragment = asFragment();
   });
 
-  afterEach(() => {
-    cleanup();
-  });
+  afterEach(() => cleanup());
 
   it('MovieTitleCard snapshot', () => {
     expect(fragment).toMatchSnapshot();
@@ -84,12 +85,14 @@ describe('MovieTitleCard', () => {
     expect(screen.getByRole(/img/i)).toHaveAttribute('height');
     expect(screen.getByRole(/img/i)).toHaveAttribute('alt');
   });
+
   it('MovieTitleCard heading must have:', () => {
     expect(screen.getByRole(/heading/i)).toHaveClass('title');
     expect(screen.getByRole(/heading/i)).toHaveTextContent(
       'The Shawshank Redemption'
     );
   });
+
   it('MovieTitleCard must be in the document:', () => {
     expect(screen.getByText(/Overview/i)).toBeInTheDocument();
     expect(screen.getByText(/1994-09-23/i)).toBeInTheDocument();

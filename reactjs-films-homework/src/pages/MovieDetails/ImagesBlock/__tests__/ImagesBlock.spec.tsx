@@ -26,29 +26,30 @@ describe('ImagesBlock', () => {
     },
   ];
   const title = 'images';
+
   let Fragment: any;
 
   beforeEach(() => {
-    const asFragment = render(
+    const { asFragment } = render(
       <Provider store={store}>
         <ImagesBlock props={mockProps} title={title} />
       </Provider>
     );
-    Fragment = asFragment;
+    Fragment = asFragment();
   });
 
   afterEach(() => cleanup());
 
-  it('ImagesBlock snapshot', () => {
+  it('Snapshot', () => {
     expect(Fragment).toMatchSnapshot();
   });
 
-  it('ImagesBlock Must have class:', () => {
+  it('Must have class:', () => {
     expect(screen.getByText(/images/i)).toBeInTheDocument();
     expect(screen.getByText(/images/i)).toHaveClass('imagesTitle');
   });
 
-  it('ImagesBlock must heave attribute:', () => {
+  it('Must heave attribute:', () => {
     screen.getAllByRole('img').forEach((el) => {
       expect(el).toHaveAttribute('src');
       expect(el).toHaveAttribute('alt');
