@@ -42,6 +42,5 @@ exports[`MovieCard MovieCard snapshot 1`] = `
       />
     </div>
   </div>
-   
 </DocumentFragment>
 `;
