@@ -1,6 +1,8 @@
 import React from 'react';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
+
 import LanguageToggler from '../LanguageToggler';
+
 import { Provider } from 'react-redux';
 import store from '../../../../store/store';
 
