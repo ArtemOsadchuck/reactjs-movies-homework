@@ -1,19 +1,23 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
+
 import Main from '../Main';
+
 import { Provider } from 'react-redux';
 import store from '../../../store/store';
 
 describe('Main', () => {
   let Fragment: any;
+
   beforeEach(() => {
-    const asFragment = render(
+    const { asFragment } = render(
       <Provider store={store}>
         <Main />
       </Provider>
     );
-    Fragment = asFragment;
+    Fragment = asFragment();
   });
+
   afterEach(() => {
     cleanup();
   });

@@ -1,288 +1,118 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App test 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        class="wrapper"
-      >
-        <header
-          class="header"
-        >
-          <h1>
-            TITLE
-          </h1>
-          <div
-            class="formWrapper"
-          >
-            <form
-              class="form"
-              id="form"
-            >
-              <input
-                autocomplete="off"
-                class="input"
-                id="input_search"
-                placeholder="Movies, person, movie theaters"
-                type="search"
-                value=""
-              />
-              <div
-                class="search"
-                id="search"
-              >
-                <img
-                  alt=""
-                  id="search"
-                  src="search.png"
-                  width="16px"
-                />
-              </div>
-            </form>
-          </div>
-          <div
-            class="dropdownWrapper"
-          >
-            <button
-              class="dropdownBtn"
-            >
-              EN
-            </button>
-          </div>
-        </header>
-        <div
-          class="mainWrapper"
-        >
-          return 
-          <h2>
-            NO RESULTS FOUND
-          </h2>
-          ;
-        </div>
-        <div
-          class="mainWrapper"
-        >
-          <div
-            class="castWrapper"
-          >
-            <div
-              class="castNameWrapper"
-            >
-              <h3
-                class="castName"
-              >
-                Top Billed Cast
-              </h3>
-              <div
-                class="castNameShowAllBtn"
-              >
-                Show all
-              </div>
-            </div>
-            <div
-              class="castGrid"
-            />
-          </div>
-          <div
-            class="recommendationsWrapper"
-          >
-            <h2
-              class="recommendationsTitle"
-            >
-              RECOMMENDATIONS
-            </h2>
-            <div
-              class="recommendationsCardsWrapper"
-            >
-              <h2>
-                Loading...
-              </h2>
-            </div>
-          </div>
-        </div>
-        <div
-          class="mainWrapper"
-        >
-          <div
-            class="PhotosWrapper"
-          >
-            <div
-              class="photosGrid"
-            />
-          </div>
-          <div
-            class="cardsWrapper"
-          />
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="wrapper"
+<DocumentFragment>
+  <div
+    class="wrapper"
+  >
+    <header
+      class="header"
     >
-      <header
-        class="header"
+      <h1>
+        TITLE
+      </h1>
+      <div
+        class="formWrapper"
       >
-        <h1>
-          TITLE
-        </h1>
-        <div
-          class="formWrapper"
+        <form
+          class="form"
+          id="form"
         >
-          <form
-            class="form"
-            id="form"
+          <input
+            autocomplete="off"
+            class="input"
+            id="input_search"
+            placeholder="Movies, person, movie theaters"
+            type="search"
+            value=""
+          />
+          <div
+            class="search"
+            id="search"
           >
-            <input
-              autocomplete="off"
-              class="input"
-              id="input_search"
-              placeholder="Movies, person, movie theaters"
-              type="search"
-              value=""
-            />
-            <div
-              class="search"
+            <img
+              alt=""
               id="search"
-            >
-              <img
-                alt=""
-                id="search"
-                src="search.png"
-                width="16px"
-              />
-            </div>
-          </form>
-        </div>
-        <div
-          class="dropdownWrapper"
-        >
-          <button
-            class="dropdownBtn"
-          >
-            EN
-          </button>
-        </div>
-      </header>
-      <div
-        class="mainWrapper"
-      >
-        return 
-        <h2>
-          NO RESULTS FOUND
-        </h2>
-        ;
+              src="search.png"
+              width="16px"
+            />
+          </div>
+        </form>
       </div>
       <div
-        class="mainWrapper"
+        class="dropdownWrapper"
       >
-        <div
-          class="castWrapper"
+        <button
+          class="dropdownBtn"
         >
-          <div
-            class="castNameWrapper"
-          >
-            <h3
-              class="castName"
-            >
-              Top Billed Cast
-            </h3>
-            <div
-              class="castNameShowAllBtn"
-            >
-              Show all
-            </div>
-          </div>
-          <div
-            class="castGrid"
-          />
-        </div>
-        <div
-          class="recommendationsWrapper"
-        >
-          <h2
-            class="recommendationsTitle"
-          >
-            RECOMMENDATIONS
-          </h2>
-          <div
-            class="recommendationsCardsWrapper"
-          >
-            <h2>
-              Loading...
-            </h2>
-          </div>
-        </div>
+          EN
+        </button>
       </div>
+    </header>
+    <div
+      class="mainWrapper"
+    >
+      return 
+      <h2>
+        NO RESULTS FOUND
+      </h2>
+      ;
+    </div>
+    <div
+      class="mainWrapper"
+    >
       <div
-        class="mainWrapper"
+        class="castWrapper"
       >
         <div
-          class="PhotosWrapper"
+          class="castNameWrapper"
         >
+          <h3
+            class="castName"
+          >
+            Top Billed Cast
+          </h3>
           <div
-            class="photosGrid"
-          />
+            class="castNameShowAllBtn"
+          >
+            Show all
+          </div>
         </div>
         <div
-          class="cardsWrapper"
+          class="castGrid"
         />
       </div>
+      <div
+        class="recommendationsWrapper"
+      >
+        <h2
+          class="recommendationsTitle"
+        >
+          RECOMMENDATIONS
+        </h2>
+        <div
+          class="recommendationsCardsWrapper"
+        >
+          <h2>
+            Loading...
+          </h2>
+        </div>
+      </div>
     </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+    <div
+      class="mainWrapper"
+    >
+      <div
+        class="photosWrapper"
+      >
+        <div
+          class="photosGrid"
+        />
+      </div>
+      <div
+        class="cardsWrapper"
+      />
+    </div>
+  </div>
+</DocumentFragment>
 `;
