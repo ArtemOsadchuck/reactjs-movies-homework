@@ -1,6 +1,8 @@
 import React from 'react';
-import { render, screen, fireEvent, cleanup } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
+
 import ActorPhotos from '../ActorPhotos';
+
 import { Provider } from 'react-redux';
 import store from '../../../../store/store';
 
@@ -26,23 +28,20 @@ describe('ActorPhotos', () => {
     },
   ];
 
-  afterEach(() => {
-    cleanup();
-  });
-
   let Fragment: any;
   beforeEach(() => {
-    const asFragment = render(
+    const { asFragment } = render(
       <Provider store={store}>
-        <ActorPhotos props={mockProps} photosLength={2} />
+        <ActorPhotos photos={mockProps} photosLength={2} />
       </Provider>
     );
-    Fragment = asFragment;
+    Fragment = asFragment();
   });
 
   afterEach(() => {
     cleanup();
   });
+
   it('ActorPhotos snapshot', () => {
     expect(Fragment).toMatchSnapshot();
   });
@@ -50,6 +49,7 @@ describe('ActorPhotos', () => {
   it('ActorPhotos IMG Must include attr alt', () => {
     expect(screen.getAllByRole('img')[0]).toHaveAttribute('alt');
   });
+
   it('ActorPhotos heading include class photosTitle', () => {
     expect(screen.getByRole('heading')).toHaveClass('photosTitle');
   });

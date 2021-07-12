@@ -1,30 +1,34 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
+
 import ActorProfile from '../ActorProfile';
+
 import { Provider } from 'react-redux';
 import store from '../../../store/store';
 
 describe('ActorProfile', () => {
   let fragment: any;
+
   beforeEach(() => {
-    const asFragment = render(
+    const { asFragment } = render(
       <Provider store={store}>
         <ActorProfile />
       </Provider>
     );
-    fragment = asFragment;
+    fragment = asFragment();
   });
 
   afterEach(() => {
     cleanup();
   });
 
-  it('ActorProfile snapshot', () => {
+  it('Snapshot', () => {
     expect(fragment).toMatchSnapshot();
   });
-  // it('ActorProfile Must have classes  mainWrapper, cardsWrapper, PhotosWrapper', () => {
-  //   expect(fragment.firstChild).toHaveClass('mainWrapper');
-  //   expect(fragment.firstChild!.childNodes[1]).toHaveClass('cardsWrapper');
-  //   expect(fragment.firstChild!.childNodes[0]).toHaveClass('PhotosWrapper');
-  // });
+
+  it('Must have classes mainWrapper, cardsWrapper, PhotosWrapper', () => {
+    expect(fragment.firstChild).toHaveClass('mainWrapper');
+    expect(fragment.firstChild!.childNodes[1]).toHaveClass('cardsWrapper');
+    expect(fragment.firstChild!.childNodes[0]).toHaveClass('photosWrapper');
+  });
 });
