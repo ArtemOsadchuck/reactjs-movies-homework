@@ -16,6 +16,7 @@ const Main: React.FC = () => {
     category: useAppSelector((state) => state.mainReducer.category),
     query: useAppSelector((state) => state.mainReducer.query),
   };
+  const neededPages = 5;
 
   useEffect(() => {
     dispatch(getMainData(mainState));
@@ -34,7 +35,7 @@ const Main: React.FC = () => {
           <h2>Loading...</h2>
         )}
       </div>
-      <Pagination />
+      <Pagination neededPages={neededPages} />
     </div>
   ) : (
     <div className={styles.mainWrapper}>
