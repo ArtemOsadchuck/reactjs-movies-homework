@@ -16,8 +16,9 @@ import getMovieDetailsData from '../../store/rootStore/movieDetailsPageStore/get
 import getTopBilletCastData from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getTopBilletCastData';
 import getMovieImages from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getMovieImages';
 import getRecommendations from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getRecommendations';
-import getGenres from '../../store/rootStore/mainStore/getMaiData/getGenres';
-
+// import getGenres from '../../store/rootStore/mainStore/getMaiData/getGenres';
+import { setMovieID } from '../../store/rootStore/movieDetailsPageStore/movieDetailsPageSlice';
+import useQueryHash from '../../hooks/useQuery';
 const sortCastBySix = (cast: Array<ITopBilledCastProp>) => {
   const castLength = 6;
   const resultCast = [...cast].sort((a, b) => {
@@ -37,6 +38,7 @@ const MovieDetails: React.FC = () => {
   const imagesBlockQuality = 8;
   const imagesWidth = '172px';
 
+  const locationHash = useQueryHash();
   const dispatch = useAppDispatch();
   const appLang = useAppSelector((state) => state.mainReducer.lang);
   const ImagesBlockTitle = lang(appLang).images;
@@ -56,6 +58,7 @@ const MovieDetails: React.FC = () => {
   const movieCastFromAPI = useAppSelector(
     (state) => state.movieDetailsReducer.cast
   );
+
   useEffect(() => {
     const detailsState = {
       lang: appLang,
@@ -72,10 +75,7 @@ const MovieDetails: React.FC = () => {
   }, [dispatch, appLang, movie_id]);
 
   useEffect(() => {
-    dispatch(getGenres(appLang));
-  }, [dispatch, appLang]);
-
-  useEffect(() => {
+    dispatch(setMovieID(locationHash));
     setTitleInfoState(() => appFetchInfo);
     setCast(() => movieCastFromAPI?.cast);
     setStateImg(() => imagesFromAPI?.backdrops);
@@ -87,6 +87,8 @@ const MovieDetails: React.FC = () => {
     movieCastFromAPI,
     imagesFromAPI,
     recommendations,
+    dispatch,
+    locationHash,
   ]);
 
   useEffect(() => {
