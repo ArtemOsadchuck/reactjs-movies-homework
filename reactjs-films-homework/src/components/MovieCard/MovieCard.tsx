@@ -5,6 +5,7 @@ import styles from './MovieCard.module.scss';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { setMovieID } from '../../store/rootStore/movieDetailsPageStore/movieDetailsPageSlice';
 import GenresList from './GenresList';
+import { Link } from 'react-router-dom';
 
 export interface ICard {
   props: IMovieCard;
@@ -66,7 +67,8 @@ const MovieCard: React.FC<ICard> = ({
   };
 
   return (
-    <div
+    <Link
+      to={`/movie-details/#${id}`}
       id={`${id}`}
       className={styles.movieCardLink}
       onClick={() => goToMovie(`${id}`)}
@@ -88,7 +90,7 @@ const MovieCard: React.FC<ICard> = ({
         <h4>{title}</h4>
         {genreName && <GenresList genreName={genreName} />}
       </div>
-    </div>
+    </Link>
   );
 };
 
