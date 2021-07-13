@@ -7,6 +7,7 @@ import ActorProfile from '../ActorProfile';
 import ErrorBoundary from '../../components/ErrorBoundary';
 
 import './App.scss';
+import { Route } from 'react-router-dom';
 
 function App() {
   return (
@@ -16,15 +17,21 @@ function App() {
       </ErrorBoundary>
 
       <ErrorBoundary title="main page">
-        <Main />
+        <Route exact path="/">
+          <Main />
+        </Route>
       </ErrorBoundary>
 
       <ErrorBoundary title="movie details page">
-        <MovieDetails />
+        <Route path="/movie-details/">
+          <MovieDetails />
+        </Route>
       </ErrorBoundary>
 
       <ErrorBoundary title="actor profile page">
-        <ActorProfile />
+        <Route path="/actor-profile">
+          <ActorProfile />
+        </Route>
       </ErrorBoundary>
     </div>
   );
