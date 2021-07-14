@@ -32,7 +32,7 @@ interface IGetRecommendations {
 }
 
 const initialState: IInitialState = {
-  movie_id: '277',
+  movie_id: '',
   lang: 'EN',
   genre: { genres: [] },
 };
