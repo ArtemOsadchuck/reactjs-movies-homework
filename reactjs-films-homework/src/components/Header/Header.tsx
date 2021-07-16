@@ -15,10 +15,13 @@ const Header: React.FC = () => {
   useEffect(() => {
     dispatch(getGenres(appLang));
   }, [dispatch, appLang]);
+
   return (
     <header className={style.header}>
       <h1>
-        <Link to="/">{lang(appLang).title.toUpperCase()}</Link>
+        <Link to="/?category=popular&page=1">
+          {lang(appLang).title.toUpperCase()}
+        </Link>
       </h1>
       <Form placeholder={lang(appLang).placeholder} />
       <LanguageToggler />
