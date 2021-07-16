@@ -28,7 +28,7 @@ const ActorPhotos: React.FC<IActorPhotos> = ({
 }) => {
   const appLang = useAppSelector((state) => state.mainReducer.lang);
   const titlePhotos = getLang(appLang).photos;
-  console.log(photos);
+
   return (
     <div className={styles.photosWrapper}>
       {photos?.length ? (

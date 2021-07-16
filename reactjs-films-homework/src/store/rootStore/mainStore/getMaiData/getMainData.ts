@@ -17,9 +17,7 @@ const getMainData = createAsyncThunk(
       const baseUrl = `https://api.themoviedb.org/3/movie/${category}?api_key=8fa5bc53bb4a09dfb6560253edf33030&language=${lang.toLowerCase()}-${lang}&page=${page}`;
       const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=8fa5bc53bb4a09dfb6560253edf33030&language=${lang.toLowerCase()}-${lang}&${queryFromForm}&page=${page}`;
 
-      // console.log(searchUrl);
       if (query?.length && page?.length && lang) {
-        console.log(searchUrl);
         try {
           const response = await axios.get(searchUrl);
           return response.data;
