@@ -29,7 +29,7 @@ const TopBilledCast: React.FC<ITopBilledCast> = ({ props }) => {
 
   return (
     <Link
-      to={`/actor-profile/${id}`}
+      to={`/actor-profile/?actor-id=${id}`}
       className={styles.actorWrapper}
       id={`${id}`}
       onClick={() => getActorInfo(id)}
