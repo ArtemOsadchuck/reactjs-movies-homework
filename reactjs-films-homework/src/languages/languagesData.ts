@@ -19,6 +19,8 @@ const data = {
     placeOfBirth: 'Место рождения',
     biography: 'Биография',
     photos: 'Фотографии',
+    loading: 'Загрузка...',
+    noResults: 'Совпадений не найдено',
   },
   EN: {
     title: 'Title',
@@ -40,8 +42,9 @@ const data = {
     placeOfBirth: 'Place of birth',
     biography: 'Biography',
     photos: 'Photos',
+    loading: 'Loading...',
+    noResults: 'NO RESULTS FOUND',
   },
 };
 
 export default data;
-//
