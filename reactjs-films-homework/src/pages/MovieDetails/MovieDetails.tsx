@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import MovieTitleCard from './MovieTitleCard';
 import styles from './MovieDetails.module.scss';
-import sortCastBySix from './utils/sortCastBySix';
 
-import TopBilledCast from './TopBilledCast';
-import { ITopBilledCastProp } from './TopBilledCast/TopBilledCast';
-import ImagesBlock from './ImagesBlock';
 import MovieCard from '../../components/MovieCard';
+import TopBilledCast from './TopBilledCast';
+import ImagesBlock from './ImagesBlock';
 import { IMovieCard } from '../../components/MovieCard/MovieCard';
+import { ITopBilledCastProp } from './TopBilledCast/TopBilledCast';
 import { ITitleMovieProps } from './MovieTitleCard/MovieTitleCard';
 import { IImagesBlockProps } from './ImagesBlock/ImagesBlock';
 
-import lang from '../../languages/getLanguage';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import getMovieDetailsData from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getMovieDetailsData';
 import getTopBilletCastData from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getTopBilletCastData';
@@ -19,7 +17,14 @@ import getMovieImages from '../../store/rootStore/movieDetailsPageStore/getMovie
 import getRecommendations from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getRecommendations';
 import { setMovieID } from '../../store/rootStore/movieDetailsPageStore/movieDetailsPageSlice';
 
+import sortCastBySix from './utils/sortCastBySix';
+import lang from '../../languages/getLanguage';
 import useUrlSearch from '../../hooks/useUrlSearch';
+import {
+  movieDetailsImagesBlockQuality,
+  movieDetailsImagesWidth,
+  recommendationsMovieDetailsQuality,
+} from '../../constants/variables';
 
 const MovieDetails: React.FC = () => {
   const [titleInfoState, setTitleInfoState] = useState<ITitleMovieProps>();
@@ -27,10 +32,6 @@ const MovieDetails: React.FC = () => {
   const [sortCast, setSortCast] = useState<Array<ITopBilledCastProp>>();
   const [stateImg, setStateImg] = useState<Array<IImagesBlockProps>>();
   const [recommended, setRecommended] = useState<Array<IMovieCard>>();
-
-  const recommendationsQuality = 5;
-  const imagesBlockQuality = 8;
-  const imagesWidth = '172px';
 
   const dispatch = useAppDispatch();
   const appLang = useAppSelector((state) => state.mainReducer.lang);
@@ -112,8 +113,8 @@ const MovieDetails: React.FC = () => {
           <ImagesBlock
             images={stateImg}
             title={ImagesBlockTitle}
-            imgWidth={imagesWidth}
-            imagesQuality={imagesBlockQuality}
+            imgWidth={movieDetailsImagesWidth}
+            imagesQuality={movieDetailsImagesBlockQuality}
           />
         ) : null}
       </div>
@@ -124,12 +125,12 @@ const MovieDetails: React.FC = () => {
         <div className={styles.recommendationsCardsWrapper}>
           {recommended ? (
             recommended
-              .slice(0, recommendationsQuality)
+              .slice(0, recommendationsMovieDetailsQuality)
               .map((el: IMovieCard) => {
                 return <MovieCard props={el} key={el.id - 0.5} />;
               })
           ) : (
-            <h2>Loading...</h2>
+            <h2>{lang(appLang).loading}</h2>
           )}
         </div>
       </div>

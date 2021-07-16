@@ -4,6 +4,8 @@ import styles from './ActorPhotos.module.scss';
 import getLang from '../../../languages/getLanguage';
 import { useAppSelector } from '../../../hooks/hooks';
 
+import { partOfImagesURL } from '../../../constants/links';
+
 export interface IPhotos {
   aspect_ratio: number;
   file_path: string;
@@ -16,12 +18,17 @@ export interface IPhotos {
 export interface IActorPhotos {
   photos?: IPhotos[];
   photosLength?: number;
+  nameAltImg: string | undefined;
 }
 
-const ActorPhotos: React.FC<IActorPhotos> = ({ photos, photosLength }) => {
+const ActorPhotos: React.FC<IActorPhotos> = ({
+  photos,
+  photosLength,
+  nameAltImg,
+}) => {
   const appLang = useAppSelector((state) => state.mainReducer.lang);
   const titlePhotos = getLang(appLang).photos;
-
+  console.log(photos);
   return (
     <div className={styles.photosWrapper}>
       {photos?.length ? (
@@ -35,8 +42,8 @@ const ActorPhotos: React.FC<IActorPhotos> = ({ photos, photosLength }) => {
                   width="120px"
                   className={styles.photo}
                   key={el.file_path}
-                  src={`https://image.tmdb.org/t/p/w500/${el.file_path}`}
-                  alt=""
+                  src={`${partOfImagesURL}${el.file_path}`}
+                  alt={nameAltImg}
                 />
               );
             })

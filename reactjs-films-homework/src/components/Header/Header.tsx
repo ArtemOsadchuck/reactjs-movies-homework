@@ -3,6 +3,8 @@ import Form from './Form';
 import LanguageToggler from './LanguageToggler';
 import style from './Header.module.scss';
 
+import { homePageLink } from '../../constants/links';
+
 import lang from '../../languages/getLanguage';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { Link } from 'react-router-dom';
@@ -19,9 +21,7 @@ const Header: React.FC = () => {
   return (
     <header className={style.header}>
       <h1>
-        <Link to="/?category=popular&page=1">
-          {lang(appLang).title.toUpperCase()}
-        </Link>
+        <Link to={homePageLink}>{lang(appLang).title.toUpperCase()}</Link>
       </h1>
       <Form placeholder={lang(appLang).placeholder} />
       <LanguageToggler />

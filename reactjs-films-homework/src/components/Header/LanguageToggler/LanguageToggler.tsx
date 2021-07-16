@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './LanguageToggler.module.scss';
 import { langArr } from '../../../languages/getLanguage';
+import { initialLanguage } from '../../../constants/variables';
 import { setLang } from '../../../store/rootStore/mainStore/mainSlice';
 import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
 import useLocalStorage from '../../../hooks/useLocalStorage';
@@ -13,7 +14,7 @@ const LanguageToggler: React.FC = () => {
   const dispatch = useAppDispatch();
   const [langInLocal, setLangInLocal] = useLocalStorage(
     'lang',
-    appLang.length ? appLang : 'EN'
+    appLang.length ? appLang : initialLanguage
   );
 
   useEffect(() => {

@@ -1,12 +1,14 @@
 import React from 'react';
-import img from '../../../components/MovieCard/img/Movie-card.png';
 import styles from './MovieTitleCard.module.scss';
+
 import MovieTitleInfo from './MovieTitleInfo';
 
 import lang from '../../../languages/getLanguage';
 import { useAppSelector } from '../../../hooks/hooks';
 
+import backgroundImage from '../../../components/MovieCard/img/Movie-card.png';
 import getRevenueFormat from './utils/getRevenueFormat';
+import { partOfImagesURL } from '../../../constants/links';
 
 export interface ICard {
   props: ITitleMovieProps;
@@ -38,8 +40,8 @@ const MovieTitleCard: React.FC<ICard> = ({ props }) => {
     runtime,
     revenue,
   } = props;
-  const urlImg = `https://image.tmdb.org/t/p/w500/${poster_path}`;
-  const imgWidth = '52px';
+  const urlImg = `${partOfImagesURL}${poster_path}`;
+  const backgroundImgWidth = '52px';
   const appLang = useAppSelector((state) => state.mainReducer.lang);
   const titleText = lang(appLang).titleName + ':';
   const overviewText = lang(appLang).overview + ':';
@@ -59,7 +61,7 @@ const MovieTitleCard: React.FC<ICard> = ({ props }) => {
           {poster_path ? (
             <img src={urlImg} height="100%" alt={title} />
           ) : (
-            <img src={img} width={imgWidth} alt={title} />
+            <img src={backgroundImage} width={backgroundImgWidth} alt={title} />
           )}
         </div>
       </div>

@@ -1,10 +1,13 @@
 import React from 'react';
 import styles from './ActorTitleInfo.module.scss';
+
 import getLang from '../../../languages/getLanguage';
+
 import { useAppSelector } from '../../../hooks/hooks';
+import { partOfImagesURL } from '../../../constants/links';
 
 export interface IActorTitle {
-  props: IActorTitleProps;
+  actorInfo: IActorTitleProps;
 }
 export interface IActorTitleProps {
   also_known_as?: string[];
@@ -18,16 +21,16 @@ export interface IActorTitleProps {
   profile_path: string;
 }
 
-const ActorTitle: React.FC<IActorTitle> = ({ props }) => {
-  const { birthday, name, profile_path, biography, place_of_birth } = props;
-  const urlImg = `https://image.tmdb.org/t/p/w500/${profile_path}`;
-
+const ActorTitle: React.FC<IActorTitle> = ({
+  actorInfo: { birthday, name, profile_path, biography, place_of_birth },
+}) => {
+  const urlImg = `${partOfImagesURL}${profile_path}`;
   const appLang = useAppSelector((state) => state.mainReducer.lang);
 
   return (
     <div className={styles.titleWrapper}>
       <div className={styles.titleImageWrapper}>
-        {props.profile_path ? (
+        {profile_path ? (
           <img className={styles.titleImage} src={urlImg} alt={name} />
         ) : null}
       </div>

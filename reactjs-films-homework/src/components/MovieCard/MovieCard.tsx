@@ -1,11 +1,14 @@
 /* eslint-disable array-callback-return */
 import React, { useState, useMemo } from 'react';
-import img from './img/Movie-card.png';
+import { Link } from 'react-router-dom';
 import styles from './MovieCard.module.scss';
+import img from './img/Movie-card.png';
+
+import GenresList from './GenresList';
+
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { setMovieID } from '../../store/rootStore/movieDetailsPageStore/movieDetailsPageSlice';
-import GenresList from './GenresList';
-import { Link } from 'react-router-dom';
+import { movieDetailsURL } from '../../constants/links';
 
 export interface ICard {
   props: IMovieCard;
@@ -31,9 +34,11 @@ const MovieCard: React.FC<ICard> = ({
   props: { id, title, vote_average, poster_path, genre_ids },
 }) => {
   const imgWidth = '52px';
-  const movieTitle = 'Movie Title';
   const urlImg = `https://image.tmdb.org/t/p/w500/${poster_path}`;
+  const detailsURL = `${movieDetailsURL}${id}`;
+
   const [genreName, setGenreName] = useState<string[]>([]);
+
   const dispatch = useAppDispatch();
   const appFetchMovieGenre = useAppSelector((state) => state.mainReducer.genre);
 
@@ -68,7 +73,7 @@ const MovieCard: React.FC<ICard> = ({
 
   return (
     <Link
-      to={`/movie-details/?movie-id=${id}`}
+      to={detailsURL}
       id={`${id}`}
       className={styles.movieCardLink}
       onClick={() => goToMovie(`${id}`)}
@@ -82,9 +87,9 @@ const MovieCard: React.FC<ICard> = ({
       <div className={styles.movieCardWrapper}>
         <div className={styles.imgCardWrapper}>
           {poster_path ? (
-            <img src={urlImg} height="100%" alt={movieTitle} />
+            <img src={urlImg} height="100%" alt={title} />
           ) : (
-            <img src={img} width={imgWidth} alt={movieTitle} />
+            <img src={img} width={imgWidth} alt={title} />
           )}
         </div>
         <h4>{title}</h4>

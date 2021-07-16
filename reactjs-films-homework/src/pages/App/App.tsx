@@ -1,13 +1,13 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+
+import './App.scss';
 
 import Header from '../../components/Header/Header';
 import Main from '../Main';
 import MovieDetails from '../MovieDetails';
 import ActorProfile from '../ActorProfile';
 import ErrorBoundary from '../../components/ErrorBoundary';
-
-import './App.scss';
-import { Route, Switch } from 'react-router-dom';
 
 function App() {
   const homePath = '/' || '/popular' || '/top_rated' || 'upcoming';
@@ -16,6 +16,7 @@ function App() {
       <ErrorBoundary title="header component">
         <Header />
       </ErrorBoundary>
+
       <Switch>
         <Route exact path={homePath}>
           <ErrorBoundary title="main page">

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import styles from './ActorProfile.module.scss';
 
 import ActorTitle from './ActorTitleInfo';
 import ActorPhotos from './ActorPhotos';
-import styles from './ActorProfile.module.scss';
 import MovieCard from '../../components/MovieCard';
 import { IMovieCard } from '../../components/MovieCard/MovieCard';
 import { IPhotos } from './ActorPhotos/ActorPhotos';
@@ -59,8 +59,12 @@ const ActorProfile: React.FC = () => {
 
   return (
     <div className={styles.mainWrapper}>
-      {info && <ActorTitle props={info} />}
-      <ActorPhotos photos={photos} photosLength={actorGridPhotosLength} />
+      {info && <ActorTitle actorInfo={info} />}
+      <ActorPhotos
+        photos={photos}
+        nameAltImg={info?.name}
+        photosLength={actorGridPhotosLength}
+      />
       <div className={styles.cardsWrapper}>
         {sortKnownBy.map((el: IMovieCard) => {
           return <MovieCard key={Math.random() / 1.321} props={el} />;

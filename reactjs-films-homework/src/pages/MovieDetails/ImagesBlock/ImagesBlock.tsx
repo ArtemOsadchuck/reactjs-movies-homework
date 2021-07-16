@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './ImagesBlock.module.scss';
 
+import { partOfImagesURL } from '../../../constants/links';
+
 export interface IImagesBlock {
   images: IImagesBlockProps[];
   title: string;
@@ -36,8 +38,8 @@ const ImagesBlock: React.FC<IImagesBlock> = ({
                   className={styles.image}
                   width={imgWidth}
                   key={el.file_path.length * Math.random()}
-                  src={`https://image.tmdb.org/t/p/w500/${el.file_path}`}
-                  alt="images"
+                  src={`${partOfImagesURL}${el.file_path}`}
+                  alt={title}
                 />
               );
             })
