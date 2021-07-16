@@ -68,7 +68,7 @@ const MovieCard: React.FC<ICard> = ({
 
   return (
     <Link
-      to={`/movie-details/#${id}`}
+      to={`/movie-details/?movie-id=${id}`}
       id={`${id}`}
       className={styles.movieCardLink}
       onClick={() => goToMovie(`${id}`)}
