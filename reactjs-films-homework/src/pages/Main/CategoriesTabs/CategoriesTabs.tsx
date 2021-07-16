@@ -1,76 +1,66 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
+
 import styles from './CategoriesTabs.module.scss';
+
 import lang from '../../../languages/getLanguage';
 import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
+import useUrlSearch from '../../../hooks/useUrlSearch';
+
 import {
   setCategory,
   setActivePage,
 } from '../../../store/rootStore/mainStore/mainSlice';
-import getMainData from '../../../store/rootStore/mainStore/getMaiData/getMainData';
 
 const CategoriesTabs: React.FC = () => {
-  const startActivePage = 'popular';
   const appLang = useAppSelector((state) => state.mainReducer.lang);
   const dispatch = useAppDispatch();
-  const [active, setActive] = useState(startActivePage);
   const activeClass = styles.categoryBtn + ' ' + styles.active;
   const btnClass = styles.categoryBtn;
+  const activePage: string | undefined = useAppSelector(
+    (state) => state.mainReducer.activePage
+  );
 
-  const mainState = {
-    lang: useAppSelector((state) => state.mainReducer.lang),
-    page: '1',
-    activePage: '1',
-  };
+  const startPage = '1';
+  const activeUrlCategory = useUrlSearch('category');
 
-  const setActiveCategory = (event: any) => {
-    setActive(() => event.id);
-  };
+  useEffect(() => {
+    activePage && dispatch(setActivePage(activePage));
+    activeUrlCategory && dispatch(setCategory(activeUrlCategory));
+  }, [activePage, activeUrlCategory, dispatch]);
 
-  const getPopular = async (event: EventTarget) => {
-    const mainStateAddCategory = { ...mainState, category: 'popular' };
-    await dispatch(setCategory('popular'));
-    await dispatch(getMainData(mainStateAddCategory));
-    dispatch(setActivePage('1'));
-    setActiveCategory(event);
-  };
-  const getTopRated = async (event: EventTarget) => {
-    dispatch(setActivePage('1'));
-    const mainStateAddCategory = { ...mainState, category: 'top_rated' };
-    await dispatch(setCategory('top_rated'));
-    await dispatch(getMainData(mainStateAddCategory));
-    setActiveCategory(event);
-  };
-  const getUpcoming = async (event: EventTarget) => {
-    dispatch(setActivePage('1'));
-    const mainStateAddCategory = { ...mainState, category: 'upcoming' };
-    await dispatch(setCategory('upcoming'));
-    await dispatch(getMainData(mainStateAddCategory));
-    setActiveCategory(event);
+  const handlerSetCategory = (event: any) => {
+    const category: string = event.target.id;
+    dispatch(setActivePage(startPage));
+    dispatch(setCategory(category));
   };
 
   return (
     <div className={styles.categoriesWrapper}>
-      <div
+      <NavLink
+        to={`/?category=popular&page=${startPage}`}
         id={'popular'}
-        onClick={(event) => getPopular(event.target)}
-        className={active === 'popular' ? activeClass : btnClass}
+        onClick={(event) => handlerSetCategory(event)}
+        className={activeUrlCategory === 'popular' ? activeClass : btnClass}
       >
         {lang(appLang).popular}
-      </div>
-      <div
+      </NavLink>
+      <NavLink
+        to={`?category=top_rated&page=${startPage}`}
         id={'top_rated'}
-        onClick={(event) => getTopRated(event.target)}
-        className={active === 'top_rated' ? activeClass : btnClass}
+        onClick={(event) => handlerSetCategory(event)}
+        className={activeUrlCategory === 'top_rated' ? activeClass : btnClass}
       >
         {lang(appLang).topRated}
-      </div>
-      <div
+      </NavLink>
+      <NavLink
+        to={`/?category=upcoming&page=${startPage}`}
         id={'upcoming'}
-        onClick={(event) => getUpcoming(event.target)}
-        className={active === 'upcoming' ? activeClass : btnClass}
+        onClick={(event) => handlerSetCategory(event)}
+        className={activeUrlCategory === 'upcoming' ? activeClass : btnClass}
       >
         {lang(appLang).upcoming}
-      </div>
+      </NavLink>
     </div>
   );
 };
