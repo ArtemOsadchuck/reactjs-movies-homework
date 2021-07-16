@@ -12,6 +12,11 @@ import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import getActorInfo from '../../store/rootStore/actorPageStore/getActorData/getActorInfo';
 import getActorImages from '../../store/rootStore/actorPageStore/getActorData/getActorPhotos';
 import getFilmsWithActor from '../../store/rootStore/actorPageStore/getActorData/getFilmsWithActor';
+import { setID } from '../../store/rootStore/actorPageStore/actorPageSlice';
+
+import useUrlSearch from '../../hooks/useUrlSearch';
+
+import changeFilmsQuality from './utils/changeFilmsQuality';
 
 const ActorProfile: React.FC = () => {
   const [info, setInfo] = useState<IActorTitleProps>();
@@ -20,30 +25,27 @@ const ActorProfile: React.FC = () => {
   const [sortKnownBy, setSortKnownBy] = useState<Array<IMovieCard>>([]);
   const actorGridPhotosLength = 4;
   const filmsLength = 10;
+
   const dispatch = useAppDispatch();
+  const locationActorID = useUrlSearch('actor-id');
 
   const actorInfoStore = useAppSelector((state) => state.actorPageReducer);
   const lang = useAppSelector((state) => state.mainReducer.lang);
   const id = useAppSelector((state) => state.actorPageReducer.id);
   const cast = useAppSelector((state) => state.actorPageReducer.cast);
 
-  const sortFilmPopularity = (arr: Array<IMovieCard>, filmsLength: number) => {
-    // const resultFilmsLength = [...arr].sort((a, b) => {
-    //   return a.vote_average > b.vote_average ? -1 : 1;
-    // });
-    // I don't know how it will be better
-    return arr.slice(0, filmsLength);
-  };
-
   useMemo(() => {
-    const requestInfoProperties = {
-      lang: lang,
-      id: id,
-    };
-    dispatch(getActorInfo(requestInfoProperties));
-    dispatch(getFilmsWithActor(requestInfoProperties));
-    dispatch(getActorImages(id));
-  }, [lang, id, dispatch]);
+    if (locationActorID) {
+      const requestInfoProperties = {
+        lang: lang,
+        id: id || locationActorID,
+      };
+      dispatch(getActorInfo(requestInfoProperties));
+      dispatch(getFilmsWithActor(requestInfoProperties));
+      dispatch(getActorImages(locationActorID));
+      dispatch(setID(locationActorID));
+    }
+  }, [lang, dispatch, locationActorID, id]);
 
   useEffect(() => {
     setInfo(() => actorInfoStore.actorInfo);
@@ -52,7 +54,7 @@ const ActorProfile: React.FC = () => {
   }, [dispatch, lang, actorInfoStore, cast]);
 
   useMemo(() => {
-    setSortKnownBy(sortFilmPopularity(knownBy, filmsLength));
+    setSortKnownBy(changeFilmsQuality(knownBy, filmsLength));
   }, [knownBy]);
 
   return (
