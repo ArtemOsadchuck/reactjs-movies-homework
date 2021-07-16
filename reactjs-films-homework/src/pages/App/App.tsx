@@ -7,32 +7,34 @@ import ActorProfile from '../ActorProfile';
 import ErrorBoundary from '../../components/ErrorBoundary';
 
 import './App.scss';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 function App() {
+  const homePath = '/' || '/popular' || '/top_rated' || 'upcoming';
   return (
     <div className="wrapper">
       <ErrorBoundary title="header component">
         <Header />
       </ErrorBoundary>
-
-      <ErrorBoundary title="main page">
-        <Route exact path="/">
-          <Main />
+      <Switch>
+        <Route exact path={homePath}>
+          <ErrorBoundary title="main page">
+            <Main />
+          </ErrorBoundary>
         </Route>
-      </ErrorBoundary>
 
-      <ErrorBoundary title="movie details page">
-        <Route path="/movie-details/">
-          <MovieDetails />
+        <Route path="/movie-details">
+          <ErrorBoundary title="movie details page">
+            <MovieDetails />
+          </ErrorBoundary>
         </Route>
-      </ErrorBoundary>
 
-      <ErrorBoundary title="actor profile page">
         <Route path="/actor-profile">
-          <ActorProfile />
+          <ErrorBoundary title="actor profile page">
+            <ActorProfile />
+          </ErrorBoundary>
         </Route>
-      </ErrorBoundary>
+      </Switch>
     </div>
   );
 }
