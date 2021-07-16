@@ -5,113 +5,41 @@ exports[`App test 1`] = `
   <div
     class="wrapper"
   >
-    <header
-      class="header"
-    >
-      <h1>
-        TITLE
-      </h1>
-      <div
-        class="formWrapper"
-      >
-        <form
-          class="form"
-          id="form"
-        >
-          <input
-            autocomplete="off"
-            class="input"
-            id="input_search"
-            placeholder="Movies, person, movie theaters"
-            type="search"
-            value=""
-          />
-          <div
-            class="search"
-            id="search"
-          >
-            <img
-              alt=""
-              id="search"
-              src="search.png"
-              width="16px"
-            />
-          </div>
-        </form>
-      </div>
-      <div
-        class="dropdownWrapper"
-      >
-        <button
-          class="dropdownBtn"
-        >
-          EN
-        </button>
-      </div>
-    </header>
     <div
-      class="mainWrapper"
+      class="boundaryWrapper"
     >
-      return 
-      <h2>
-        NO RESULTS FOUND
+      <h2
+        color="wite"
+      >
+        An error has occurred on the header component. Please try to refresh the page
       </h2>
-      ;
     </div>
     <div
-      class="mainWrapper"
+      class="boundaryWrapper"
     >
-      <div
-        class="castWrapper"
+      <h2
+        color="wite"
       >
-        <div
-          class="castNameWrapper"
-        >
-          <h3
-            class="castName"
-          >
-            Top Billed Cast
-          </h3>
-          <div
-            class="castNameShowAllBtn"
-          >
-            Show all
-          </div>
-        </div>
-        <div
-          class="castGrid"
-        />
-      </div>
-      <div
-        class="recommendationsWrapper"
-      >
-        <h2
-          class="recommendationsTitle"
-        >
-          RECOMMENDATIONS
-        </h2>
-        <div
-          class="recommendationsCardsWrapper"
-        >
-          <h2>
-            Loading...
-          </h2>
-        </div>
-      </div>
+        An error has occurred on the main page. Please try to refresh the page
+      </h2>
     </div>
     <div
-      class="mainWrapper"
+      class="boundaryWrapper"
     >
-      <div
-        class="photosWrapper"
+      <h2
+        color="wite"
       >
-        <div
-          class="photosGrid"
-        />
-      </div>
-      <div
-        class="cardsWrapper"
-      />
+        An error has occurred on the movie details page. Please try to refresh the page
+      </h2>
+    </div>
+    <div
+      class="boundaryWrapper"
+    >
+      <h2
+        color="wite"
+      >
+        An error has occurred on the actor profile page. Please try to refresh the page
+      </h2>
     </div>
   </div>
 </DocumentFragment>
