@@ -20,13 +20,13 @@ interface IMainState {
 }
 
 const initialState: IInitialState = {
-  lang: 'EN',
-  activePage: '1',
+  lang: '',
+  activePage: '',
   totalPages: 0,
   genre: { genres: [] },
   query: '',
-  page: '1',
-  category: 'popular',
+  page: '',
+  category: '',
   mainState: [],
 };
 

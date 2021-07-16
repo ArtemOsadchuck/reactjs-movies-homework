@@ -23,7 +23,7 @@ interface IGetFilmsWithActor {
 }
 
 const initialState: IInitialState = {
-  id: '131',
+  id: '',
   lang: '',
   genre: { genres: [] },
   profiles: [],
