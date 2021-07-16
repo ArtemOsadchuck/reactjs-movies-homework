@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import MovieTitleCard from './MovieTitleCard';
 import styles from './MovieDetails.module.scss';
+import sortCastBySix from './utils/sortCastBySix';
 
 import TopBilledCast from './TopBilledCast';
 import { ITopBilledCastProp } from './TopBilledCast/TopBilledCast';
@@ -16,16 +17,9 @@ import getMovieDetailsData from '../../store/rootStore/movieDetailsPageStore/get
 import getTopBilletCastData from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getTopBilletCastData';
 import getMovieImages from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getMovieImages';
 import getRecommendations from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getRecommendations';
-// import getGenres from '../../store/rootStore/mainStore/getMaiData/getGenres';
 import { setMovieID } from '../../store/rootStore/movieDetailsPageStore/movieDetailsPageSlice';
-import useQueryHash from '../../hooks/useQuery';
-const sortCastBySix = (cast: Array<ITopBilledCastProp>) => {
-  const castLength = 6;
-  const resultCast = [...cast].sort((a, b) => {
-    return a.popularity > b.popularity ? -1 : 1;
-  });
-  return resultCast.slice(0, castLength);
-};
+
+import useUrlSearch from '../../hooks/useUrlSearch';
 
 const MovieDetails: React.FC = () => {
   const [titleInfoState, setTitleInfoState] = useState<ITitleMovieProps>();
@@ -38,10 +32,10 @@ const MovieDetails: React.FC = () => {
   const imagesBlockQuality = 8;
   const imagesWidth = '172px';
 
-  const locationHash = useQueryHash();
   const dispatch = useAppDispatch();
   const appLang = useAppSelector((state) => state.mainReducer.lang);
   const ImagesBlockTitle = lang(appLang).images;
+  const locationMovieID = useUrlSearch('movie-id');
 
   const movie_id = useAppSelector(
     (state) => state.movieDetailsReducer.movie_id
@@ -60,22 +54,24 @@ const MovieDetails: React.FC = () => {
   );
 
   useEffect(() => {
-    const detailsState = {
-      lang: appLang,
-      movie_id: movie_id,
-    };
-    const getData = async () => {
-      await dispatch(getMovieDetailsData(detailsState));
-      await dispatch(getTopBilletCastData(detailsState));
-      await dispatch(getMovieImages(detailsState.movie_id));
-      dispatch(getRecommendations(detailsState));
-    };
+    if (locationMovieID?.length) {
+      dispatch(setMovieID(locationMovieID));
+      const getData = async () => {
+        const detailsState = {
+          lang: appLang,
+          movie_id: movie_id || locationMovieID,
+        };
 
-    getData();
-  }, [dispatch, appLang, movie_id]);
+        await dispatch(getMovieDetailsData(detailsState));
+        await dispatch(getTopBilletCastData(detailsState));
+        await dispatch(getMovieImages(detailsState.movie_id));
+        await dispatch(getRecommendations(detailsState));
+      };
+      locationMovieID?.length && getData();
+    }
+  }, [dispatch, appLang, movie_id, locationMovieID]);
 
   useEffect(() => {
-    dispatch(setMovieID(locationHash));
     setTitleInfoState(() => appFetchInfo);
     setCast(() => movieCastFromAPI?.cast);
     setStateImg(() => imagesFromAPI?.backdrops);
@@ -88,7 +84,7 @@ const MovieDetails: React.FC = () => {
     imagesFromAPI,
     recommendations,
     dispatch,
-    locationHash,
+    locationMovieID,
   ]);
 
   useEffect(() => {
