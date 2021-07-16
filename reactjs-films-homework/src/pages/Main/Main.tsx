@@ -6,22 +6,99 @@ import styles from './Main.module.scss';
 import Pagination from './Pagination';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import getMainData from '../../store/rootStore/mainStore/getMaiData/getMainData';
+import useUrlSearch from '../../hooks/useUrlSearch';
+import {
+  setActivePage,
+  setCategory,
+  setQuery,
+} from '../../store/rootStore/mainStore/mainSlice';
+import { useHistory } from 'react-router-dom';
 
 const Main: React.FC = () => {
   const dispatch = useAppDispatch();
   const appFetchMovie = useAppSelector((state) => state.mainReducer.mainState);
-  const mainState = {
-    lang: useAppSelector((state) => state.mainReducer.lang),
-    page: useAppSelector((state) => state.mainReducer.page),
-    category: useAppSelector((state) => state.mainReducer.category),
-    query: useAppSelector((state) => state.mainReducer.query),
-  };
+  const activeUrlCategory = useUrlSearch('category');
+  const activeUrlPage = useUrlSearch('page');
+  const activeUrlSearch = useUrlSearch('search');
+
+  const lang = useAppSelector((state) => state.mainReducer.lang);
+  const activePage = useAppSelector((state) => state.mainReducer.activePage);
+  const category = useAppSelector((state) => state.mainReducer.category);
+  const query = useAppSelector((state) => state.mainReducer.query);
+
   const neededPages = 5;
+  const history = useHistory();
+
+  // useEffect(() => {
+  //   if (
+  //     !activeUrlPage?.length &&
+  //     !activeUrlCategory?.length &&
+  //     !activeUrlSearch?.length
+  //   ) {
+  //     history.push('/?category=popular&page=1');
+  //   }
+  // }, [
+  //   activeUrlPage?.length,
+  //   activeUrlCategory?.length,
+  //   history,
+  //   activeUrlSearch?.length,
+  // ]);
 
   useEffect(() => {
-    dispatch(getMainData(mainState));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (!category && activeUrlCategory) {
+      dispatch(setCategory(activeUrlCategory));
+    }
+    if (!activePage && activeUrlPage) {
+      dispatch(setActivePage(activeUrlPage));
+    }
+    if (!query && activeUrlSearch) {
+      dispatch(setQuery(activeUrlSearch));
+    }
+    if (!activeUrlSearch && !activeUrlCategory && !activeUrlSearch) {
+      history.push('/?category=popular&page=1');
+    }
+  }, [
+    activePage,
+    activeUrlCategory,
+    activeUrlPage,
+    activeUrlSearch,
+    category,
+    dispatch,
+    history,
+    query,
+  ]);
+
+  useEffect(() => {
+    if (activePage && activeUrlPage) {
+      if (activeUrlSearch && !activeUrlCategory) {
+        const mainState = {
+          lang: lang,
+          page: activeUrlPage,
+          category: '',
+          query: activeUrlSearch,
+        };
+        dispatch(getMainData(mainState));
+      }
+      if (activeUrlCategory) {
+        const mainState = {
+          lang: lang,
+          page: activePage,
+          category: activeUrlCategory,
+        };
+
+        dispatch(getMainData(mainState));
+      }
+    }
+  }, [
+    activePage,
+    activeUrlCategory,
+    activeUrlPage,
+    activeUrlSearch,
+    category,
+    dispatch,
+    lang,
+    query,
+  ]);
 
   return appFetchMovie.length ? (
     <div className={styles.mainWrapper}>
@@ -39,7 +116,7 @@ const Main: React.FC = () => {
     </div>
   ) : (
     <div className={styles.mainWrapper}>
-      return <h2>NO RESULTS FOUND</h2>;
+      <h2>NO RESULTS FOUND</h2>;
     </div>
   );
 };
