@@ -5,24 +5,30 @@ exports[`CategoriesTabs CategoriesTabs snapshot 1`] = `
   <div
     class="categoriesWrapper"
   >
-    <div
+    <a
+      aria-current="page"
       class="categoryBtn active"
+      href="/?category=popular&page=1"
       id="popular"
     >
       Popular
-    </div>
-    <div
-      class="categoryBtn"
+    </a>
+    <a
+      aria-current="page"
+      class="categoryBtn active"
+      href="/?category=top_rated&page=1"
       id="top_rated"
     >
       Top rated
-    </div>
-    <div
-      class="categoryBtn"
+    </a>
+    <a
+      aria-current="page"
+      class="categoryBtn active"
+      href="/?category=upcoming&page=1"
       id="upcoming"
     >
       Upcoming
-    </div>
+    </a>
   </div>
 </DocumentFragment>
 `;

@@ -2,8 +2,9 @@
 
 exports[`MovieCard MovieCard snapshot 1`] = `
 <DocumentFragment>
-  <div
+  <a
     class="movieCardLink"
+    href="/movie-details/?movie-id=724089"
     id="724089"
   >
     <div
@@ -29,7 +30,7 @@ exports[`MovieCard MovieCard snapshot 1`] = `
         class="imgCardWrapper"
       >
         <img
-          alt="Movie Title"
+          alt="Gabriel's Inferno Part II"
           height="100%"
           src="https://image.tmdb.org/t/p/w500//x5o8cLZfEXMoZczTYWLrUo1P7UJ.jpg"
         />
@@ -41,6 +42,6 @@ exports[`MovieCard MovieCard snapshot 1`] = `
         class="genre"
       />
     </div>
-  </div>
+  </a>
 </DocumentFragment>
 `;

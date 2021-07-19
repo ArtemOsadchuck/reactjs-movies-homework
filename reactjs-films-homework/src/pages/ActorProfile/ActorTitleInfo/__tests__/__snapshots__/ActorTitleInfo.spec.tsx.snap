@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ActorTitleInfo ActorTitleInfo snapshot 1`] = `
+exports[`ActorTitleInfo should renders correctly 1`] = `
 <DocumentFragment>
   (
   <div

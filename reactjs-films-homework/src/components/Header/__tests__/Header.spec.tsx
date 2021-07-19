@@ -1,16 +1,22 @@
 import React from 'react';
 import { cleanup, render, screen } from '@testing-library/react';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 import Header from '../Header';
 import { Provider } from 'react-redux';
 import store from '../../../store/store';
 
 describe('Header', () => {
   let fragment: any;
+  const history = createMemoryHistory();
+  history.push('/');
 
   beforeEach(() => {
     const { asFragment } = render(
       <Provider store={store}>
-        <Header />
+        <Router history={history}>
+          <Header />
+        </Router>
       </Provider>
     );
     fragment = asFragment();

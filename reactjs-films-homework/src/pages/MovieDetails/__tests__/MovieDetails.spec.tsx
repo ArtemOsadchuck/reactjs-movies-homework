@@ -1,5 +1,7 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 
 import MovieDetails from '../MovieDetails';
 
@@ -9,10 +11,15 @@ import store from '../../../store/store';
 describe('MovieDetails', () => {
   let fragment: any;
 
+  const history = createMemoryHistory();
+  history.push('/');
+
   beforeEach(() => {
     const { asFragment } = render(
       <Provider store={store}>
-        <MovieDetails />
+        <Router history={history}>
+          <MovieDetails />
+        </Router>
       </Provider>
     );
     fragment = asFragment();

@@ -5,41 +5,65 @@ exports[`App test 1`] = `
   <div
     class="wrapper"
   >
-    <div
-      class="boundaryWrapper"
+    <header
+      class="header"
     >
-      <h2
-        color="wite"
+      <h1>
+        <a
+          href="/?category=popular&page=1"
+        >
+          TITLE
+        </a>
+      </h1>
+      <div
+        class="formWrapper"
       >
-        An error has occurred on the header component. Please try to refresh the page
-      </h2>
-    </div>
+        <form
+          class="form"
+          id="form"
+        >
+          <input
+            autocomplete="off"
+            class="input"
+            id="input_search"
+            placeholder="Movies, person, movie theaters"
+            type="search"
+            value=""
+          />
+          <div
+            class="search"
+            id="search"
+          >
+            <a
+              href="/?search=&page=1"
+            >
+              <img
+                alt=""
+                id="search"
+                src="search.png"
+                width="16px"
+              />
+            </a>
+          </div>
+        </form>
+      </div>
+      <div
+        class="dropdownWrapper"
+      >
+        <button
+          class="dropdownBtn"
+        >
+          EN
+        </button>
+      </div>
+    </header>
     <div
-      class="boundaryWrapper"
+      class="mainWrapper"
     >
-      <h2
-        color="wite"
-      >
-        An error has occurred on the main page. Please try to refresh the page
+      <h2>
+        NO RESULTS FOUND
       </h2>
-    </div>
-    <div
-      class="boundaryWrapper"
-    >
-      <h2
-        color="wite"
-      >
-        An error has occurred on the movie details page. Please try to refresh the page
-      </h2>
-    </div>
-    <div
-      class="boundaryWrapper"
-    >
-      <h2
-        color="wite"
-      >
-        An error has occurred on the actor profile page. Please try to refresh the page
-      </h2>
+      ;
     </div>
   </div>
 </DocumentFragment>

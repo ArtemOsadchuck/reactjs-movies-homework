@@ -1,5 +1,7 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 
 import TopBilledCast from '../TopBilledCast';
 import TopBilledCastMocks from '../mocks';
@@ -10,10 +12,15 @@ import store from '../../../../store/store';
 describe('TopBilledCast', () => {
   let fragment: any;
 
+  const history = createMemoryHistory();
+  history.push('/');
+
   beforeEach(async () => {
     const { asFragment } = await render(
       <Provider store={store}>
-        <TopBilledCast props={TopBilledCastMocks} />
+        <Router history={history}>
+          <TopBilledCast props={TopBilledCastMocks} />
+        </Router>
       </Provider>
     );
     fragment = asFragment();

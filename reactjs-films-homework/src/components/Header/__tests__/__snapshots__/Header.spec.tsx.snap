@@ -6,7 +6,11 @@ exports[`Header Snapshot 1`] = `
     class="header"
   >
     <h1>
-      TITLE
+      <a
+        href="/?category=popular&page=1"
+      >
+        TITLE
+      </a>
     </h1>
     <div
       class="formWrapper"
@@ -27,12 +31,16 @@ exports[`Header Snapshot 1`] = `
           class="search"
           id="search"
         >
-          <img
-            alt=""
-            id="search"
-            src="search.png"
-            width="16px"
-          />
+          <a
+            href="/?search=&page=1"
+          >
+            <img
+              alt=""
+              id="search"
+              src="search.png"
+              width="16px"
+            />
+          </a>
         </div>
       </form>
     </div>

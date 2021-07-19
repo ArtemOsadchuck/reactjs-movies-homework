@@ -6,14 +6,20 @@ import MovieCardMocks from '../mocks';
 
 import { Provider } from 'react-redux';
 import store from '../../../store/store';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 
 describe('MovieCard', () => {
   let fragment: any;
+  const history = createMemoryHistory();
+  history.push('/');
 
   beforeEach(() => {
     const { asFragment } = render(
       <Provider store={store}>
-        <MovieCard props={MovieCardMocks} />
+        <Router history={history}>
+          <MovieCard props={MovieCardMocks} />
+        </Router>
       </Provider>
     );
     fragment = asFragment();

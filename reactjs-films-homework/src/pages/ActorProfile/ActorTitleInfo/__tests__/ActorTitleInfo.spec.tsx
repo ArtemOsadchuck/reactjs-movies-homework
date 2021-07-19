@@ -13,7 +13,7 @@ describe('ActorTitleInfo', () => {
   beforeEach(() => {
     const { asFragment } = render(
       <Provider store={store}>
-        (<ActorTitleInfo props={ActorTitleInfoMocks} />
+        (<ActorTitleInfo actorInfo={ActorTitleInfoMocks} />
       </Provider>
     );
     fragment = asFragment();
@@ -21,7 +21,7 @@ describe('ActorTitleInfo', () => {
 
   afterEach(() => cleanup());
 
-  it('ActorTitleInfo snapshot', () => {
+  it('should renders correctly', () => {
     expect(fragment).toMatchSnapshot();
   });
 

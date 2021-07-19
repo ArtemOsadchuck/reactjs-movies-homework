@@ -2,15 +2,16 @@
 
 exports[`TopBilledCast TopBilledCast snapshot 1`] = `
 <DocumentFragment>
-  <div
+  <a
     class="actorWrapper"
+    href="/actor-profile/?actor-id=192"
     id="192"
   >
     <img
       alt="Morgan Freeman"
       class="actorImg"
       height="160px"
-      src="https://image.tmdb.org/t/p/w200//oIciQWr8VwKoR8TmAw1owaiZFyb.jpg"
+      src="https://image.tmdb.org/t/p/w500//oIciQWr8VwKoR8TmAw1owaiZFyb.jpg"
     />
     <p
       class="actorName"
@@ -24,6 +25,6 @@ exports[`TopBilledCast TopBilledCast snapshot 1`] = `
     >
       Ellis Boyd 'Red' Redding
     </p>
-  </div>
+  </a>
 </DocumentFragment>
 `;

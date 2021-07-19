@@ -5,7 +5,6 @@ exports[`Main Main snapshot 1`] = `
   <div
     class="mainWrapper"
   >
-    return 
     <h2>
       NO RESULTS FOUND
     </h2>

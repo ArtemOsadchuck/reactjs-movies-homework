@@ -12,25 +12,27 @@ describe('ActorPhotos', () => {
   beforeEach(() => {
     const { asFragment } = render(
       <Provider store={store}>
-        <ActorPhotos photos={ActorPhotosMocks} photosLength={2} />
+        <ActorPhotos
+          photos={ActorPhotosMocks}
+          nameAltImg={'imgAlt'}
+          photosLength={2}
+        />
       </Provider>
     );
     Fragment = asFragment();
   });
 
-  afterEach(() => {
-    cleanup();
-  });
+  afterEach(() => cleanup());
 
-  it('ActorPhotos snapshot', () => {
+  it('should renders correctly', () => {
     expect(Fragment).toMatchSnapshot();
   });
 
-  it('ActorPhotos IMG Must include attr alt', () => {
-    expect(screen.getAllByRole('img')[0]).toHaveAttribute('alt');
-  });
+  it('must include attr alt, and class photosTitle', () => {
+    const imgTag = screen.getAllByRole('img')[0];
+    const heading = screen.getByRole('heading');
 
-  it('ActorPhotos heading include class photosTitle', () => {
-    expect(screen.getByRole('heading')).toHaveClass('photosTitle');
+    expect(imgTag).toHaveAttribute('alt');
+    expect(heading).toHaveClass('photosTitle');
   });
 });

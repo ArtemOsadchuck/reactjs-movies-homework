@@ -3,14 +3,20 @@ import { render, screen, cleanup } from '@testing-library/react';
 import Form from '../Form';
 import { Provider } from 'react-redux';
 import store from '../../../../store/store';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 
 describe('Form', () => {
   let fragment: any;
+  const history = createMemoryHistory();
+  history.push('/');
 
   beforeEach(() => {
     const { asFragment } = render(
       <Provider store={store}>
-        <Form placeholder="Movies" />
+        <Router history={history}>
+          <Form placeholder="Movies" />
+        </Router>
       </Provider>
     );
     fragment = asFragment();

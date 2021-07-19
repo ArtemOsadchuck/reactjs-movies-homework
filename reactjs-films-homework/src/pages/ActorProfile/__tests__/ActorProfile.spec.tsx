@@ -6,6 +6,13 @@ import ActorProfile from '../ActorProfile';
 import { Provider } from 'react-redux';
 import store from '../../../store/store';
 
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useLocation: () => ({
+    pathname: 'localhost:3000/',
+  }),
+}));
+
 describe('ActorProfile', () => {
   let fragment: any;
 
