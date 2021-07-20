@@ -1,40 +1,32 @@
 import React from 'react';
-import { render, screen, cleanup } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
-import { Router } from 'react-router-dom';
+import { screen, cleanup, render } from '@testing-library/react';
 
-import TopBilledCast from '../TopBilledCast';
+import TopBilledCast, { ITopBilledCastProp } from '../TopBilledCast';
 import TopBilledCastMocks from '../mocks';
 
-import { Provider } from 'react-redux';
-import store from '../../../../store/store';
+import StoreWrapper from '../../../../__testsUtils__/storeHoc';
+import RouterWrapper from '../../../../__testsUtils__/routerHoc';
+
+const renderComponent = (propsToTestedComponent: ITopBilledCastProp) => {
+  const urlApp = '/movie-details';
+  const { asFragment } = render(
+    <StoreWrapper>
+      <RouterWrapper url={urlApp}>
+        <TopBilledCast props={propsToTestedComponent} />
+      </RouterWrapper>
+    </StoreWrapper>
+  );
+  return asFragment();
+};
 
 describe('TopBilledCast', () => {
-  let fragment: any;
+  it('should renders correctly', () => {
+    const fragment = renderComponent(TopBilledCastMocks);
+    const castLink = screen.getByRole(/link/i).id;
 
-  const history = createMemoryHistory();
-  history.push('/');
-
-  beforeEach(async () => {
-    const { asFragment } = await render(
-      <Provider store={store}>
-        <Router history={history}>
-          <TopBilledCast props={TopBilledCastMocks} />
-        </Router>
-      </Provider>
-    );
-    fragment = asFragment();
-  });
-
-  afterEach(() => cleanup());
-
-  it('TopBilledCast snapshot', () => {
     expect(fragment).toMatchSnapshot();
+    expect(castLink).toEqual('192');
   });
 
-  it('TopBilledCast img must have attribute:', () => {
-    expect(screen.getByRole(/img/i)).toHaveAttribute('alt');
-    expect(screen.getByRole(/img/i)).toHaveAttribute('height');
-    expect(screen.getByRole(/img/i)).toHaveAttribute('src');
-  });
+  cleanup();
 });

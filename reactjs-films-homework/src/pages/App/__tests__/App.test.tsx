@@ -1,23 +1,29 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
+import { cleanup, render } from '@testing-library/react';
 
 import App from '../App';
 
-import { Provider } from 'react-redux';
-import store from '../../../store/store';
-import { Router } from 'react-router-dom';
+import RouterWrapper from '../../../__testsUtils__/routerHoc';
+import StoreWrapper from '../../../__testsUtils__/storeHoc';
 
-test('App test', () => {
-  const history = createMemoryHistory();
-  history.push('/');
+const renderComponent = () => {
+  const urlApp = '/movie-details';
   const { asFragment } = render(
-    <Provider store={store}>
-      <Router history={history}>
+    <StoreWrapper>
+      <RouterWrapper url={urlApp}>
         <App />
-      </Router>
-    </Provider>
+      </RouterWrapper>
+    </StoreWrapper>
   );
+  return asFragment();
+};
 
-  expect(asFragment()).toMatchSnapshot();
+describe('App', () => {
+  it('should renders correctly', () => {
+    const fragment = renderComponent();
+
+    expect(fragment).toMatchSnapshot();
+  });
+
+  cleanup();
 });

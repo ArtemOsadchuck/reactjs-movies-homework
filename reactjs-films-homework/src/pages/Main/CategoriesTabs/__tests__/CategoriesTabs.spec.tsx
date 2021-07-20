@@ -1,27 +1,29 @@
 import React from 'react';
 import { cleanup, render } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
-import { Router } from 'react-router-dom';
 
 import CategoriesTabs from '../CategoriesTabs';
 
-import { Provider } from 'react-redux';
-import store from '../../../../store/store';
+import StoreWrapper from '../../../../__testsUtils__/storeHoc';
+import RouterWrapper from '../../../../__testsUtils__/routerHoc';
+
+const renderComponent = () => {
+  const urlApp = '/';
+  const { asFragment } = render(
+    <StoreWrapper>
+      <RouterWrapper url={urlApp}>
+        <CategoriesTabs />
+      </RouterWrapper>
+    </StoreWrapper>
+  );
+  return asFragment();
+};
 
 describe('CategoriesTabs', () => {
-  const history = createMemoryHistory();
-  history.push('/');
+  it('should renders correctly', () => {
+    const fragment = renderComponent();
 
-  it('CategoriesTabs snapshot', () => {
-    const { asFragment } = render(
-      <Provider store={store}>
-        <Router history={history}>
-          <CategoriesTabs />
-        </Router>
-      </Provider>
-    );
-
-    expect(asFragment()).toMatchSnapshot();
-    cleanup();
+    expect(fragment).toMatchSnapshot();
   });
+
+  cleanup();
 });

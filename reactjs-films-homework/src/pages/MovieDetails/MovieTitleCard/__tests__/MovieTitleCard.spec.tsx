@@ -1,50 +1,35 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
 
-import MovieTitleCard from '../MovieTitleCard';
+import MovieTitleCard, { ITitleMovieProps } from '../MovieTitleCard';
 import MovieTitleCardMocks from '../mocks';
 
-import { Provider } from 'react-redux';
-import store from '../../../../store/store';
+import RouterWrapper from '../../../../__testsUtils__/routerHoc';
+import StoreWrapper from '../../../../__testsUtils__/storeHoc';
+
+const renderComponent = (propsToTestedComponent: ITitleMovieProps) => {
+  const urlApp = '/movie-details';
+  const { asFragment } = render(
+    <StoreWrapper>
+      <RouterWrapper url={urlApp}>
+        <MovieTitleCard props={propsToTestedComponent} />
+      </RouterWrapper>
+    </StoreWrapper>
+  );
+  return asFragment();
+};
 
 describe('MovieTitleCard', () => {
-  let fragment: any;
+  it('should renders correctly', () => {
+    const fragment = renderComponent(MovieTitleCardMocks);
+    const date = screen.getByText(/1994-09-23/i);
+    const revenue = screen.getByText(/28 341 469/i);
 
-  beforeEach(() => {
-    const { asFragment } = render(
-      <Provider store={store}>
-        <MovieTitleCard props={MovieTitleCardMocks} />{' '}
-      </Provider>
-    );
-    fragment = asFragment();
-  });
-
-  afterEach(() => cleanup());
-
-  it('MovieTitleCard snapshot', () => {
     expect(fragment).toMatchSnapshot();
+
+    expect(date).toBeInTheDocument();
+    expect(revenue).toBeInTheDocument();
   });
 
-  it('MovieTitleCard img must have attribute:', () => {
-    expect(screen.getByRole(/img/i)).toHaveAttribute('src');
-    expect(screen.getByRole(/img/i)).toHaveAttribute('height');
-    expect(screen.getByRole(/img/i)).toHaveAttribute('alt');
-  });
-
-  it('MovieTitleCard heading must have:', () => {
-    expect(screen.getByRole(/heading/i)).toHaveClass('title');
-    expect(screen.getByRole(/heading/i)).toHaveTextContent(
-      'The Shawshank Redemption'
-    );
-  });
-
-  it('MovieTitleCard must be in the document:', () => {
-    expect(screen.getByText(/Overview/i)).toBeInTheDocument();
-    expect(screen.getByText(/1994-09-23/i)).toBeInTheDocument();
-    expect(screen.getByText(/Revenue/i)).toBeInTheDocument();
-    expect(screen.getByText(/341/i)).toBeInTheDocument();
-    expect(screen.getByText(/min/i)).toBeInTheDocument();
-    expect(screen.getByText(/Drama/i)).toBeInTheDocument();
-    expect(screen.getByText(/Crime/i)).toBeInTheDocument();
-  });
+  cleanup();
 });

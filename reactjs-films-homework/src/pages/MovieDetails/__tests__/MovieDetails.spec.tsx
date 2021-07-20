@@ -1,52 +1,29 @@
 import React from 'react';
-import { render, screen, cleanup } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
-import { Router } from 'react-router-dom';
+import { render, cleanup } from '@testing-library/react';
 
 import MovieDetails from '../MovieDetails';
 
-import { Provider } from 'react-redux';
-import store from '../../../store/store';
+import RouterWrapper from '../../../__testsUtils__/routerHoc';
+import StoreWrapper from '../../../__testsUtils__/storeHoc';
+
+const renderComponent = () => {
+  const urlApp = '/movie-details';
+  const { asFragment } = render(
+    <StoreWrapper>
+      <RouterWrapper url={urlApp}>
+        <MovieDetails />
+      </RouterWrapper>
+    </StoreWrapper>
+  );
+  return asFragment();
+};
 
 describe('MovieDetails', () => {
-  let fragment: any;
+  it('should renders correctly', () => {
+    const fragment = renderComponent();
 
-  const history = createMemoryHistory();
-  history.push('/');
-
-  beforeEach(() => {
-    const { asFragment } = render(
-      <Provider store={store}>
-        <Router history={history}>
-          <MovieDetails />
-        </Router>
-      </Provider>
-    );
-    fragment = asFragment();
-  });
-
-  afterEach(() => cleanup());
-
-  it('MovieDetails snapshot', () => {
     expect(fragment).toMatchSnapshot();
   });
 
-  it('MovieDetails heading`s must defined', () => {
-    expect(screen.getAllByRole('heading')).toBeDefined();
-    screen.getAllByRole('heading').forEach((el) => {
-      expect(el).toBeDefined();
-    });
-  });
-
-  it('MovieDetails ShowAll button include class:', () => {
-    expect(screen.getByText(/Show|all/i)).toHaveClass('castNameShowAllBtn');
-  });
-
-  it('MovieDetails recommendations must be in the document:', () => {
-    expect(screen.getByText(/RECOMMENDATIONS/i)).toBeInTheDocument();
-  });
-
-  it('MovieDetails Loading... must be in the document:', () => {
-    expect(screen.getByText(/Loading.../i)).toBeInTheDocument();
-  });
+  cleanup();
 });

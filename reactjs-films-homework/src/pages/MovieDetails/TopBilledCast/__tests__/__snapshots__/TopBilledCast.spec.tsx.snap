@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TopBilledCast TopBilledCast snapshot 1`] = `
+exports[`TopBilledCast should renders correctly 1`] = `
 <DocumentFragment>
   <a
     class="actorWrapper"

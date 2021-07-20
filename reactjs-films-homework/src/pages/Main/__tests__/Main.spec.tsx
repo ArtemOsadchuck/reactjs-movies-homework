@@ -1,43 +1,30 @@
 import React from 'react';
-import { render, screen, cleanup } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
-import { Router } from 'react-router-dom';
+import { render, cleanup } from '@testing-library/react';
 
 import Main from '../Main';
 
-import { Provider } from 'react-redux';
-import store from '../../../store/store';
+import RouterWrapper from '../../../__testsUtils__/routerHoc';
+import StoreWrapper from '../../../__testsUtils__/storeHoc';
+
+const renderComponent = () => {
+  const urlApp = '/';
+  const { asFragment } = render(
+    <StoreWrapper>
+      <RouterWrapper url={urlApp}>
+        <Main />
+      </RouterWrapper>
+    </StoreWrapper>
+  );
+
+  return asFragment();
+};
 
 describe('Main', () => {
-  let Fragment: any;
+  it('should renders correctly', () => {
+    const fragment = renderComponent();
 
-  const history = createMemoryHistory();
-  history.push('/');
-
-  beforeEach(() => {
-    const { asFragment } = render(
-      <Provider store={store}>
-        <Router history={history}>
-          <Main />
-        </Router>
-      </Provider>
-    );
-    Fragment = asFragment();
+    expect(fragment).toMatchSnapshot();
   });
 
-  afterEach(() => {
-    cleanup();
-  });
-
-  it('Main snapshot', () => {
-    expect(Fragment).toMatchSnapshot();
-  });
-
-  it('Main heading must include text Loading...', () => {
-    expect(screen.getByRole('heading')).toBeDefined();
-  });
-
-  it('Main  must include inner text', () => {
-    expect(screen.getByText(/NO RESULTS FOUND/i)).toBeDefined();
-  });
+  cleanup();
 });

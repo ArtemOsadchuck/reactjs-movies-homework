@@ -3,39 +3,27 @@ import { render, cleanup } from '@testing-library/react';
 
 import ActorProfile from '../ActorProfile';
 
-import { Provider } from 'react-redux';
-import store from '../../../store/store';
+import RouterWrapper from '../../../__testsUtils__/routerHoc';
+import StoreWrapper from '../../../__testsUtils__/storeHoc';
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useLocation: () => ({
-    pathname: 'localhost:3000/',
-  }),
-}));
+const renderComponent = () => {
+  const urlApp = '/actor-profile/?actor-id=1245';
+  const { asFragment } = render(
+    <StoreWrapper>
+      <RouterWrapper url={urlApp}>
+        <ActorProfile />
+      </RouterWrapper>
+    </StoreWrapper>
+  );
+  return asFragment();
+};
 
 describe('ActorProfile', () => {
-  let fragment: any;
+  it('should renders correctly', () => {
+    const fragment = renderComponent();
 
-  beforeEach(() => {
-    const { asFragment } = render(
-      <Provider store={store}>
-        <ActorProfile />
-      </Provider>
-    );
-    fragment = asFragment();
-  });
-
-  afterEach(() => {
-    cleanup();
-  });
-
-  it('Snapshot', () => {
     expect(fragment).toMatchSnapshot();
   });
 
-  it('Must have classes mainWrapper, cardsWrapper, PhotosWrapper', () => {
-    expect(fragment.firstChild).toHaveClass('mainWrapper');
-    expect(fragment.firstChild!.childNodes[1]).toHaveClass('cardsWrapper');
-    expect(fragment.firstChild!.childNodes[0]).toHaveClass('photosWrapper');
-  });
+  cleanup();
 });

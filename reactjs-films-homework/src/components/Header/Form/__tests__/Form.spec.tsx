@@ -1,40 +1,28 @@
 import React from 'react';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, cleanup } from '@testing-library/react';
 import Form from '../Form';
-import { Provider } from 'react-redux';
-import store from '../../../../store/store';
-import { createMemoryHistory } from 'history';
-import { Router } from 'react-router-dom';
+import RouterWrapper from '../../../../__testsUtils__/routerHoc';
+import StoreWrapper from '../../../../__testsUtils__/storeHoc';
+
+const renderComponent = (placeholder: string) => {
+  const urlApp = '/';
+  const { asFragment } = render(
+    <StoreWrapper>
+      <RouterWrapper url={urlApp}>
+        <Form placeholder="Movies" />
+      </RouterWrapper>
+    </StoreWrapper>
+  );
+  return asFragment();
+};
 
 describe('Form', () => {
-  let fragment: any;
-  const history = createMemoryHistory();
-  history.push('/');
+  it('should renders correctly', () => {
+    const placeholder = 'Movies';
+    const fragment = renderComponent(placeholder);
 
-  beforeEach(() => {
-    const { asFragment } = render(
-      <Provider store={store}>
-        <Router history={history}>
-          <Form placeholder="Movies" />
-        </Router>
-      </Provider>
-    );
-    fragment = asFragment();
-  });
-
-  afterEach(() => {
-    cleanup();
-  });
-
-  it('Snapshot', () => {
     expect(fragment).toMatchSnapshot();
   });
 
-  it('Should render placeholder', () => {
-    expect(screen.getByPlaceholderText(/Movies/i)).toBeInTheDocument();
-  });
-
-  it('Must has not default value', () => {
-    expect(screen.getByDisplayValue('')).toBeInTheDocument();
-  });
+  cleanup();
 });

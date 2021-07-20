@@ -3,31 +3,26 @@ import { render, cleanup } from '@testing-library/react';
 
 import Pagination from '../Pagination';
 
-import { Provider } from 'react-redux';
-import store from '../../../../store/store';
+import StoreWrapper from '../../../../__testsUtils__/storeHoc';
+import RouterWrapper from '../../../../__testsUtils__/routerHoc';
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useLocation: () => ({
-    pathname: 'localhost:3000/',
-  }),
-}));
+const renderComponent = () => {
+  const urlApp = '/';
+  const { asFragment } = render(
+    <StoreWrapper>
+      <RouterWrapper url={urlApp}>
+        <Pagination neededPages={5} />
+      </RouterWrapper>
+    </StoreWrapper>
+  );
+  return asFragment();
+};
 
 describe('Pagination', () => {
-  let Fragment: any;
+  it('should renders correctly', () => {
+    const fragment = renderComponent();
 
-  beforeEach(() => {
-    const { asFragment } = render(
-      <Provider store={store}>
-        <Pagination neededPages={5} />
-      </Provider>
-    );
-    Fragment = asFragment();
+    expect(fragment).toMatchSnapshot();
   });
-
-  afterEach(() => cleanup());
-
-  it('Pagination snapshot', () => {
-    expect(Fragment).toMatchSnapshot();
-  });
+  cleanup();
 });

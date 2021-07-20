@@ -1,53 +1,49 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
 
-import ImagesBlock from '../ImagesBlock';
+import ImagesBlock, { IImagesBlock } from '../ImagesBlock';
 import ImagesBlockMocks from '../mocks';
 
-import { Provider } from 'react-redux';
-import store from '../../../../store/store';
+import RouterWrapper from '../../../../__testsUtils__/routerHoc';
+import StoreWrapper from '../../../../__testsUtils__/storeHoc';
 
-describe('ImagesBlock', () => {
-  const title = 'images';
-  const imagesQuality = 8;
-  const imgWidth = '172px';
-  let Fragment: any;
+const renderComponent = ({
+  title,
+  images,
+  imagesQuality,
+  imgWidth,
+}: IImagesBlock) => {
+  const urlApp = '/movie-details';
 
-  beforeEach(() => {
-    const { asFragment } = render(
-      <Provider store={store}>
+  const { asFragment } = render(
+    <StoreWrapper>
+      <RouterWrapper url={urlApp}>
         <ImagesBlock
-          images={ImagesBlockMocks}
+          images={images}
           title={title}
           imgWidth={imgWidth}
           imagesQuality={imagesQuality}
         />
-      </Provider>
-    );
-    Fragment = asFragment();
+      </RouterWrapper>
+    </StoreWrapper>
+  );
+  return asFragment();
+};
+
+describe('ImagesBlock', () => {
+  it('should renders correctly', () => {
+    const imagesBlockData = {
+      title: 'images',
+      imagesQuality: 8,
+      imgWidth: '172px',
+      images: ImagesBlockMocks,
+    };
+    const fragment = renderComponent(imagesBlockData);
+    const imgLength = screen.getAllByRole('img').length;
+
+    expect(fragment).toMatchSnapshot();
+    expect(imgLength).toEqual(2);
   });
 
-  afterEach(() => cleanup());
-
-  it('Snapshot', () => {
-    expect(Fragment).toMatchSnapshot();
-  });
-
-  it('Must have class:', () => {
-    expect(screen.getByText(/images/i)).toBeInTheDocument();
-    expect(screen.getByText(/images/i)).toHaveClass('imagesTitle');
-  });
-
-  it('Must heave attribute:', () => {
-    screen.getAllByRole('img').forEach((el) => {
-      expect(el).toHaveAttribute('src');
-      expect(el).toHaveAttribute('alt');
-      expect(el).toHaveAttribute('width');
-      expect(el).toHaveClass('image');
-    });
-  });
-
-  it('ImagesBlock Loading... must be in the document:', () => {
-    expect(screen.getByText(/Images/i)).toBeInTheDocument();
-  });
+  cleanup();
 });

@@ -1,38 +1,45 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
 
-import ActorPhotos from '../ActorPhotos';
-
-import { Provider } from 'react-redux';
-import store from '../../../../store/store';
+import ActorPhotos, { IActorPhotos } from '../ActorPhotos';
 import ActorPhotosMocks from '../mocks';
 
-describe('ActorPhotos', () => {
-  let Fragment: any;
-  beforeEach(() => {
-    const { asFragment } = render(
-      <Provider store={store}>
+import RouterWrapper from '../../../../__testsUtils__/routerHoc';
+import StoreWrapper from '../../../../__testsUtils__/storeHoc';
+
+const renderComponent = ({
+  photos,
+  nameAltImg,
+  photosLength,
+}: IActorPhotos) => {
+  const urlApp = '/movie-details';
+  const { asFragment } = render(
+    <StoreWrapper>
+      <RouterWrapper url={urlApp}>
         <ActorPhotos
-          photos={ActorPhotosMocks}
-          nameAltImg={'imgAlt'}
-          photosLength={2}
+          photos={photos}
+          nameAltImg={nameAltImg}
+          photosLength={photosLength}
         />
-      </Provider>
-    );
-    Fragment = asFragment();
-  });
+      </RouterWrapper>
+    </StoreWrapper>
+  );
+  return asFragment();
+};
 
-  afterEach(() => cleanup());
-
+describe('ActorPhotos', () => {
   it('should renders correctly', () => {
-    expect(Fragment).toMatchSnapshot();
+    const mock = {
+      nameAltImg: 'altName',
+      photosLength: 4,
+      photos: ActorPhotosMocks,
+    };
+    const fragment = renderComponent(mock);
+    const imgTag = screen.getAllByRole('img').length;
+
+    expect(fragment).toMatchSnapshot();
+    expect(imgTag).toEqual(mock.photosLength);
   });
 
-  it('must include attr alt, and class photosTitle', () => {
-    const imgTag = screen.getAllByRole('img')[0];
-    const heading = screen.getByRole('heading');
-
-    expect(imgTag).toHaveAttribute('alt');
-    expect(heading).toHaveClass('photosTitle');
-  });
+  cleanup();
 });

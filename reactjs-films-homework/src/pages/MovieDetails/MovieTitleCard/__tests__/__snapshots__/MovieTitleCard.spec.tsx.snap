@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MovieTitleCard MovieTitleCard snapshot 1`] = `
+exports[`MovieTitleCard should renders correctly 1`] = `
 <DocumentFragment>
   <div
     class="movieTitleWrapper"
@@ -121,6 +121,5 @@ exports[`MovieTitleCard MovieTitleCard snapshot 1`] = `
       </div>
     </div>
   </div>
-   
 </DocumentFragment>
 `;

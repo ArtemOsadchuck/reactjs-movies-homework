@@ -5,40 +5,27 @@ import { Router } from 'react-router-dom';
 import Header from '../Header';
 import { Provider } from 'react-redux';
 import store from '../../../store/store';
+import RouterWrapper from '../../../__testsUtils__/routerHoc';
+import StoreWrapper from '../../../__testsUtils__/storeHoc';
+
+const renderComponent = () => {
+  const urlApp = '/';
+  const { asFragment } = render(
+    <StoreWrapper>
+      <RouterWrapper url={urlApp}>
+        <Header />
+      </RouterWrapper>
+    </StoreWrapper>
+  );
+  return asFragment();
+};
 
 describe('Header', () => {
-  let fragment: any;
-  const history = createMemoryHistory();
-  history.push('/');
+  it('should renders correctly', () => {
+    const fragment = renderComponent();
 
-  beforeEach(() => {
-    const { asFragment } = render(
-      <Provider store={store}>
-        <Router history={history}>
-          <Header />
-        </Router>
-      </Provider>
-    );
-    fragment = asFragment();
-  });
-
-  afterEach(() => {
-    cleanup();
-  });
-
-  it('Snapshot', () => {
     expect(fragment).toMatchSnapshot();
   });
 
-  it('Must include img', () => {
-    expect(screen.getByRole('img')).toBeInTheDocument();
-  });
-
-  it('Must include h1', () => {
-    expect(screen.getByRole('heading')).toBeInTheDocument();
-  });
-
-  it('Must include button', () => {
-    expect(screen.getByRole('button')).toBeInTheDocument();
-  });
+  cleanup();
 });

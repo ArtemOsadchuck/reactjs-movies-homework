@@ -14,15 +14,27 @@ exports[`ActorPhotos should renders correctly 1`] = `
       class="photosGrid"
     >
       <img
-        alt="imgAlt"
+        alt="altName"
         class="photo"
         src="https://image.tmdb.org/t/p/w500//oIciQWr8VwKoR8TmAw1owaiZFyb.jpg"
         width="120px"
       />
       <img
-        alt="imgAlt"
+        alt="altName"
         class="photo"
         src="https://image.tmdb.org/t/p/w500//1ahENoyEgKSbRUd0IsydIff7rt1.jpg"
+        width="120px"
+      />
+      <img
+        alt="altName"
+        class="photo"
+        src="https://image.tmdb.org/t/p/w500//20DXKyUQoL38SYoSW3JkHkZkkVP.jpg"
+        width="120px"
+      />
+      <img
+        alt="altName"
+        class="photo"
+        src="https://image.tmdb.org/t/p/w500//g2n87hnxD0w2suSBMv0BMoB4gef.jpg"
         width="120px"
       />
     </div>
