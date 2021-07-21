@@ -5,6 +5,7 @@ import getMainData from './getMaiData/getMainData';
 
 interface IInitialState {
   mainState: IMovieCard[];
+  isLoading: boolean;
   lang: string;
   activePage?: string;
   totalPages: number;
@@ -27,6 +28,7 @@ const initialState: IInitialState = {
   query: '',
   page: '',
   category: '',
+  isLoading: false,
   mainState: [],
 };
 
@@ -49,6 +51,9 @@ const mainSlice = createSlice({
     setQuery: (state, action: PayloadAction<string>) => {
       state.query = action.payload;
     },
+    setIsLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(
@@ -62,8 +67,12 @@ const mainSlice = createSlice({
       (rootState, action: PayloadAction<IMainState>) => {
         rootState.mainState = action.payload.results;
         rootState.totalPages = action.payload.total_pages;
+        rootState.isLoading = true;
       }
     );
+    builder.addCase(getMainData.pending, (state) => {
+      state.isLoading = false;
+    });
   },
 });
 
@@ -72,5 +81,6 @@ export const { setCategory } = mainSlice.actions;
 export const { setPage } = mainSlice.actions;
 export const { setQuery } = mainSlice.actions;
 export const { setActivePage } = mainSlice.actions;
+export const { setIsLoading } = mainSlice.actions;
 
 export default mainSlice.reducer;

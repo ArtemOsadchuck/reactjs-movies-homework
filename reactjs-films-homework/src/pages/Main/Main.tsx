@@ -32,7 +32,8 @@ const Main: React.FC = () => {
   const activePage = useAppSelector((state) => state.mainReducer.activePage);
   const category = useAppSelector((state) => state.mainReducer.category);
   const query = useAppSelector((state) => state.mainReducer.query);
-
+  const isLoading = useAppSelector((state) => state.mainReducer.isLoading);
+  console.log(isLoading);
   const history = useHistory();
 
   useEffect(() => {
@@ -91,7 +92,7 @@ const Main: React.FC = () => {
     query,
   ]);
 
-  return appFetchMovie.length ? (
+  return isLoading ? (
     <div className={styles.mainWrapper}>
       <CategoriesTabs />
       <div className={styles.cardsWrapper}>
