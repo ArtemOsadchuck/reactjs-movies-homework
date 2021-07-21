@@ -1,45 +1,29 @@
 import React from 'react';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
-import MovieTitleInfo from '../MovieTitleInfo';
-import { Provider } from 'react-redux';
-import store from '../../../../../store/store';
+import MovieTitleInfo, { IMovieTitleInfo } from '../MovieTitleInfo';
+
+import RouterWrapper from '../../../../../__testsUtils__/routerHoc';
+import StoreWrapper from '../../../../../__testsUtils__/storeHoc';
+
+const getComponent = (props?: Partial<IMovieTitleInfo>) => (
+  <StoreWrapper>
+    <RouterWrapper url="/">
+      <MovieTitleInfo {...props} />
+    </RouterWrapper>
+  </StoreWrapper>
+);
 
 describe('MovieTitleInfo', () => {
-  const mockProps = {
-    heading: 'Overview:',
-    overview:
-      'Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison',
-  };
+  it('should renders correctly', () => {
+    const props = {
+      heading: 'Overview:',
+      infoField:
+        'Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison',
+    };
+    const { asFragment } = render(getComponent(props));
+    const fragment = asFragment();
 
-  let fragment: any;
-
-  beforeEach(() => {
-    const { asFragment } = render(
-      <Provider store={store}>
-        <MovieTitleInfo
-          heading={mockProps.heading}
-          infoField={mockProps.overview}
-        />
-      </Provider>
-    );
-    fragment = asFragment();
-  });
-
-  afterEach(() => cleanup());
-
-  it('Snapshot', () => {
     expect(fragment).toMatchSnapshot();
-  });
-
-  it('Must have class:', () => {
-    expect(fragment.firstChild).toHaveClass('otherInfoWrapper');
-    expect(fragment.firstChild!.childNodes[0]).toHaveClass('heading');
-    expect(fragment.firstChild!.childNodes[1]).toHaveClass('infoField');
-  });
-
-  it('Must have text:', () => {
-    expect(screen.getByText(/Overview/i)).toBeInTheDocument();
-    expect(screen.getByText(/1940s/i)).toBeInTheDocument();
   });
 });

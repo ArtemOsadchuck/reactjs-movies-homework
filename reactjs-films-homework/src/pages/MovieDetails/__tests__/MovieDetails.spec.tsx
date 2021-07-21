@@ -1,29 +1,24 @@
 import React from 'react';
-import { render, cleanup } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import MovieDetails from '../MovieDetails';
 
 import RouterWrapper from '../../../__testsUtils__/routerHoc';
 import StoreWrapper from '../../../__testsUtils__/storeHoc';
 
-const renderComponent = () => {
-  const urlApp = '/movie-details';
-  const { asFragment } = render(
-    <StoreWrapper>
-      <RouterWrapper url={urlApp}>
-        <MovieDetails />
-      </RouterWrapper>
-    </StoreWrapper>
-  );
-  return asFragment();
-};
+const getComponent = () => (
+  <StoreWrapper>
+    <RouterWrapper url="/">
+      <MovieDetails />
+    </RouterWrapper>
+  </StoreWrapper>
+);
 
 describe('MovieDetails', () => {
   it('should renders correctly', () => {
-    const fragment = renderComponent();
+    const { asFragment } = render(getComponent());
+    const fragment = asFragment();
 
     expect(fragment).toMatchSnapshot();
   });
-
-  cleanup();
 });

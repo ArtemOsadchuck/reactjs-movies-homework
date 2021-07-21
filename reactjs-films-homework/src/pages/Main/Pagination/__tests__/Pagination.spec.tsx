@@ -1,28 +1,25 @@
 import React from 'react';
-import { render, cleanup } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import Pagination from '../Pagination';
 
 import StoreWrapper from '../../../../__testsUtils__/storeHoc';
 import RouterWrapper from '../../../../__testsUtils__/routerHoc';
 
-const renderComponent = () => {
-  const urlApp = '/';
-  const { asFragment } = render(
-    <StoreWrapper>
-      <RouterWrapper url={urlApp}>
-        <Pagination neededPages={5} />
-      </RouterWrapper>
-    </StoreWrapper>
-  );
-  return asFragment();
-};
+const getComponent = (props: number) => (
+  <StoreWrapper>
+    <RouterWrapper url="/">
+      <Pagination neededPages={props} />
+    </RouterWrapper>
+  </StoreWrapper>
+);
 
 describe('Pagination', () => {
   it('should renders correctly', () => {
-    const fragment = renderComponent();
+    const neededPages = 5;
+    const { asFragment } = render(getComponent(neededPages));
 
+    const fragment = asFragment();
     expect(fragment).toMatchSnapshot();
   });
-  cleanup();
 });

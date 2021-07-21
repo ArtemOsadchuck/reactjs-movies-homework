@@ -2,8 +2,8 @@ import React from 'react';
 import styles from './MovieTitleInfo.module.scss';
 
 export interface IMovieTitleInfo {
-  heading: string;
-  infoField: string;
+  heading?: string;
+  infoField?: string;
 }
 
 const MovieTitleInfo: React.FC<IMovieTitleInfo> = ({ heading, infoField }) => {

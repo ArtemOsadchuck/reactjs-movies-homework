@@ -4,10 +4,10 @@ import styles from './ImagesBlock.module.scss';
 import { partOfImagesURL } from '../../../constants/links';
 
 export interface IImagesBlock {
-  images: IImagesBlockProps[];
-  title: string;
-  imgWidth: string;
-  imagesQuality: number;
+  images?: IImagesBlockProps[];
+  title?: string;
+  imgWidth?: string;
+  imagesQuality?: number;
 }
 export interface IImagesBlockProps {
   aspect_ratio?: number;
