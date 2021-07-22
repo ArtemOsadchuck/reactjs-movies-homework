@@ -17,6 +17,9 @@ import { setID } from '../../store/rootStore/actorPageStore/actorPageSlice';
 import useUrlSearch from '../../hooks/useUrlSearch';
 
 import changeFilmsQuality from './utils/changeFilmsQuality';
+import Loader from '../../components/Loader';
+import PageNotFound404 from '../../components/PageNotFound404';
+import { timingOfPageNotFound } from '../../constants/variables';
 
 const ActorProfile: React.FC = () => {
   const [info, setInfo] = useState<IActorTitleProps>();
@@ -33,6 +36,10 @@ const ActorProfile: React.FC = () => {
   const lang = useAppSelector((state) => state.mainReducer.lang);
   const id = useAppSelector((state) => state.actorPageReducer.id);
   const cast = useAppSelector((state) => state.actorPageReducer.cast);
+  const isLoading = useAppSelector((state) => state.actorPageReducer.isLoading);
+  const errorActorInfo = useAppSelector(
+    (state) => state.actorPageReducer.errorActorInfo?.name
+  );
 
   useMemo(() => {
     if (locationActorID) {
@@ -57,7 +64,11 @@ const ActorProfile: React.FC = () => {
     setSortKnownBy(changeFilmsQuality(knownBy, filmsLength));
   }, [knownBy]);
 
-  return (
+  return errorActorInfo === 'Error' ? (
+    <div className={styles.mainWrapper}>
+      <PageNotFound404 timing={timingOfPageNotFound} />
+    </div>
+  ) : !isLoading ? (
     <div className={styles.mainWrapper}>
       {info && <ActorTitle actorInfo={info} />}
       <ActorPhotos
@@ -66,10 +77,14 @@ const ActorProfile: React.FC = () => {
         photosLength={actorGridPhotosLength}
       />
       <div className={styles.cardsWrapper}>
-        {sortKnownBy.map((el: IMovieCard) => {
-          return <MovieCard key={Math.random() / 1.321} props={el} />;
+        {sortKnownBy?.map((el: IMovieCard) => {
+          return <MovieCard key={el.id} props={el} />;
         })}
       </div>
+    </div>
+  ) : (
+    <div className={styles.mainWrapper}>
+      <Loader />
     </div>
   );
 };

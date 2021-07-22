@@ -8,7 +8,7 @@ export interface IGetActorInfo {
 
 const getActorInfo = createAsyncThunk(
   'getActorInfo/setActorInfo',
-  async (props: IGetActorInfo) => {
+  async (props: IGetActorInfo, { rejectWithValue }) => {
     try {
       const { lang, id } = props;
       if (typeof id === 'string' && lang) {
@@ -18,6 +18,12 @@ const getActorInfo = createAsyncThunk(
       }
     } catch (error) {
       console.error('getActorInfo', error);
+      const statusCode = error.response.data.status_code;
+      if (statusCode === 34 || 404) {
+        console.error('getMovieDetailsData', error);
+        rejectWithValue(error.response);
+        throw new Error(error);
+      }
     }
   }
 );

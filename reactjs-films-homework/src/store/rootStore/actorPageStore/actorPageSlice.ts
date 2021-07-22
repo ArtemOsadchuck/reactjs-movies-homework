@@ -14,6 +14,8 @@ interface IInitialState {
   actorInfo?: IActorTitleProps;
   profiles: IPhotos[];
   cast: IMovieCard[];
+  isLoading?: boolean;
+  errorActorInfo?: any;
 }
 interface IProfilePhotos {
   profiles: IPhotos[];
@@ -42,22 +44,30 @@ const actorPageSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(getActorInfo.pending, (state) => {
+      state.isLoading = true;
+      state.errorActorInfo = null;
+    });
+    builder.addCase(getActorInfo.rejected, (state, action) => {
+      state.errorActorInfo = action.error;
+    });
     builder.addCase(
       getActorInfo.fulfilled,
-      (rootState, action: PayloadAction<IActorTitleProps>) => {
-        rootState.actorInfo = action.payload;
+      (state, action: PayloadAction<IActorTitleProps>) => {
+        state.actorInfo = action.payload;
       }
     );
     builder.addCase(
       getActorPhotos.fulfilled,
-      (rootState, action: PayloadAction<IProfilePhotos>) => {
-        rootState.profiles = action.payload.profiles;
+      (state, action: PayloadAction<IProfilePhotos>) => {
+        state.profiles = action.payload?.profiles;
       }
     );
     builder.addCase(
       getFilmsWithActor.fulfilled,
-      (rootState, action: PayloadAction<IGetFilmsWithActor>) => {
-        rootState.cast = action.payload.cast;
+      (state, action: PayloadAction<IGetFilmsWithActor>) => {
+        state.cast = action.payload?.cast;
+        state.isLoading = false;
       }
     );
   },
