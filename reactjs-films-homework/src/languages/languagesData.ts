@@ -21,6 +21,8 @@ const data = {
     photos: 'Фотографии',
     loading: 'Загрузка...',
     noResults: 'Совпадений не найдено',
+    errorPageText: 'Вы будите перенаправлены на главную страницу чрез 5 секунд',
+    errorPageTitle: '404 Страница не найдена',
   },
   EN: {
     title: 'Title',
@@ -44,6 +46,8 @@ const data = {
     photos: 'Photos',
     loading: 'Loading...',
     noResults: 'NO RESULTS FOUND',
+    errorPageText: 'You will be redirected to the home page in 5 seconds',
+    errorPageTitle: '404 Page not found',
   },
 };
 
