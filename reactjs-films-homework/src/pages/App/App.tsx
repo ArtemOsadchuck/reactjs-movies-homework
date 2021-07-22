@@ -8,9 +8,12 @@ import Main from '../Main';
 import MovieDetails from '../MovieDetails';
 import ActorProfile from '../ActorProfile';
 import ErrorBoundary from '../../components/ErrorBoundary';
+import PageNotFound404 from '../../components/PageNotFound404';
+import { timingOfPageNotFound } from '../../constants/variables';
 
 function App() {
-  const homePath = '/' || '/popular' || '/top_rated' || 'upcoming';
+  // const homePath = '/' || '/popular' || '/top_rated' || 'upcoming';
+
   return (
     <div className="wrapper">
       <ErrorBoundary title="header component">
@@ -18,7 +21,7 @@ function App() {
       </ErrorBoundary>
 
       <Switch>
-        <Route exact path={homePath}>
+        <Route exact path={'/'}>
           <ErrorBoundary title="main page">
             <Main />
           </ErrorBoundary>
@@ -33,6 +36,11 @@ function App() {
         <Route path="/actor-profile">
           <ErrorBoundary title="actor profile page">
             <ActorProfile />
+          </ErrorBoundary>
+        </Route>
+        <Route>
+          <ErrorBoundary title="error 404">
+            <PageNotFound404 timing={timingOfPageNotFound} />
           </ErrorBoundary>
         </Route>
       </Switch>

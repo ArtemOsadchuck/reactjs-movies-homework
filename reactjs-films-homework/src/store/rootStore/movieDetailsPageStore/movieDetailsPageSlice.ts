@@ -25,16 +25,27 @@ interface IInitialState {
   cast?: ICast;
   images?: IImages;
   recommendations?: IGetRecommendations;
+  isLoading: boolean;
+  errorDetailsData?: SerializedError | null;
 }
 
 interface IGetRecommendations {
   results: IMovieCard[];
 }
 
+export interface SerializedError {
+  name?: string;
+  message?: string;
+  stack?: string;
+  code?: string;
+}
+
 const initialState: IInitialState = {
   movie_id: '',
   lang: 'EN',
   genre: { genres: [] },
+  isLoading: false,
+  errorDetailsData: null,
 };
 
 const moviePageSlice = createSlice({
@@ -43,6 +54,12 @@ const moviePageSlice = createSlice({
   reducers: {
     setMovieID: (state, action: PayloadAction<string>) => {
       state.movie_id = action.payload;
+    },
+    setErrorDetailsData: (
+      state,
+      action: PayloadAction<typeof initialState.errorDetailsData>
+    ) => {
+      state.errorDetailsData = action.payload;
     },
   },
 
@@ -53,12 +70,20 @@ const moviePageSlice = createSlice({
         moviePageState.cast = action.payload;
       }
     );
+    builder.addCase(getMovieDetailsData.pending, (moviePageState) => {
+      moviePageState.errorDetailsData = null;
+      moviePageState.isLoading = false;
+    });
     builder.addCase(
       getMovieDetailsData.fulfilled,
       (moviePageState, action: PayloadAction<ITitleMovieProps>) => {
         moviePageState.moviePageInfoResult = action.payload;
+        moviePageState.isLoading = true;
       }
     );
+    builder.addCase(getMovieDetailsData.rejected, (moviePageState, action) => {
+      moviePageState.errorDetailsData = action.error;
+    });
     builder.addCase(
       getMovieImages.fulfilled,
       (moviePageState, action: PayloadAction<IImages>) => {
@@ -75,4 +100,5 @@ const moviePageSlice = createSlice({
 });
 
 export const { setMovieID } = moviePageSlice.actions;
+export const { setErrorDetailsData } = moviePageSlice.actions;
 export default moviePageSlice.reducer;

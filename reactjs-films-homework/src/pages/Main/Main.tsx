@@ -20,6 +20,8 @@ import {
 import getLang from '../../languages/getLanguage';
 import { neededMainPages } from '../../constants/variables';
 import { homePageLink } from '../../constants/links';
+import Loader from '../../components/Loader';
+import { setErrorDetailsData } from '../../store/rootStore/movieDetailsPageStore/movieDetailsPageSlice';
 
 const Main: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -33,7 +35,6 @@ const Main: React.FC = () => {
   const category = useAppSelector((state) => state.mainReducer.category);
   const query = useAppSelector((state) => state.mainReducer.query);
   const isLoading = useAppSelector((state) => state.mainReducer.isLoading);
-  console.log(isLoading);
   const history = useHistory();
 
   useEffect(() => {
@@ -47,6 +48,7 @@ const Main: React.FC = () => {
       dispatch(setQuery(activeUrlSearch));
     }
     if (!activeUrlSearch && !activeUrlCategory && !activeUrlSearch) {
+      dispatch(setErrorDetailsData(null));
       history.push(homePageLink);
     }
   }, [
@@ -101,14 +103,15 @@ const Main: React.FC = () => {
             return <MovieCard props={card} key={card.id + 0.1} />;
           })
         ) : (
-          <h2>{getLang(lang).loading}</h2>
+          <h2>{getLang(lang).noResults}</h2>
         )}
       </div>
       <Pagination neededPages={neededMainPages} />
     </div>
   ) : (
     <div className={styles.mainWrapper}>
-      <h2>{getLang(lang).noResults}</h2>;
+      {/* <h2>{getLang(lang).noResults}</h2>; */}
+      <Loader />
     </div>
   );
 };

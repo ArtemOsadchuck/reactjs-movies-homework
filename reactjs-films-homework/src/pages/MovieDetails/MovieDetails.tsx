@@ -24,7 +24,10 @@ import {
   movieDetailsImagesBlockQuality,
   movieDetailsImagesWidth,
   recommendationsMovieDetailsQuality,
+  timingOfPageNotFound,
 } from '../../constants/variables';
+import Loader from '../../components/Loader';
+import PageNotFound404 from '../../components/PageNotFound404';
 
 const MovieDetails: React.FC = () => {
   const [titleInfoState, setTitleInfoState] = useState<ITitleMovieProps>();
@@ -52,6 +55,12 @@ const MovieDetails: React.FC = () => {
   );
   const movieCastFromAPI = useAppSelector(
     (state) => state.movieDetailsReducer.cast
+  );
+  const isLoading = useAppSelector(
+    (state) => state.movieDetailsReducer.isLoading
+  );
+  const errorDetailsData = useAppSelector(
+    (state) => state.movieDetailsReducer.errorDetailsData?.name
   );
 
   useEffect(() => {
@@ -92,7 +101,7 @@ const MovieDetails: React.FC = () => {
     cast?.length !== undefined && setSortCast(sortCastBySix(cast));
   }, [cast, appLang, movieCastFromAPI]);
 
-  return (
+  return isLoading ? (
     <div className={styles.mainWrapper}>
       {titleInfoState && <MovieTitleCard props={titleInfoState} />}
       <div className={styles.castWrapper}>
@@ -135,6 +144,10 @@ const MovieDetails: React.FC = () => {
         </div>
       </div>
     </div>
+  ) : errorDetailsData === 'Error' ? (
+    <PageNotFound404 timing={timingOfPageNotFound} />
+  ) : (
+    <Loader />
   );
 };
 
