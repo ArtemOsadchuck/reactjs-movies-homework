@@ -1,0 +1,12 @@
+$size: 60px;
+$white: rgb(177, 177, 177);
+
+.wrapper {
+  align-items: center;
+  color: $white;
+  display: flex;
+  flex-direction: column;
+  height: 10rem;
+  justify-content: center;
+  width: 100%;
+}
