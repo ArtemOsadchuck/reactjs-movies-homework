@@ -5,3 +5,4 @@ export const recommendationsMovieDetailsQuality = 5;
 export const movieDetailsImagesBlockQuality = 8;
 export const movieDetailsImagesWidth = '172px';
 export const topBilletCastImagesHight = '160px';
+export const timingOfPageNotFound = 4400;
