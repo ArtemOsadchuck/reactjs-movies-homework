@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MovieCard MovieCard snapshot 1`] = `
+exports[`MovieCard should renders correctly 1`] = `
 <DocumentFragment>
   <a
     class="movieCardLink"

@@ -5,10 +5,9 @@ exports[`Main should renders correctly 1`] = `
   <div
     class="mainWrapper"
   >
-    <h2>
-      NO RESULTS FOUND
-    </h2>
-    ;
+    <div
+      class="loader"
+    />
   </div>
 </DocumentFragment>
 `;

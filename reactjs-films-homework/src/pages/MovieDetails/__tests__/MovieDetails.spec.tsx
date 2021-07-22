@@ -8,7 +8,7 @@ import StoreWrapper from '../../../__testsUtils__/storeHoc';
 
 const getComponent = () => (
   <StoreWrapper>
-    <RouterWrapper url="/">
+    <RouterWrapper url="/movie-details/?id=192">
       <MovieDetails />
     </RouterWrapper>
   </StoreWrapper>

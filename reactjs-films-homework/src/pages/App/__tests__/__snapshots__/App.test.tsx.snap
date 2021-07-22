@@ -58,46 +58,8 @@ exports[`App should renders correctly 1`] = `
       </div>
     </header>
     <div
-      class="mainWrapper"
-    >
-      <div
-        class="castWrapper"
-      >
-        <div
-          class="castNameWrapper"
-        >
-          <h3
-            class="castName"
-          >
-            Top Billed Cast
-          </h3>
-          <div
-            class="castNameShowAllBtn"
-          >
-            Show all
-          </div>
-        </div>
-        <div
-          class="castGrid"
-        />
-      </div>
-      <div
-        class="recommendationsWrapper"
-      >
-        <h2
-          class="recommendationsTitle"
-        >
-          RECOMMENDATIONS
-        </h2>
-        <div
-          class="recommendationsCardsWrapper"
-        >
-          <h2>
-            Loading...
-          </h2>
-        </div>
-      </div>
-    </div>
+      class="loader"
+    />
   </div>
 </DocumentFragment>
 `;

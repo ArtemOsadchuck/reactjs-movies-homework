@@ -6,14 +6,7 @@ exports[`ActorProfile should renders correctly 1`] = `
     class="mainWrapper"
   >
     <div
-      class="photosWrapper"
-    >
-      <div
-        class="photosGrid"
-      />
-    </div>
-    <div
-      class="cardsWrapper"
+      class="loader"
     />
   </div>
 </DocumentFragment>

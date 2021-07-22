@@ -1,29 +1,24 @@
 import React from 'react';
-import { cleanup, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import Header from '../Header';
 
 import RouterWrapper from '../../../__testsUtils__/routerHoc';
 import StoreWrapper from '../../../__testsUtils__/storeHoc';
 
-const renderComponent = () => {
-  const urlApp = '/';
-  const { asFragment } = render(
-    <StoreWrapper>
-      <RouterWrapper url={urlApp}>
-        <Header />
-      </RouterWrapper>
-    </StoreWrapper>
-  );
-  return asFragment();
-};
+const getComponent = () => (
+  <StoreWrapper>
+    <RouterWrapper url={'/'}>
+      <Header />
+    </RouterWrapper>
+  </StoreWrapper>
+);
 
 describe('Header', () => {
   it('should renders correctly', () => {
-    const fragment = renderComponent();
+    const { asFragment } = render(getComponent());
+    const fragment = asFragment();
 
     expect(fragment).toMatchSnapshot();
   });
-
-  cleanup();
 });

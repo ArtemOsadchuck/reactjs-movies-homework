@@ -1,41 +1,31 @@
 import React from 'react';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import MovieCard from '../MovieCard';
 import MovieCardMocks from '../mocks';
 
-import { Provider } from 'react-redux';
-import store from '../../../store/store';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
+import RouterWrapper from '../../../__testsUtils__/routerHoc';
+import StoreWrapper from '../../../__testsUtils__/storeHoc';
+
+const getComponent = () => (
+  <StoreWrapper>
+    <RouterWrapper url={'/'}>
+      <MovieCard
+        id={MovieCardMocks.id}
+        title={MovieCardMocks.title}
+        vote_average={MovieCardMocks.vote_average}
+        poster_path={MovieCardMocks.poster_path}
+      />
+    </RouterWrapper>
+  </StoreWrapper>
+);
 
 describe('MovieCard', () => {
-  let fragment: any;
-  const history = createMemoryHistory();
-  history.push('/');
+  it('should renders correctly', () => {
+    const { asFragment } = render(getComponent());
+    const fragment = asFragment();
 
-  beforeEach(() => {
-    const { asFragment } = render(
-      <Provider store={store}>
-        <Router history={history}>
-          <MovieCard props={MovieCardMocks} />
-        </Router>
-      </Provider>
-    );
-    fragment = asFragment();
-  });
-
-  afterEach(() => cleanup());
-
-  it('MovieCard snapshot', () => {
     expect(fragment).toMatchSnapshot();
-  });
-
-  it('MovieCard Must include rating', () => {
     expect(screen.getByText(/[0-9]/i)).toBeInTheDocument();
-  });
-
-  it('MovieCard IMG Must include attr alt', () => {
-    expect(screen.getByRole('img')).toHaveAttribute('alt');
   });
 });

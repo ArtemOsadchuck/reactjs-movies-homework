@@ -4,19 +4,24 @@ import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import LanguageToggler from '../LanguageToggler';
 
 import StoreWrapper from '../../../../__testsUtils__/storeHoc';
+import RouterWrapper from '../../../../__testsUtils__/routerHoc';
 
-const renderComponent = () => {
-  const { asFragment } = render(
-    <StoreWrapper>
+const getComponent = () => (
+  <StoreWrapper>
+    <RouterWrapper url="/">
       <LanguageToggler />
-    </StoreWrapper>
-  );
-  return asFragment();
-};
+    </RouterWrapper>
+  </StoreWrapper>
+);
 
 describe('LanguageToggler', () => {
   let fragment: any;
-  beforeEach(() => (fragment = renderComponent()));
+
+  beforeEach(() => {
+    const { asFragment } = render(getComponent());
+
+    fragment = asFragment();
+  });
   afterEach(() => cleanup());
 
   it('should renders correctly', () => {
