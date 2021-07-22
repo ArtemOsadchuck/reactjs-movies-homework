@@ -3,9 +3,9 @@ import { Story } from '@storybook/react';
 
 import MovieCard from './MovieCard';
 
-import { Provider } from 'react-redux';
-import store from '../../store/store';
 import MovieCardMocks from './mocks';
+import RouterWrapper from '../../__testsUtils__/routerHoc';
+import StoreWrapper from '../../__testsUtils__/storeHoc';
 
 const MovieCardMocksWithoutImg = {
   ...MovieCardMocks,
@@ -13,14 +13,18 @@ const MovieCardMocksWithoutImg = {
 };
 
 const TemplateUrl: Story<typeof MovieCard> = () => (
-  <Provider store={store}>
-    <MovieCard props={MovieCardMocks} />
-  </Provider>
+  <StoreWrapper>
+    <RouterWrapper url="/">
+      <MovieCard props={MovieCardMocks} />
+    </RouterWrapper>
+  </StoreWrapper>
 );
 const Template: Story<typeof MovieCard> = () => (
-  <Provider store={store}>
-    <MovieCard props={MovieCardMocksWithoutImg} />
-  </Provider>
+  <StoreWrapper>
+    <RouterWrapper url="/">
+      <MovieCard props={MovieCardMocksWithoutImg} />
+    </RouterWrapper>
+  </StoreWrapper>
 );
 
 export const MovieCardImg = TemplateUrl.bind({});

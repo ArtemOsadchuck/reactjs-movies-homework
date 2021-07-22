@@ -4,8 +4,8 @@ import { Story } from '@storybook/react';
 import TopBilledCast from './TopBilledCast';
 import TopBilledCastMocks from './mocks';
 
-import { Provider } from 'react-redux';
-import store from '../../../store/store';
+import RouterWrapper from '../../../__testsUtils__/routerHoc';
+import StoreWrapper from '../../../__testsUtils__/storeHoc';
 
 export default {
   title: 'TopBilledCast',
@@ -13,9 +13,11 @@ export default {
 };
 
 const TemplateUrl: Story<typeof TopBilledCast> = () => (
-  <Provider store={store}>
-    <TopBilledCast props={TopBilledCastMocks} />
-  </Provider>
+  <StoreWrapper>
+    <RouterWrapper url="/">
+      <TopBilledCast props={TopBilledCastMocks} />
+    </RouterWrapper>
+  </StoreWrapper>
 );
 
 export const TopBilledCastStory = TemplateUrl.bind({});

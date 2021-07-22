@@ -3,13 +3,15 @@ import { Story } from '@storybook/react';
 
 import Header from './Header';
 
-import { Provider } from 'react-redux';
-import store from '../../store/store';
+import RouterWrapper from '../../__testsUtils__/routerHoc';
+import StoreWrapper from '../../__testsUtils__/storeHoc';
 
 const Template: Story<typeof Header> = () => (
-  <Provider store={store}>
-    <Header />
-  </Provider>
+  <StoreWrapper>
+    <RouterWrapper url="/">
+      <Header />
+    </RouterWrapper>
+  </StoreWrapper>
 );
 
 export const HeaderStory = Template.bind({});
