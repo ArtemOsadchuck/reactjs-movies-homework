@@ -6,9 +6,6 @@ import getLang from '../../../languages/getLanguage';
 import { useAppSelector } from '../../../hooks/hooks';
 import { partOfImagesURL } from '../../../constants/links';
 
-export interface IActorTitle {
-  actorInfo: IActorTitleProps;
-}
 export interface IActorTitleProps {
   also_known_as?: string[];
   biography: string;
@@ -21,8 +18,12 @@ export interface IActorTitleProps {
   profile_path: string;
 }
 
-const ActorTitle: React.FC<IActorTitle> = ({
-  actorInfo: { birthday, name, profile_path, biography, place_of_birth },
+const ActorTitle: React.FC<IActorTitleProps> = ({
+  birthday,
+  name,
+  profile_path,
+  biography,
+  place_of_birth,
 }) => {
   const urlImg = `${partOfImagesURL}${profile_path}`;
   const appLang = useAppSelector((state) => state.mainReducer.lang);

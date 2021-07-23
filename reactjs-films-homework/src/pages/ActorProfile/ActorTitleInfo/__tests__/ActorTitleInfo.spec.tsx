@@ -8,7 +8,17 @@ import StoreWrapper from '../../../../__testsUtils__/storeHoc';
 
 const getComponent = (props: IActorTitleProps) => (
   <StoreWrapper>
-    <ActorTitleInfo actorInfo={props} />
+    <ActorTitleInfo
+      also_known_as={ActorTitleInfoMocks.also_known_as}
+      biography={ActorTitleInfoMocks.biography}
+      birthday={ActorTitleInfoMocks.birthday}
+      gender={ActorTitleInfoMocks.gender}
+      id={ActorTitleInfoMocks.id}
+      known_for_department={ActorTitleInfoMocks.known_for_department}
+      name={ActorTitleInfoMocks.name}
+      place_of_birth={ActorTitleInfoMocks.place_of_birth}
+      profile_path={ActorTitleInfoMocks.profile_path}
+    />
   </StoreWrapper>
 );
 

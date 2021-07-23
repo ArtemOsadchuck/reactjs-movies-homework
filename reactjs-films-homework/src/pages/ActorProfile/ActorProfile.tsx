@@ -70,7 +70,19 @@ const ActorProfile: React.FC = () => {
     </div>
   ) : !isLoading ? (
     <div className={styles.mainWrapper}>
-      {info && <ActorTitle actorInfo={info} />}
+      {info && (
+        <ActorTitle
+          also_known_as={info.also_known_as}
+          biography={info.biography}
+          birthday={info.birthday}
+          gender={info.gender}
+          id={info.id}
+          known_for_department={info.known_for_department}
+          name={info.name}
+          place_of_birth={info.place_of_birth}
+          profile_path={info.profile_path}
+        />
+      )}
       <ActorPhotos
         photos={photos}
         nameAltImg={info?.name}
