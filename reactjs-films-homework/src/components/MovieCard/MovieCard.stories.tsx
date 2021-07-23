@@ -15,14 +15,24 @@ const MovieCardMocksWithoutImg = {
 const TemplateUrl: Story<typeof MovieCard> = () => (
   <StoreWrapper>
     <RouterWrapper url="/">
-      <MovieCard props={MovieCardMocks} />
+      <MovieCard
+        id={MovieCardMocks.id}
+        title={MovieCardMocks.title}
+        vote_average={MovieCardMocks.vote_average}
+        poster_path={MovieCardMocks.poster_path}
+      />
     </RouterWrapper>
   </StoreWrapper>
 );
 const Template: Story<typeof MovieCard> = () => (
   <StoreWrapper>
     <RouterWrapper url="/">
-      <MovieCard props={MovieCardMocksWithoutImg} />
+      <MovieCard
+        id={MovieCardMocksWithoutImg.id}
+        title={MovieCardMocksWithoutImg.title}
+        vote_average={MovieCardMocksWithoutImg.vote_average}
+        poster_path={MovieCardMocksWithoutImg.poster_path}
+      />
     </RouterWrapper>
   </StoreWrapper>
 );

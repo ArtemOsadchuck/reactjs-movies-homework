@@ -135,8 +135,17 @@ const MovieDetails: React.FC = () => {
           {recommended ? (
             recommended
               .slice(0, recommendationsMovieDetailsQuality)
-              .map((el: IMovieCard) => {
-                return <MovieCard props={el} key={el.id - 0.5} />;
+              .map((cardInfo: IMovieCard) => {
+                return (
+                  <MovieCard
+                    id={cardInfo.id}
+                    title={cardInfo.title}
+                    vote_average={cardInfo.vote_average}
+                    poster_path={cardInfo.poster_path}
+                    genre_ids={cardInfo.genre_ids}
+                    key={cardInfo.id}
+                  />
+                );
               })
           ) : (
             <h2>{lang(appLang).loading}</h2>

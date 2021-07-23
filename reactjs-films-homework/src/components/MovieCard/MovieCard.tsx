@@ -10,10 +10,6 @@ import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { setMovieID } from '../../store/rootStore/movieDetailsPageStore/movieDetailsPageSlice';
 import { movieDetailsURL } from '../../constants/links';
 
-export interface ICard {
-  props: IMovieCard;
-}
-
 export interface IMovieCard {
   id: number;
   title: string;
@@ -30,8 +26,12 @@ export interface IGenre {
   }[];
 }
 
-const MovieCard: React.FC<ICard> = ({
-  props: { id, title, vote_average, poster_path, genre_ids },
+const MovieCard: React.FC<IMovieCard> = ({
+  id,
+  title,
+  vote_average,
+  poster_path,
+  genre_ids,
 }) => {
   const imgWidth = '52px';
   const urlImg = `https://image.tmdb.org/t/p/w500/${poster_path}`;

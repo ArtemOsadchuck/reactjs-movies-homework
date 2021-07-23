@@ -77,8 +77,17 @@ const ActorProfile: React.FC = () => {
         photosLength={actorGridPhotosLength}
       />
       <div className={styles.cardsWrapper}>
-        {sortKnownBy?.map((el: IMovieCard) => {
-          return <MovieCard key={el.id} props={el} />;
+        {sortKnownBy?.map((cardData: IMovieCard) => {
+          return (
+            <MovieCard
+              id={cardData.id}
+              title={cardData.title}
+              vote_average={cardData.vote_average}
+              poster_path={cardData.poster_path}
+              genre_ids={cardData.genre_ids}
+              key={cardData.id}
+            />
+          );
         })}
       </div>
     </div>

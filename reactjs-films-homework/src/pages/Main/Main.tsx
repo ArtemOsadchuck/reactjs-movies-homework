@@ -99,8 +99,17 @@ const Main: React.FC = () => {
       <CategoriesTabs />
       <div className={styles.cardsWrapper}>
         {appFetchMovie.length ? (
-          appFetchMovie.map((card: IMovieCard) => {
-            return <MovieCard props={card} key={card.id + 0.1} />;
+          appFetchMovie.map((cardData: IMovieCard) => {
+            return (
+              <MovieCard
+                id={cardData.id}
+                title={cardData.title}
+                vote_average={cardData.vote_average}
+                poster_path={cardData.poster_path}
+                genre_ids={cardData.genre_ids}
+                key={cardData.id + 0.1}
+              />
+            );
           })
         ) : (
           <h2>{getLang(lang).noResults}</h2>
