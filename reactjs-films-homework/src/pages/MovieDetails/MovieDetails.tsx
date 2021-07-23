@@ -103,7 +103,19 @@ const MovieDetails: React.FC = () => {
 
   return isLoading ? (
     <div className={styles.mainWrapper}>
-      {titleInfoState && <MovieTitleCard props={titleInfoState} />}
+      {titleInfoState && (
+        <MovieTitleCard
+          title={titleInfoState.title}
+          vote_average={titleInfoState.vote_average}
+          poster_path={titleInfoState.poster_path}
+          overview={titleInfoState.overview}
+          release_date={titleInfoState.release_date}
+          runtime={titleInfoState.runtime}
+          revenue={titleInfoState.revenue}
+          genres={titleInfoState.genres}
+          id={titleInfoState.id}
+        />
+      )}
       <div className={styles.castWrapper}>
         <div className={styles.castNameWrapper}>
           <h3 className={styles.castName}>{lang(appLang).topBilledCast}</h3>
@@ -113,8 +125,17 @@ const MovieDetails: React.FC = () => {
         </div>
         <div className={styles.castGrid}>
           {sortCast
-            ? sortCast.map((el: ITopBilledCastProp) => {
-                return <TopBilledCast key={el.id} props={el} />;
+            ? sortCast.map((actorInfo: ITopBilledCastProp) => {
+                return (
+                  <TopBilledCast
+                    key={actorInfo.id}
+                    character={actorInfo.character}
+                    id={actorInfo.id}
+                    name={actorInfo.name}
+                    profile_path={actorInfo.profile_path}
+                    popularity={actorInfo.popularity}
+                  />
+                );
               })
             : null}
         </div>

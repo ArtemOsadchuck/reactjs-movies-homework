@@ -15,7 +15,13 @@ export default {
 const TemplateUrl: Story<typeof TopBilledCast> = () => (
   <StoreWrapper>
     <RouterWrapper url="/">
-      <TopBilledCast props={TopBilledCastMocks} />
+      <TopBilledCast
+        character={TopBilledCastMocks.character}
+        id={TopBilledCastMocks.id}
+        name={TopBilledCastMocks.name}
+        profile_path={TopBilledCastMocks.profile_path}
+        popularity={TopBilledCastMocks.popularity}
+      />
     </RouterWrapper>
   </StoreWrapper>
 );

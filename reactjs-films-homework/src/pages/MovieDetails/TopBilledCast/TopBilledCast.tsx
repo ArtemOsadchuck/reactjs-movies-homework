@@ -16,12 +16,13 @@ export interface ITopBilledCastProp {
   character: string;
   popularity: number;
 }
-export interface ITopBilledCast {
-  props: ITopBilledCastProp;
-}
 
-const TopBilledCast: React.FC<ITopBilledCast> = ({ props }) => {
-  const { id, name, profile_path, character } = props;
+const TopBilledCast: React.FC<ITopBilledCastProp> = ({
+  id,
+  name,
+  profile_path,
+  character,
+}) => {
   const urlImg = `${partOfImagesURL}${profile_path}`;
   const dispatch = useAppDispatch();
 

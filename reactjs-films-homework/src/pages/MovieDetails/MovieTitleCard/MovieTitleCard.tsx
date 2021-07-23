@@ -10,9 +10,6 @@ import backgroundImage from '../../../components/MovieCard/img/Movie-card.png';
 import getRevenueFormat from './utils/getRevenueFormat';
 import { partOfImagesURL } from '../../../constants/links';
 
-export interface ICard {
-  props: ITitleMovieProps;
-}
 export interface ITitleMovieProps {
   id: number;
   title: string;
@@ -28,18 +25,17 @@ export interface ITitleMovieProps {
   }[];
 }
 
-const MovieTitleCard: React.FC<ICard> = ({ props }) => {
-  const {
-    id,
-    title,
-    vote_average,
-    poster_path,
-    overview,
-    release_date,
-    genres,
-    runtime,
-    revenue,
-  } = props;
+const MovieTitleCard: React.FC<ITitleMovieProps> = ({
+  id,
+  title,
+  vote_average,
+  poster_path,
+  overview,
+  release_date,
+  genres,
+  runtime,
+  revenue,
+}) => {
   const urlImg = `${partOfImagesURL}${poster_path}`;
   const backgroundImgWidth = '52px';
   const appLang = useAppSelector((state) => state.mainReducer.lang);

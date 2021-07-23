@@ -10,7 +10,13 @@ import RouterWrapper from '../../../../__testsUtils__/routerHoc';
 const getComponent = (props: ITopBilledCastProp) => (
   <StoreWrapper>
     <RouterWrapper url="/movie-details">
-      <TopBilledCast props={props} />
+      <TopBilledCast
+        character={TopBilledCastMocks.character}
+        id={TopBilledCastMocks.id}
+        name={TopBilledCastMocks.name}
+        profile_path={TopBilledCastMocks.profile_path}
+        popularity={TopBilledCastMocks.popularity}
+      />
     </RouterWrapper>
   </StoreWrapper>
 );

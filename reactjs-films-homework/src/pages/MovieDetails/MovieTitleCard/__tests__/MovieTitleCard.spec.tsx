@@ -10,7 +10,17 @@ import StoreWrapper from '../../../../__testsUtils__/storeHoc';
 const getComponent = (props: ITitleMovieProps) => (
   <StoreWrapper>
     <RouterWrapper url="/">
-      <MovieTitleCard props={props} />
+      <MovieTitleCard
+        title={props.title}
+        vote_average={props.vote_average}
+        poster_path={props.poster_path}
+        overview={props.overview}
+        release_date={props.release_date}
+        runtime={props.runtime}
+        revenue={props.revenue}
+        genres={props.genres}
+        id={props.id}
+      />
     </RouterWrapper>
   </StoreWrapper>
 );
