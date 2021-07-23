@@ -8,10 +8,9 @@ interface IGenresList {
 const GenresList: React.FC<IGenresList> = ({ genreName }) => {
   return (
     <p className={styles.genre}>
-      {genreName &&
-        genreName.map((el: string) => {
-          return <span key={el}>{` ${el}`}</span>;
-        })}
+      {genreName.map((el: string) => {
+        return <span key={el}>{` ${el}`}</span>;
+      })}
     </p>
   );
 };
