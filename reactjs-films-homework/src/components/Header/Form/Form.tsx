@@ -9,10 +9,7 @@ import {
 
 import { Link, useHistory } from 'react-router-dom';
 import useUrlSearch from '../../../hooks/useUrlSearch';
-
-type IFormProps = {
-  placeholder: string;
-};
+import { IFormProps } from './types';
 
 const Form: React.FC<IFormProps> = ({ placeholder }) => {
   const [inputValue, setInputValue] = useState<string>('');
