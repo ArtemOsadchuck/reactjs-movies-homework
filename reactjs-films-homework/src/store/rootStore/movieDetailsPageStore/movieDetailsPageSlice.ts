@@ -5,7 +5,7 @@ import getTopBilletCastData from './getMoviePageData/getTopBilletCastData';
 import getMovieImages from './getMoviePageData/getMovieImages';
 import getRecommendations from './getMoviePageData/getRecommendations';
 
-import { IGenre, IMovieCard } from '../../../components/MovieCard/MovieCard';
+import { IGenre, IMovieCard } from '../../../types/components/types';
 import { ITopBilledCastProp } from '../../../pages/MovieDetails/TopBilledCast/TopBilledCast';
 import { IImagesBlockProps } from '../../../pages/MovieDetails/ImagesBlock/ImagesBlock';
 import { ITitleMovieProps } from '../../../pages/MovieDetails/MovieTitleCard/MovieTitleCard';

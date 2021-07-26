@@ -5,7 +5,7 @@ import styles from './MovieDetails.module.scss';
 import MovieCard from '../../components/MovieCard';
 import TopBilledCast from './TopBilledCast';
 import ImagesBlock from './ImagesBlock';
-import { IMovieCard } from '../../components/MovieCard/MovieCard';
+import { IMovieCard } from '../../types/components/types';
 import { ITopBilledCastProp } from './TopBilledCast/TopBilledCast';
 import { ITitleMovieProps } from './MovieTitleCard/MovieTitleCard';
 import { IImagesBlockProps } from './ImagesBlock/ImagesBlock';
