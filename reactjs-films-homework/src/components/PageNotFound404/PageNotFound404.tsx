@@ -7,9 +7,7 @@ import lang from '../../languages/getLanguage';
 import { useAppSelector } from '../../hooks/hooks';
 import { homePageLink } from '../../constants/links';
 
-interface IPageNotFound404 {
-  timing: number;
-}
+import { IPageNotFound404 } from './types';
 
 const PageNotFound404: React.FC<IPageNotFound404> = ({ timing }) => {
   const history = useHistory();
