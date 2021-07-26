@@ -10,22 +10,7 @@ import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { setMovieID } from '../../store/rootStore/movieDetailsPageStore/movieDetailsPageSlice';
 import { movieDetailsURL } from '../../constants/links';
 
-import { IMovieCard } from '../../types/components/types';
-// export interface IMovieCard {
-//   id: number;
-//   title: string;
-//   vote_average: number;
-//   poster_path: string;
-//   genre_ids?: number[];
-//   key?: number;
-// }
-
-// export interface IGenre {
-//   genres?: {
-//     id: number;
-//     name: string;
-//   }[];
-// }
+import { IMovieCard } from '../../types/components/MovieCard/types';
 
 const MovieCard: React.FC<IMovieCard> = ({
   id,

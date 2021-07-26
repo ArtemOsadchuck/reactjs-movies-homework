@@ -4,7 +4,7 @@ import styles from './ActorProfile.module.scss';
 import ActorTitle from './ActorTitleInfo';
 import ActorPhotos from './ActorPhotos';
 import MovieCard from '../../components/MovieCard';
-import { IMovieCard } from '../../types/components/types';
+import { IMovieCard } from '../../types/components/MovieCard/types';
 import { IPhotos } from './ActorPhotos/ActorPhotos';
 import { IActorTitleProps } from './ActorTitleInfo/ActorTitleInfo';
 

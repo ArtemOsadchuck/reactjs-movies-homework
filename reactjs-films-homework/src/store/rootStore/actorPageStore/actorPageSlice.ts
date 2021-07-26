@@ -4,7 +4,7 @@ import getActorPhotos from './getActorData/getActorPhotos';
 import getFilmsWithActor from './getActorData/getFilmsWithActor';
 
 import { IPhotos } from './../../../pages/ActorProfile/ActorPhotos/ActorPhotos';
-import { IGenre, IMovieCard } from '../../../types/components/types';
+import { IGenre, IMovieCard } from '../../../types/components/MovieCard/types';
 import { IActorTitleProps } from '../../../pages/ActorProfile/ActorTitleInfo/ActorTitleInfo';
 
 interface IInitialState {
