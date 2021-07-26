@@ -8,9 +8,8 @@ export interface IGetActorInfo {
 
 const getActorInfo = createAsyncThunk(
   'getActorInfo/setActorInfo',
-  async (props: IGetActorInfo, { rejectWithValue }) => {
+  async ({ lang, id }: IGetActorInfo, { rejectWithValue }) => {
     try {
-      const { lang, id } = props;
       if (typeof id === 'string' && lang) {
         const baseUrl = `https://api.themoviedb.org/3/person/${id}?api_key=8fa5bc53bb4a09dfb6560253edf33030&language=${lang.toLowerCase()}-${lang}`;
         const response = await axios.get(baseUrl);
