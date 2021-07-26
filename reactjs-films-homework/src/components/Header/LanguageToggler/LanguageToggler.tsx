@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styles from './LanguageToggler.module.scss';
+
 import { langArr } from '../../../languages/getLanguage';
 import { initialLanguage } from '../../../constants/variables';
-import { setLang } from '../../../store/rootStore/mainStore/mainSlice';
-import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
 import useLocalStorage from '../../../hooks/useLocalStorage';
+
+import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
+import { setLang } from '../../../store/rootStore/mainStore/mainSlice';
 import getMovieDetailsData from '../../../store/rootStore/movieDetailsPageStore/getMoviePageData/getMovieDetailsData';
 import getTopBilletCastData from '../../../store/rootStore/movieDetailsPageStore/getMoviePageData/getTopBilletCastData';
 
