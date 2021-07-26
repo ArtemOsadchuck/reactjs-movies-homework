@@ -12,8 +12,6 @@ import PageNotFound404 from '../../components/PageNotFound404';
 import { timingOfPageNotFound } from '../../constants/variables';
 
 function App() {
-  // const homePath = '/' || '/popular' || '/top_rated' || 'upcoming';
-
   return (
     <div className="wrapper">
       <ErrorBoundary title="header component">
