@@ -10,14 +10,16 @@ import {
   IMovieCard,
 } from '../../../types/components/movieCardTypes/types';
 import { ITopBilledCastProp } from '../../../pages/MovieDetails/TopBilledCast/TopBilledCast';
-import { IImagesBlockProps } from '../../../pages/MovieDetails/ImagesBlock/ImagesBlock';
-import { ITitleMovieProps } from '../../../pages/MovieDetails/MovieTitleCard/MovieTitleCard';
+import {
+  IImagesBlockImages,
+  ITitleMovieProps,
+} from '../../../types/pages/movieDetails/types';
 
 interface ICast {
   cast: ITopBilledCastProp[];
 }
 interface IImages {
-  backdrops: IImagesBlockProps[];
+  backdrops: IImagesBlockImages[];
 }
 
 interface IInitialState {

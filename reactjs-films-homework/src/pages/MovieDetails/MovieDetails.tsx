@@ -7,8 +7,10 @@ import TopBilledCast from './TopBilledCast';
 import ImagesBlock from './ImagesBlock';
 import { IMovieCard } from '../../types/components/movieCardTypes/types';
 import { ITopBilledCastProp } from './TopBilledCast/TopBilledCast';
-import { ITitleMovieProps } from './MovieTitleCard/MovieTitleCard';
-import { IImagesBlockProps } from './ImagesBlock/ImagesBlock';
+import {
+  IImagesBlockImages,
+  ITitleMovieProps,
+} from '../../types/pages/movieDetails/types';
 
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import getMovieDetailsData from '../../store/rootStore/movieDetailsPageStore/getMoviePageData/getMovieDetailsData';
@@ -33,7 +35,7 @@ const MovieDetails: React.FC = () => {
   const [titleInfoState, setTitleInfoState] = useState<ITitleMovieProps>();
   const [cast, setCast] = useState<Array<ITopBilledCastProp>>();
   const [sortCast, setSortCast] = useState<Array<ITopBilledCastProp>>();
-  const [stateImg, setStateImg] = useState<Array<IImagesBlockProps>>();
+  const [stateImg, setStateImg] = useState<Array<IImagesBlockImages>>();
   const [recommended, setRecommended] = useState<Array<IMovieCard>>();
 
   const dispatch = useAppDispatch();

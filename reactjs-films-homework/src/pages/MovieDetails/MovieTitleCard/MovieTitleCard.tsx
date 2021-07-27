@@ -10,20 +10,7 @@ import backgroundImage from '../../../components/MovieCard/img/Movie-card.png';
 import getRevenueFormat from './utils/getRevenueFormat';
 import { partOfImagesURL } from '../../../constants/links';
 
-export interface ITitleMovieProps {
-  id: number;
-  title: string;
-  vote_average: number;
-  poster_path: string;
-  overview: string;
-  release_date: string;
-  runtime: number;
-  revenue: number;
-  genres?: {
-    id: number;
-    name: string;
-  }[];
-}
+import { ITitleMovieProps } from '../../../types/pages/movieDetails/types';
 
 const MovieTitleCard: React.FC<ITitleMovieProps> = ({
   id,

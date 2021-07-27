@@ -2,24 +2,16 @@ import React from 'react';
 import styles from './ImagesBlock.module.scss';
 
 import { partOfImagesURL } from '../../../constants/links';
+import { IImagesBlockImages } from '../../../types/pages/movieDetails/types';
 
-export interface IImagesBlock {
-  images?: IImagesBlockProps[];
+interface IImagesBlockProps {
+  images?: IImagesBlockImages[];
   title?: string;
   imgWidth?: string;
   imagesQuality?: number;
 }
-export interface IImagesBlockProps {
-  aspect_ratio?: number;
-  file_path: string;
-  height?: number;
-  iso_639_1?: null;
-  vote_average?: number;
-  vote_count?: number;
-  width?: number;
-}
 
-const ImagesBlock: React.FC<IImagesBlock> = ({
+const ImagesBlock: React.FC<IImagesBlockProps> = ({
   images,
   title,
   imagesQuality,
