@@ -1,4 +1,7 @@
-import { IGenre, IMovieCard } from '../../../types/components/MovieCard/types';
+import {
+  IGenre,
+  IMovieCard,
+} from '../../../types/components/movieCardTypes/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import getGenres from './/getMaiData/getGenres';
 import getMainData from './getMaiData/getMainData';

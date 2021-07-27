@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 interface IPagination {
   neededPages: number;
 }
+
 const Pagination: React.FC<IPagination> = ({ neededPages }) => {
   const [pagNum, setPugNum] = useState<Array<string>>([]);
   const dispatch = useAppDispatch();

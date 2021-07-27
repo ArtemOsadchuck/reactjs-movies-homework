@@ -10,7 +10,7 @@ import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { setMovieID } from '../../store/rootStore/movieDetailsPageStore/movieDetailsPageSlice';
 import { movieDetailsURL } from '../../constants/links';
 
-import { IMovieCard } from '../../types/components/MovieCard/types';
+import { IMovieCard } from '../../types/components/movieCardTypes/types';
 
 const MovieCard: React.FC<IMovieCard> = ({
   id,

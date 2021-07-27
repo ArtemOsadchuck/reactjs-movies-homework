@@ -1,7 +1,8 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 
-import ActorPhotos, { IActorPhotos } from './ActorPhotos';
+import ActorPhotos from './ActorPhotos';
+import { IActorPhotos } from '../types';
 import ActorPhotosMocks from './mocks';
 
 import { Provider } from 'react-redux';

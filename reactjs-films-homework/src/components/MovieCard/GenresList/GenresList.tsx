@@ -1,6 +1,9 @@
 import React from 'react';
-import { IGenresList } from '../../../types/components/MovieCard/types';
 import styles from './GenresList.module.scss';
+
+export interface IGenresList {
+  genreName: string[];
+}
 
 const GenresList: React.FC<IGenresList> = ({ genreName }) => {
   return (

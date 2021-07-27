@@ -6,17 +6,7 @@ import getLang from '../../../languages/getLanguage';
 import { useAppSelector } from '../../../hooks/hooks';
 import { partOfImagesURL } from '../../../constants/links';
 
-export interface IActorTitleProps {
-  also_known_as?: string[];
-  biography: string;
-  birthday: string;
-  gender: number;
-  id: number;
-  known_for_department?: string;
-  name: string;
-  place_of_birth: string;
-  profile_path: string;
-}
+import { IActorTitleProps } from '../../../types/pages/actorProfileTypes/types';
 
 const ActorTitle: React.FC<IActorTitleProps> = ({
   birthday,

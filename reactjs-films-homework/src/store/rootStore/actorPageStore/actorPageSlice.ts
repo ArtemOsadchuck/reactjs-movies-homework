@@ -3,9 +3,14 @@ import getActorInfo from './getActorData/getActorInfo';
 import getActorPhotos from './getActorData/getActorPhotos';
 import getFilmsWithActor from './getActorData/getFilmsWithActor';
 
-import { IPhotos } from './../../../pages/ActorProfile/ActorPhotos/ActorPhotos';
-import { IGenre, IMovieCard } from '../../../types/components/MovieCard/types';
-import { IActorTitleProps } from '../../../pages/ActorProfile/ActorTitleInfo/ActorTitleInfo';
+import {
+  IGenre,
+  IMovieCard,
+} from '../../../types/components/movieCardTypes/types';
+import {
+  IActorTitleProps,
+  IPhotos,
+} from '../../../types/pages/actorProfileTypes/types';
 
 interface IInitialState {
   id: string;

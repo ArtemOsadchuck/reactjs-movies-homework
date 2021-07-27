@@ -13,7 +13,3 @@ export interface IGenre {
     name: string;
   }[];
 }
-
-export interface IGenresList {
-  genreName: string[];
-}

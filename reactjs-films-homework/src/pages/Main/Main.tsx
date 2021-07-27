@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import styles from './Main.module.scss';
 
 import MovieCard from '../../components/MovieCard';
-import { IMovieCard } from '../../types/components/MovieCard/types';
+import { IMovieCard } from '../../types/components/movieCardTypes/types';
 import CategoriesTabs from './CategoriesTabs';
 import Pagination from './Pagination';
 

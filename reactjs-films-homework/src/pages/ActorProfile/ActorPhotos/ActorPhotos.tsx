@@ -6,20 +6,7 @@ import { useAppSelector } from '../../../hooks/hooks';
 
 import { partOfImagesURL } from '../../../constants/links';
 
-export interface IPhotos {
-  aspect_ratio: number;
-  file_path: string;
-  height: number;
-  iso_639_1: null;
-  vote_average: number;
-  vote_count: number;
-  width: number;
-}
-export interface IActorPhotos {
-  photos?: IPhotos[];
-  photosLength?: number;
-  nameAltImg: string | undefined;
-}
+import { IActorPhotos } from '../types';
 
 const ActorPhotos: React.FC<IActorPhotos> = ({
   photos,
