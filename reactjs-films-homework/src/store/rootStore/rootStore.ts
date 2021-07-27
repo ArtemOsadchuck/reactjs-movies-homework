@@ -14,4 +14,3 @@ const rootStore = configureStore({
 });
 
 export default rootStore;
-//
