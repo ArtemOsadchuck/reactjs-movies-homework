@@ -1,58 +1,32 @@
 import React from 'react';
-import { render, screen, cleanup } from '@testing-library/react';
-import ImagesBlock from '../ImagesBlock';
+import { render, screen } from '@testing-library/react';
+
+import ImagesBlock, { IImagesBlock } from '../ImagesBlock';
+import ImagesBlockMocks from '../mocks';
+
+import RouterWrapper from '../../../../__testsUtils__/routerHoc';
+import StoreWrapper from '../../../../__testsUtils__/storeHoc';
+
+const getComponent = (props?: Partial<IImagesBlock>) => (
+  <StoreWrapper>
+    <RouterWrapper url="/">
+      <ImagesBlock title="images" images={ImagesBlockMocks} {...props} />
+    </RouterWrapper>
+  </StoreWrapper>
+);
 
 describe('ImagesBlock', () => {
-  const mockProps = [
-    {
-      aspect_ratio: 1.777777777777778,
-      file_path: '/irlfhYtHfhZuYpsq2LAoh308NFe.jpg',
-      height: 1080,
-      iso_639_1: null,
-      vote_average: 5.384,
-      vote_count: 2,
-      width: 1920,
-    },
-    {
-      aspect_ratio: 1.777777777777778,
-      file_path: '/iNh3BivHyg5sQRPP1KOkzguEX0H.jpg',
-      height: 1080,
-      iso_639_1: null,
-      vote_average: 5.326,
-      vote_count: 7,
-      width: 1920,
-    },
-  ];
-  afterEach(() => {
-    cleanup();
-  });
+  it('should renders correctly', () => {
+    const props = {
+      title: 'images',
+      imagesQuality: 8,
+      imgWidth: '172px',
+    };
+    const { asFragment } = render(getComponent(props));
+    const fragment = asFragment();
+    const imgLength = screen.getAllByRole('img').length;
 
-  it('ImagesBlock snapshot', () => {
-    const { asFragment } = render(<ImagesBlock props={mockProps} />);
-    expect(asFragment).toMatchSnapshot();
-  });
-
-  it('ImagesBlock Must have class:', () => {
-    const { container } = render(<ImagesBlock props={mockProps} />);
-    expect(container.firstChild).toHaveClass('imagesBlockWrapper');
-    expect(container.firstChild!.childNodes[0]).toHaveClass(
-      'imagesTitleWrapper'
-    );
-    expect(container.firstChild!.childNodes[1]).toHaveClass('imagesWrapper');
-  });
-
-  it('ImagesBlock must heave attribute:', () => {
-    render(<ImagesBlock props={mockProps} />);
-    screen.getAllByRole('img').forEach((el) => {
-      expect(el).toHaveAttribute('src');
-      expect(el).toHaveAttribute('alt');
-      expect(el).toHaveAttribute('width');
-      expect(el).toHaveClass('image');
-    });
-  });
-
-  it('ImagesBlock Loading... must be in the document:', () => {
-    render(<ImagesBlock props={mockProps} />);
-    expect(screen.getByText(/Images/i)).toBeInTheDocument();
+    expect(fragment).toMatchSnapshot();
+    expect(imgLength).toEqual(2);
   });
 });

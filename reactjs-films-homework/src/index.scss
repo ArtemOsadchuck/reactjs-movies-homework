@@ -4,7 +4,19 @@
   outline: none;
   overflow-x: hidden;
   padding: 0;
-  text-align: center;
+  // text-align: center;
   text-decoration: none;
   text-decoration-color: none;
+
+  a {
+    color: inherit;
+  }
+
+  p {
+    overflow-y: hidden;
+  }
+
+  div {
+    overflow-y: hidden;
+  }
 }

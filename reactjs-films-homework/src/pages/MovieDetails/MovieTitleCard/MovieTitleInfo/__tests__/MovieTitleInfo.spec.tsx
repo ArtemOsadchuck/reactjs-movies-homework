@@ -1,47 +1,29 @@
 import React from 'react';
-import { render, screen, cleanup } from '@testing-library/react';
-import MovieTitleInfo from '../MovieTitleInfo';
+import { render } from '@testing-library/react';
+
+import MovieTitleInfo, { IMovieTitleInfo } from '../MovieTitleInfo';
+
+import RouterWrapper from '../../../../../__testsUtils__/routerHoc';
+import StoreWrapper from '../../../../../__testsUtils__/storeHoc';
+
+const getComponent = (props?: Partial<IMovieTitleInfo>) => (
+  <StoreWrapper>
+    <RouterWrapper url="/">
+      <MovieTitleInfo {...props} />
+    </RouterWrapper>
+  </StoreWrapper>
+);
 
 describe('MovieTitleInfo', () => {
-  const mockProps = {
-    heading: 'Overview:',
-    overview:
-      'Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison',
-  };
+  it('should renders correctly', () => {
+    const props = {
+      heading: 'Overview:',
+      infoField:
+        'Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison',
+    };
+    const { asFragment } = render(getComponent(props));
+    const fragment = asFragment();
 
-  afterEach(() => {
-    cleanup();
-  });
-
-  it('MovieTitleInfo snapshot', () => {
-    const { asFragment } = render(
-      <MovieTitleInfo
-        heading={mockProps.heading}
-        infoField={mockProps.overview}
-      />
-    );
-    expect(asFragment).toMatchSnapshot();
-  });
-
-  it('MovieTitleInfo Must have class:', () => {
-    const { container } = render(
-      <MovieTitleInfo
-        heading={mockProps.heading}
-        infoField={mockProps.overview}
-      />
-    );
-    expect(container.firstChild).toHaveClass('otherInfoWrapper');
-    expect(container.firstChild!.childNodes[0]).toHaveClass('heading');
-    expect(container.firstChild!.childNodes[1]).toHaveClass('infoField');
-  });
-  it('MovieTitleInfo must have text:', () => {
-    render(
-      <MovieTitleInfo
-        heading={mockProps.heading}
-        infoField={mockProps.overview}
-      />
-    );
-    expect(screen.getByText(/Overview/i)).toBeInTheDocument();
-    expect(screen.getByText(/1940s/i)).toBeInTheDocument();
+    expect(fragment).toMatchSnapshot();
   });
 });

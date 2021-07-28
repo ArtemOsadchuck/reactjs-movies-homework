@@ -1,15 +1,25 @@
 import React from 'react';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render } from '@testing-library/react';
+
 import Pagination from '../Pagination';
 
+import StoreWrapper from '../../../../__testsUtils__/storeHoc';
+import RouterWrapper from '../../../../__testsUtils__/routerHoc';
+
+const getComponent = (props: number) => (
+  <StoreWrapper>
+    <RouterWrapper url="/">
+      <Pagination neededPages={props} />
+    </RouterWrapper>
+  </StoreWrapper>
+);
+
 describe('Pagination', () => {
-  it('Pagination snapshot', () => {
-    const { container } = render(<Pagination />);
-    expect(container).toMatchSnapshot();
-  });
-  it('Pagination must include class', () => {
-    render(<Pagination />);
-    expect(screen.getByText(/1/i)).toHaveClass('active');
-    expect(screen.getByText(/2/i)).not.toHaveClass('active');
+  it('should renders correctly', () => {
+    const neededPages = 5;
+    const { asFragment } = render(getComponent(neededPages));
+
+    const fragment = asFragment();
+    expect(fragment).toMatchSnapshot();
   });
 });

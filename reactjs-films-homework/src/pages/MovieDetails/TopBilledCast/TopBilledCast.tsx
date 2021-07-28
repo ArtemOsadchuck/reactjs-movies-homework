@@ -1,28 +1,53 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import styles from './TopBilledCast.module.scss';
+
+import { useAppDispatch } from '../../../hooks/hooks';
+import { setID } from '../../../store/rootStore/actorPageStore/actorPageSlice';
+
+import { actorProfileURL, partOfImagesURL } from '../../../constants/links';
+import { topBilletCastImagesHight } from '../../../constants/variables';
 
 export interface ITopBilledCastProp {
   id: number;
   name: string;
   profile_path: string;
   character: string;
-}
-export interface ITopBilledCast {
-  props: ITopBilledCastProp;
+  popularity: number;
 }
 
-const TopBilledCast: React.FC<ITopBilledCast> = ({ props }) => {
-  const { id, name, profile_path, character } = props;
-  const urlImg = `https://image.tmdb.org/t/p/w200/${profile_path}`;
+const TopBilledCast: React.FC<ITopBilledCastProp> = ({
+  id,
+  name,
+  profile_path,
+  character,
+}) => {
+  const urlImg = `${partOfImagesURL}${profile_path}`;
+  const dispatch = useAppDispatch();
+
+  const getActorInfo = (actorID: any) => {
+    dispatch(setID(actorID));
+  };
 
   return (
-    <a className={styles.actorWrapper} id={`${id}`} href="/">
-      <img className={styles.actorImg} height="160px" src={urlImg} alt={name} />
+    <Link
+      to={`${actorProfileURL}${id}`}
+      className={styles.actorWrapper}
+      id={`${id}`}
+      onClick={() => getActorInfo(id)}
+    >
+      <img
+        className={styles.actorImg}
+        height={topBilletCastImagesHight}
+        src={urlImg}
+        alt={name}
+      />
       <p className={styles.actorName}>
         <strong>{name}</strong>
       </p>
       <p className={styles.actorCharacter}>{character}</p>
-    </a>
+    </Link>
   );
 };
 

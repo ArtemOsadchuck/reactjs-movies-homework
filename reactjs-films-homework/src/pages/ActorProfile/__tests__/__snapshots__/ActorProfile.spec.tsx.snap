@@ -1,3 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ActorProfile ActorProfile snapshot 1`] = `[Function]`;
+exports[`ActorProfile should renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="mainWrapper"
+  >
+    <div
+      class="loader"
+    />
+  </div>
+</DocumentFragment>
+`;

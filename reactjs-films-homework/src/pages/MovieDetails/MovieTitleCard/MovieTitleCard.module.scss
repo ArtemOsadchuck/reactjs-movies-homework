@@ -76,11 +76,12 @@ $wite-color: rgb(255, 255, 255);
   }
 
   .genreWrapper {
+    column-gap: 0.5rem;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    min-width: 11rem;
-    width: fit-content;
+    justify-content: flex-start;
+    min-width: 14rem;
+    row-gap: 1rem;
   }
 
   .genre {
@@ -91,14 +92,14 @@ $wite-color: rgb(255, 255, 255);
     font-size: 1rem;
     height: 1.5rem;
     justify-content: center;
-    min-width: 5rem;
+    min-width: 8rem;
     text-align: center;
-    width: max-content;
+    width: calc(val(max-content) + 1rem);
 
     &:hover {
       border-radius: 10px;
       cursor: pointer;
-      letter-spacing: 1px;
+      letter-spacing: 0.6px;
       transition: 0.2s ease-in-out;
     }
   }

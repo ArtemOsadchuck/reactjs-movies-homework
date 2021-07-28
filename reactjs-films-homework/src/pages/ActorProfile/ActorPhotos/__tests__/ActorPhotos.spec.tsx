@@ -1,52 +1,43 @@
 import React from 'react';
-import { render, screen, fireEvent, cleanup } from '@testing-library/react';
-import ActorPhotos from '../ActorPhotos';
+import { render } from '@testing-library/react';
+
+import ActorPhotos, { IActorPhotos } from '../ActorPhotos';
+import ActorPhotosMocks from '../mocks';
+
+import RouterWrapper from '../../../../__testsUtils__/routerHoc';
+import StoreWrapper from '../../../../__testsUtils__/storeHoc';
+
+const getComponent = (props?: Partial<IActorPhotos>) => (
+  <StoreWrapper>
+    <RouterWrapper url="/">
+      <ActorPhotos nameAltImg="name" photos={ActorPhotosMocks} {...props} />
+    </RouterWrapper>
+  </StoreWrapper>
+);
 
 describe('ActorPhotos', () => {
-  const mockProps = [
-    {
-      aspect_ratio: 0.6666666666666666,
-      file_path: '/oIciQWr8VwKoR8TmAw1owaiZFyb.jpg',
-      height: 750,
-      iso_639_1: null,
-      vote_average: 5.522,
-      vote_count: 4,
-      width: 500,
-    },
-    {
-      aspect_ratio: 0.6666666666666666,
-      file_path: '/1ahENoyEgKSbRUd0IsydIff7rt1.jpg',
-      height: 3000,
-      iso_639_1: null,
-      vote_average: 5.318,
-      vote_count: 3,
-      width: 2000,
-    },
-  ];
+  it('should renders correctly', () => {
+    const props = {
+      nameAltImg: 'altName',
+      photosLength: 4,
+    };
+    const { asFragment } = render(getComponent(props));
+    const fragment = asFragment();
 
-  afterEach(() => {
-    cleanup();
+    expect(fragment).toMatchSnapshot();
   });
 
-  it('ActorPhotos snapshot', () => {
-    const { asFragment } = render(
-      <ActorPhotos props={mockProps} photosLength={2} />
-    );
-    expect(asFragment).toMatchSnapshot();
-  });
+  it('should renders correctly with another props', () => {
+    const props = {
+      nameAltImg: 'newAltName',
+      photosLength: 6,
+    };
+    const { container } = render(getComponent(props));
+    const fragment = container;
+    const imgTagLength = fragment.querySelector('.photosGrid')?.children.length;
+    const imgAltName = fragment.querySelectorAll('img')[3].alt;
 
-  it('ActorPhotos Must have class PhotosWrapper', () => {
-    const { container } = render(
-      <ActorPhotos props={mockProps} photosLength={2} />
-    );
-    expect(container.firstChild).toHaveClass('PhotosWrapper');
-  });
-  it('ActorPhotos IMG Must include attr alt', () => {
-    render(<ActorPhotos props={mockProps} photosLength={2} />);
-    expect(screen.getAllByRole('img')[0]).toHaveAttribute('alt');
-  });
-  it('ActorPhotos heading include class photosTitle', () => {
-    render(<ActorPhotos props={mockProps} photosLength={2} />);
-    expect(screen.getByRole('heading')).toHaveClass('photosTitle');
+    expect(imgTagLength).toEqual(props.photosLength);
+    expect(imgAltName).toEqual(props.nameAltImg);
   });
 });

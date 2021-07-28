@@ -1,3 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MovieDetails MovieDetails snapshot 1`] = `[Function]`;
+exports[`MovieDetails should renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="loader"
+  />
+</DocumentFragment>
+`;

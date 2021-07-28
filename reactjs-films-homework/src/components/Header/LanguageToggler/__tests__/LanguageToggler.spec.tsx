@@ -1,25 +1,50 @@
 import React from 'react';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
+
 import LanguageToggler from '../LanguageToggler';
 
+import StoreWrapper from '../../../../__testsUtils__/storeHoc';
+import RouterWrapper from '../../../../__testsUtils__/routerHoc';
+
+const getComponent = () => (
+  <StoreWrapper>
+    <RouterWrapper url="/">
+      <LanguageToggler />
+    </RouterWrapper>
+  </StoreWrapper>
+);
+
 describe('LanguageToggler', () => {
-  afterEach(() => {
-    cleanup();
+  let fragment: any;
+
+  beforeEach(() => {
+    const { asFragment } = render(getComponent());
+
+    fragment = asFragment();
   });
-  it('LanguageToggler snapshot', () => {
-    const { asFragment } = render(<LanguageToggler />);
-    expect(asFragment).toMatchSnapshot();
+  afterEach(() => cleanup());
+
+  it('should renders correctly', () => {
+    expect(fragment).toMatchSnapshot();
   });
 
-  it('LanguageToggler Must include text RU or EN', () => {
-    render(<LanguageToggler />);
-    expect(screen.getByText(/en|ru/i)).not.toBeNull();
-  });
-  it('LanguageToggler Must be clickable', () => {
-    render(<LanguageToggler />);
-    fireEvent.click(screen.getByText(/en|ru/i));
-    fireEvent.click(screen.getByText(/ru/i), {
-      target: <div>RU</div>,
-    });
+  it('must be clickable', () => {
+    const changeLang = () => {
+      fireEvent.click(btnStart);
+
+      const btnRU = screen.getByText(/ru/i);
+
+      fireEvent.click(btnRU, {
+        target: target,
+      });
+    };
+    const btnStart = screen.getByText(/en|ru/i);
+    const target = <div>RU</div>;
+
+    changeLang();
+
+    const btnAfterChange = screen.getByText(/ru/i);
+
+    expect(btnAfterChange).toBeInTheDocument();
   });
 });

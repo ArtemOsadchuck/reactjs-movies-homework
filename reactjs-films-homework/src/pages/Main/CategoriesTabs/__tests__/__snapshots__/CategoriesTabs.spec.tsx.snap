@@ -1,3 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CategoriesTabs CategoriesTabs snapshot 1`] = `[Function]`;
+exports[`CategoriesTabs should renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="categoriesWrapper"
+  >
+    <a
+      aria-current="page"
+      class="categoryBtn active"
+      href="/?category=popular&page=1"
+      id="popular"
+    >
+      Popular
+    </a>
+    <a
+      aria-current="page"
+      class="categoryBtn active"
+      href="/?category=top_rated&page=1"
+      id="top_rated"
+    >
+      Top rated
+    </a>
+    <a
+      aria-current="page"
+      class="categoryBtn active"
+      href="/?category=upcoming&page=1"
+      id="upcoming"
+    >
+      Upcoming
+    </a>
+  </div>
+</DocumentFragment>
+`;

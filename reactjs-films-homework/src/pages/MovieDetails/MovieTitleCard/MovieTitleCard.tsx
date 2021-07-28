@@ -1,66 +1,37 @@
 import React from 'react';
-import img from '../../../components/MovieCard/img/Movie-card.png';
 import styles from './MovieTitleCard.module.scss';
+
 import MovieTitleInfo from './MovieTitleInfo';
 
 import lang from '../../../languages/getLanguage';
 import { useAppSelector } from '../../../hooks/hooks';
 
-export interface ICard {
-  props: ITitleMovieProps;
-}
-export interface ITitleMovieProps {
-  id: number;
-  title: string;
-  vote_average: number;
-  poster_path: string;
-  overview: string;
-  release_date: string;
-  runtime: number;
-  revenue: number;
-  genres?: {
-    id: number;
-    name: string;
-  }[];
-}
+import backgroundImage from '../../../components/MovieCard/img/Movie-card.png';
+import getRevenueFormat from './utils/getRevenueFormat';
+import { partOfImagesURL } from '../../../constants/links';
 
-const MovieTitleCard: React.FC<ICard> = ({ props }) => {
-  const {
-    id,
-    title,
-    vote_average,
-    poster_path,
-    overview,
-    release_date,
-    genres,
-    runtime,
-    revenue,
-  } = props;
-  const urlImg = `https://image.tmdb.org/t/p/w500/${poster_path}`;
-  const imgWidth = '52px';
-  const appLang = useAppSelector((state) => state.languageReducer.lang);
+import { ITitleMovieProps } from '../../../types/pages/movieDetails/types';
+
+const MovieTitleCard: React.FC<ITitleMovieProps> = ({
+  id,
+  title,
+  vote_average,
+  poster_path,
+  overview,
+  release_date,
+  genres,
+  runtime,
+  revenue,
+}) => {
+  const urlImg = `${partOfImagesURL}${poster_path}`;
+  const backgroundImgWidth = '52px';
+  const appLang = useAppSelector((state) => state.mainReducer.lang);
   const titleText = lang(appLang).titleName + ':';
   const overviewText = lang(appLang).overview + ':';
   const releaseText = lang(appLang).releaseDate + ':';
   const revenueText = lang(appLang).revenue + ':';
   const durationText = lang(appLang).duration + ':';
   const durationTimeMin = lang(appLang).min;
-
-  const revenueFormat = (revenue: number) => {
-    if (revenue) {
-      return revenue
-        .toString()
-        ?.match(/.{1}/g)
-        ?.reverse()
-        .join('')
-        ?.match(/.{1,3}/g)
-        ?.map((el: string) => {
-          return el.split('').reverse().join('');
-        })
-        .reverse()
-        .join(' ');
-    }
-  };
 
   return (
     <div id={`${id}`} className={styles.movieTitleWrapper}>
@@ -73,7 +44,7 @@ const MovieTitleCard: React.FC<ICard> = ({ props }) => {
           {poster_path ? (
             <img src={urlImg} height="100%" alt={title} />
           ) : (
-            <img src={img} width={imgWidth} alt={title} />
+            <img src={backgroundImage} width={backgroundImgWidth} alt={title} />
           )}
         </div>
       </div>
@@ -83,7 +54,7 @@ const MovieTitleCard: React.FC<ICard> = ({ props }) => {
         <MovieTitleInfo heading={releaseText} infoField={release_date} />
         <MovieTitleInfo
           heading={revenueText}
-          infoField={`$ ${revenueFormat(revenue)}`}
+          infoField={`$ ${getRevenueFormat(revenue)}`}
         />
         <MovieTitleInfo
           heading={durationText}

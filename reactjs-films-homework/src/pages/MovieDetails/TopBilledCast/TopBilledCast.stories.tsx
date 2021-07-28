@@ -1,29 +1,29 @@
 import React from 'react';
 import { Story } from '@storybook/react';
+
 import TopBilledCast from './TopBilledCast';
+import TopBilledCastMocks from './mocks';
+
+import RouterWrapper from '../../../__testsUtils__/routerHoc';
+import StoreWrapper from '../../../__testsUtils__/storeHoc';
 
 export default {
   title: 'TopBilledCast',
   component: TopBilledCast,
 };
 
-const Mocks = {
-  adult: false,
-  gender: 2,
-  id: 504,
-  known_for_department: 'Acting',
-  name: 'Tim Robbins',
-  original_name: 'Tim Robbins',
-  popularity: 5.305,
-  profile_path: '/hsCu1JUzQQ4pl7uFxAVFLOs9yHh.jpg',
-  cast_id: 3,
-  character: 'Andy Dufresne',
-  credit_id: '52fe4231c3a36847f800b131',
-  order: 0,
-};
-
 const TemplateUrl: Story<typeof TopBilledCast> = () => (
-  <TopBilledCast props={Mocks} />
+  <StoreWrapper>
+    <RouterWrapper url="/">
+      <TopBilledCast
+        character={TopBilledCastMocks.character}
+        id={TopBilledCastMocks.id}
+        name={TopBilledCastMocks.name}
+        profile_path={TopBilledCastMocks.profile_path}
+        popularity={TopBilledCastMocks.popularity}
+      />
+    </RouterWrapper>
+  </StoreWrapper>
 );
 
 export const TopBilledCastStory = TemplateUrl.bind({});
