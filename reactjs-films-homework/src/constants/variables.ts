@@ -6,3 +6,5 @@ export const movieDetailsImagesBlockQuality = 8;
 export const movieDetailsImagesWidth = '172px';
 export const topBilletCastImagesHight = '160px';
 export const timingOfPageNotFound = 4400;
+export const delayOfSearch = 2000;
+export const pageAfterSearch = '1';
