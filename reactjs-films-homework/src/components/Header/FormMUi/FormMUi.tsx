@@ -20,10 +20,10 @@ import { delayOfSearch, pageAfterSearch } from '../../../constants/variables';
 import useDebounce from './_utils/_useDebounce';
 import fetchAutoCompleteData from './_utils/_fetchAutocompleteData';
 import { IMovieCard } from '../../../types/components/movieCardTypes/types';
-import { useSelector } from 'react-redux';
-import rootStore from '../../../store/store';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import Form from './Form';
+import schema from './_utils/formValidation';
 
 const FormMUi: React.FC<IFormProps> = ({ placeholder }) => {
   const [open, setOpen] = useState(false);
@@ -33,27 +33,31 @@ const FormMUi: React.FC<IFormProps> = ({ placeholder }) => {
 
   const dispatch = useAppDispatch();
   const history = useHistory();
-  // const activeUrlCategory = useUrlSearch('category');
   const activeUrlPage = useUrlSearch('page');
   const activeUrlSearch = useUrlSearch('search');
-  const [placeholderState, setPlaceholderState] = useState<string>(placeholder);
   const lang = useAppSelector((state) => state.mainReducer.lang);
 
-  const debouncedSearchTerm = useDebounce(inputValue, delayOfSearch);
+  const debouncedSearch = useDebounce(inputValue, delayOfSearch);
+
   const { register, handleSubmit } = useForm({
     mode: 'onChange',
+    resolver: yupResolver(schema),
   });
 
-  const autoComplete = useCallback((searchValue: string) => {
-    if (searchValue.length && searchValue !== ' ') {
-      fetchAutoCompleteData(searchValue).then((res) => {
-        setState(res);
-      });
-    }
-  }, []);
+  const autoComplete = useCallback(
+    (searchValue: any) => {
+      console.log(searchValue);
+      if (searchValue.replace(/ /g, '').length) {
+        fetchAutoCompleteData(searchValue, lang).then((res) => {
+          setState(res);
+        });
+      }
+    },
+    [lang]
+  );
 
   useEffect(() => {
-    if (state.length) {
+    if (state?.length) {
       const arrOfOptions: string[] = [];
       state.forEach((array: IMovieCard) => {
         arrOfOptions.push(array.title);
@@ -63,28 +67,18 @@ const FormMUi: React.FC<IFormProps> = ({ placeholder }) => {
   }, [state]);
 
   useEffect(() => {
-    setPlaceholderState((prev) => {
-      return (prev = !activeUrlSearch
-        ? placeholder
-        : `Results for ${activeUrlSearch}`);
-    });
-
     activeUrlPage && dispatch(setActivePage(pageAfterSearch));
     activeUrlSearch && dispatch(setQuery(activeUrlSearch));
-  }, [activeUrlPage, activeUrlSearch, dispatch, placeholder]);
+  }, [activeUrlPage, activeUrlSearch, dispatch]);
 
   useEffect(() => {
-    // onSubmit(inputValue);
-    // console.log(handleSubmit(testFormValue)());
-
     inputValue && handleSubmit(testFormValue)();
-    // handleSubmit(onSubmit)();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedSearchTerm]);
+  }, [debouncedSearch]);
 
   const onSubmit = useCallback(
-    (data: any) => {
-      if (data) {
+    (data: string) => {
+      if (data?.length) {
         setOpen(false);
         dispatch(setActivePage(pageAfterSearch));
         dispatch(setQuery(data));
@@ -93,8 +87,7 @@ const FormMUi: React.FC<IFormProps> = ({ placeholder }) => {
     },
     [dispatch, history]
   );
-  const testFormValue = (data: any) => {
-    console.log(data);
+  const testFormValue = (data: { movie: string }) => {
     onSubmit(data.movie);
   };
 
@@ -104,45 +97,31 @@ const FormMUi: React.FC<IFormProps> = ({ placeholder }) => {
         style={{ width: 300 }}
         forcePopupIcon={false}
         noOptionsText={getLang(lang).noResults}
+        defaultValue={''}
         open={open}
         getOptionSelected={() => true}
         options={options && options}
         blurOnSelect={true}
         clearOnBlur={false}
         clearOnEscape={false}
-        onBlur={(event) => {
-          setOpen(false);
-          // setInputValue('');
-        }}
-        onChange={(event: any, value) => {
-          // setInputValue(value);
+        onBlur={() => setOpen(false)}
+        onChange={(event, value) => {
           setInputValue('');
-
-          onSubmit(value);
-          handleSubmit(testFormValue);
+          value && onSubmit(value);
         }}
         onInputChange={(event, value) => {
-          // console.log(event, value);
           setInputValue(value);
           setOpen(true);
           autoComplete(value);
+          !value && setOpen(false);
         }}
+        // value={inputValue}
         renderInput={(params) => (
           <Input
             {...params}
+            placeholder={placeholder}
             value={params.InputProps}
-            {...register('movie', { maxLength: 5 })}
-            // placeholder={placeholderState}
-            // onBlur={() => setInputValue('')}
-            // onChange={(event) => {
-            //   setOpen(true);
-            //   setInputValue(event.target.value);
-            //   autoComplete(event.target.value);
-            // }}
-            // value={inputValue}
-            // name="movie"
-            // variant="standard"
-            // color="secondary"
+            {...register('movie')}
           />
         )}
       />

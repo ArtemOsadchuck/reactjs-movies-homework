@@ -5,7 +5,7 @@ const schema = yup.object().shape({
     .string()
     .max(35)
     .min(1)
-    .matches(/[a-zа-я0-9]/i)
+    .matches(/[a-zа-я0-9/s]/i)
     .required(),
 });
 
