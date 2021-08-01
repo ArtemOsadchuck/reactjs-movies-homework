@@ -9,10 +9,7 @@ import {
   setQuery,
 } from '../../../store/rootStore/mainStore/mainSlice';
 
-import getLang from '../../../languages/getLanguage';
-
 import { useState } from 'react';
-import { IFormProps } from '../Form/types';
 import { useCallback } from 'react';
 import { delayOfSearch, pageAfterSearch } from '../../../constants/variables';
 import useDebounce from './utils/useDebounce';
