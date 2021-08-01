@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import Form from './Form';
 import LanguageToggler from './LanguageToggler';
 import style from './Header.module.scss';
 
@@ -15,6 +14,8 @@ const Header: React.FC = () => {
   const appLang = useAppSelector((state) => state.mainReducer.lang);
   const dispatch = useAppDispatch();
 
+  const placeholder = lang(appLang).placeholder;
+  const noOptionsText = lang(appLang).noResults;
   useEffect(() => {
     dispatch(getGenres(appLang));
   }, [dispatch, appLang]);
@@ -24,8 +25,15 @@ const Header: React.FC = () => {
       <h1>
         <Link to={homePageLink}>{lang(appLang).title.toUpperCase()}</Link>
       </h1>
-      {/* <Form placeholder={lang(appLang).placeholder} /> */}
-      <FormMUi placeholder={lang(appLang).placeholder} />
+      <FormMUi
+        placeholder={placeholder}
+        id="33641"
+        blurOnSelect={true}
+        clearOnBlur={false}
+        noOptionsText={noOptionsText}
+        clearOnEscape={false}
+        forcePopupIcon={false}
+      />
       <LanguageToggler />
     </header>
   );
