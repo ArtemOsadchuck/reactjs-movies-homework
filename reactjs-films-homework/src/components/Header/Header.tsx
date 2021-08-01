@@ -8,7 +8,7 @@ import lang from '../../languages/getLanguage';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { Link } from 'react-router-dom';
 import getGenres from '../../store/rootStore/mainStore/getMaiData/getGenres';
-import FormMui from './FormMui';
+import FormMui from './FormM';
 
 const Header: React.FC = () => {
   const appLang = useAppSelector((state) => state.mainReducer.lang);
