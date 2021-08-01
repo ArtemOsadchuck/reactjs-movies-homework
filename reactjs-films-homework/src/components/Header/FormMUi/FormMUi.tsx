@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import Input from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useHistory } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
@@ -10,7 +9,6 @@ import {
   setQuery,
 } from '../../../store/rootStore/mainStore/mainSlice';
 
-// import { useForm } from 'react-hook-form';
 import getLang from '../../../languages/getLanguage';
 
 import { useState } from 'react';
@@ -24,6 +22,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Form from './Form';
 import schema from './_utils/formValidation';
+
+import StyledInput from './StyledInput';
 
 const FormMUi: React.FC<IFormProps> = ({ placeholder }) => {
   const [open, setOpen] = useState(false);
@@ -94,7 +94,6 @@ const FormMUi: React.FC<IFormProps> = ({ placeholder }) => {
   return (
     <Form onSubmit={handleSubmit(testFormValue)}>
       <Autocomplete
-        style={{ width: 300 }}
         forcePopupIcon={false}
         noOptionsText={getLang(lang).noResults}
         defaultValue={''}
@@ -115,12 +114,12 @@ const FormMUi: React.FC<IFormProps> = ({ placeholder }) => {
           autoComplete(value);
           !value && setOpen(false);
         }}
-        // value={inputValue}
         renderInput={(params) => (
-          <Input
+          <StyledInput
             {...params}
             placeholder={placeholder}
             value={params.InputProps}
+            variant="standard"
             {...register('movie')}
           />
         )}
