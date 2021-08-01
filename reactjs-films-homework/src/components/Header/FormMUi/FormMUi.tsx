@@ -15,17 +15,26 @@ import { useState } from 'react';
 import { IFormProps } from '../Form/types';
 import { useCallback } from 'react';
 import { delayOfSearch, pageAfterSearch } from '../../../constants/variables';
-import useDebounce from './_utils/_useDebounce';
-import fetchAutoCompleteData from './_utils/_fetchAutocompleteData';
+import useDebounce from './utils/useDebounce';
+import fetchAutoCompleteData from './utils/fetchAutocompleteData';
 import { IMovieCard } from '../../../types/components/movieCardTypes/types';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Form from './Form';
-import schema from './_utils/formValidation';
+import schema from './utils/formValidation';
 
 import StyledInput from './StyledInput';
+import { IFormMui } from './types';
 
-const FormMUi: React.FC<IFormProps> = ({ placeholder }) => {
+const FormMui: React.FC<IFormMui> = ({
+  placeholder,
+  forcePopupIcon,
+  id,
+  blurOnSelect,
+  clearOnBlur,
+  noOptionsText,
+  clearOnEscape,
+}) => {
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState(['']);
   const [state, setState] = useState<any>([]);
@@ -94,15 +103,16 @@ const FormMUi: React.FC<IFormProps> = ({ placeholder }) => {
   return (
     <Form onSubmit={handleSubmit(testFormValue)}>
       <Autocomplete
-        forcePopupIcon={false}
-        noOptionsText={getLang(lang).noResults}
+        forcePopupIcon={forcePopupIcon}
+        noOptionsText={noOptionsText}
         defaultValue={''}
         open={open}
+        id={`mui-${id}`}
         getOptionSelected={() => true}
         options={options && options}
-        blurOnSelect={true}
-        clearOnBlur={false}
-        clearOnEscape={false}
+        blurOnSelect={blurOnSelect}
+        clearOnBlur={clearOnBlur}
+        clearOnEscape={clearOnEscape}
         onBlur={() => setOpen(false)}
         onChange={(event, value) => {
           setInputValue('');
@@ -128,4 +138,4 @@ const FormMUi: React.FC<IFormProps> = ({ placeholder }) => {
   );
 };
 
-export default FormMUi;
+export default FormMui;

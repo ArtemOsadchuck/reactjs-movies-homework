@@ -1,45 +1,42 @@
 import Input from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core';
 
+const borderReset = 0;
+const backgroundColor = '#fff';
+const height = '2rem';
+const width = '20rem';
+
 const StyledInput = withStyles({
   root: {
     alignItems: 'center',
-    border: 0,
+    border: borderReset,
     justifyContent: 'center',
     paddingLeft: '1rem',
     borderBottom: '0px',
     borderRadius: '3px',
-    backgroundColor: '#fff',
-    height: '2rem',
+    backgroundColor: backgroundColor,
+    height: height,
     paddingRight: '0.5rem',
-    width: '20rem',
+    width: width,
 
     '& .MuiInput-underline': {
       backgroundColor: '#fff',
-      border: 0,
+      border: borderReset,
       '&:after': {
-        content: '""',
-        border: 0,
+        border: borderReset,
       },
       '&:before': {
-        content: '""',
-
-        border: 0,
+        border: borderReset,
       },
       '&:focus': {
         '&:before': {
-          content: '""',
-          border: 0,
+          border: borderReset,
         },
       },
       '&:hover': {
-        content: '""',
-
-        border: 0,
+        border: borderReset,
         '&:before': {
-          content: '""',
-
-          border: 0,
+          border: borderReset,
         },
       },
     },
