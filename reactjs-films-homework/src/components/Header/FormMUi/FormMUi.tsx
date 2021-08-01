@@ -1,25 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import useUrlSearch from '../../../hooks/useUrlSearch';
+import useDebounce from './utils/useDebounce';
 
 import {
   setActivePage,
   setQuery,
 } from '../../../store/rootStore/mainStore/mainSlice';
 
-import { useState } from 'react';
-import { useCallback } from 'react';
 import { delayOfSearch, pageAfterSearch } from '../../../constants/variables';
-import useDebounce from './utils/useDebounce';
 import fetchAutoCompleteData from './utils/fetchAutocompleteData';
-import { IMovieCard } from '../../../types/components/movieCardTypes/types';
-import { useForm } from 'react-hook-form';
+
 import { yupResolver } from '@hookform/resolvers/yup';
-import Form from './Form';
 import schema from './utils/formValidation';
 
+import { IMovieCard } from '../../../types/components/movieCardTypes/types';
+import Form from './Form';
 import StyledInput from './StyledInput';
 import { IFormMui } from './types';
 
