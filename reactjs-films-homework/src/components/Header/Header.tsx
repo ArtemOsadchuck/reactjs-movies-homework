@@ -8,7 +8,7 @@ import lang from '../../languages/getLanguage';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { Link } from 'react-router-dom';
 import getGenres from '../../store/rootStore/mainStore/getMaiData/getGenres';
-import FormMUi from './FormMUi';
+import FormMui from './FormMui';
 
 const Header: React.FC = () => {
   const appLang = useAppSelector((state) => state.mainReducer.lang);
@@ -25,7 +25,7 @@ const Header: React.FC = () => {
       <h1>
         <Link to={homePageLink}>{lang(appLang).title.toUpperCase()}</Link>
       </h1>
-      <FormMUi
+      <FormMui
         placeholder={placeholder}
         id="33641"
         blurOnSelect={true}
