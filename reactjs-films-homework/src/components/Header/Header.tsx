@@ -24,7 +24,7 @@ const Header: React.FC = () => {
       <h1>
         <Link to={homePageLink}>{lang(appLang).title.toUpperCase()}</Link>
       </h1>
-      <Form placeholder={lang(appLang).placeholder} />
+      {/* <Form placeholder={lang(appLang).placeholder} /> */}
       <FormMUi placeholder={lang(appLang).placeholder} />
       <LanguageToggler />
     </header>
