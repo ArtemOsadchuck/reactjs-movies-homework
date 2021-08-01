@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import Form from '../FormMui';
+import FormMui from '../FormMui';
 
 import RouterWrapper from '../../../../__testsUtils__/routerHoc';
 import StoreWrapper from '../../../../__testsUtils__/storeHoc';
@@ -18,7 +18,7 @@ const getComponent = ({
 }: IFormMui) => (
   <StoreWrapper>
     <RouterWrapper url="/?search=q&page=1">
-      <Form
+      <FormMui
         placeholder={placeholder}
         id="33641"
         blurOnSelect={true}
