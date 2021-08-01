@@ -18,6 +18,7 @@ const getMainData = createAsyncThunk(
 
       if (query?.length && page?.length && lang) {
         try {
+          console.log(query);
           const response = await axios.get(searchUrl);
           return response.data;
         } catch (error) {
