@@ -18,7 +18,6 @@ import fetchAutoCompleteData from './utils/fetchAutocompleteData';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from './utils/formValidation';
 
-import { IMovieCard } from '../../../types/components/movieCardTypes/types';
 import Form from './Form';
 import StyledInput from './StyledInput';
 import { IFormMui } from './types';
@@ -51,7 +50,7 @@ const FormMui: React.FC<IFormMui> = ({
   });
 
   const autoComplete = useCallback(
-    (searchValue: any) => {
+    (searchValue: string) => {
       console.log(searchValue);
       if (searchValue.replace(/ /g, '').length) {
         fetchAutoCompleteData(searchValue, lang).then((res) => {
@@ -65,8 +64,8 @@ const FormMui: React.FC<IFormMui> = ({
   useEffect(() => {
     if (state?.length) {
       const arrOfOptions: string[] = [];
-      state.forEach((array: IMovieCard) => {
-        arrOfOptions.push(array.title);
+      state.forEach((movie: { title: string }) => {
+        arrOfOptions.push(movie.title);
       });
       arrOfOptions.length && setOptions(arrOfOptions);
     }
