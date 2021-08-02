@@ -7,26 +7,10 @@ import RouterWrapper from '../../../../__testsUtils__/routerHoc';
 import StoreWrapper from '../../../../__testsUtils__/storeHoc';
 import { IFormMui } from '../types';
 
-const getComponent = ({
-  placeholder,
-  forcePopupIcon,
-  id,
-  blurOnSelect,
-  clearOnBlur,
-  noOptionsText,
-  clearOnEscape,
-}: IFormMui) => (
+const getComponent = (props: IFormMui) => (
   <StoreWrapper>
     <RouterWrapper url="/?search=q&page=1">
-      <FormMui
-        placeholder={placeholder}
-        id="33641"
-        blurOnSelect={true}
-        clearOnBlur={false}
-        noOptionsText={noOptionsText}
-        clearOnEscape={false}
-        forcePopupIcon={false}
-      />
+      <FormMui {...props} />
     </RouterWrapper>
   </StoreWrapper>
 );
@@ -41,6 +25,8 @@ describe('FormMui', () => {
       noOptionsText: 'no options',
       clearOnEscape: false,
       forcePopupIcon: false,
+      delayOfSearch: 1,
+      pageAfterSearch: '1',
     };
 
     const { asFragment } = render(getComponent(formProps));

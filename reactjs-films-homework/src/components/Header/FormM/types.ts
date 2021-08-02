@@ -6,4 +6,6 @@ export interface IFormMui {
   clearOnBlur: boolean;
   clearOnEscape: boolean;
   placeholder: string;
+  pageAfterSearch: string;
+  delayOfSearch: number;
 }

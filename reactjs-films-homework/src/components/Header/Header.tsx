@@ -9,6 +9,7 @@ import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { Link } from 'react-router-dom';
 import getGenres from '../../store/rootStore/mainStore/getMaiData/getGenres';
 import FormMui from './FormM';
+import { delayOfSearch, pageAfterSearch } from '../../constants/variables';
 
 const Header: React.FC = () => {
   const appLang = useAppSelector((state) => state.mainReducer.lang);
@@ -33,6 +34,8 @@ const Header: React.FC = () => {
         noOptionsText={noOptionsText}
         clearOnEscape={false}
         forcePopupIcon={false}
+        delayOfSearch={delayOfSearch}
+        pageAfterSearch={pageAfterSearch}
       />
       <LanguageToggler />
     </header>

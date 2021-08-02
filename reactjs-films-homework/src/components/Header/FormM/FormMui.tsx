@@ -12,7 +12,6 @@ import {
   setQuery,
 } from '../../../store/rootStore/mainStore/mainSlice';
 
-import { delayOfSearch, pageAfterSearch } from '../../../constants/variables';
 import fetchAutoCompleteData from './utils/fetchAutocompleteData';
 
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -30,6 +29,8 @@ const FormMui: React.FC<IFormMui> = ({
   clearOnBlur,
   noOptionsText,
   clearOnEscape,
+  delayOfSearch,
+  pageAfterSearch,
 }) => {
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState(['']);
@@ -50,7 +51,8 @@ const FormMui: React.FC<IFormMui> = ({
   });
 
   const autoComplete = useCallback(
-    (searchValue: string) => {
+    (searchData: { movie: string }) => {
+      const searchValue = searchData.movie;
       if (searchValue.replace(/ /g, '').length) {
         fetchAutoCompleteData(searchValue, lang).then((res) => {
           setState(res);
@@ -73,10 +75,10 @@ const FormMui: React.FC<IFormMui> = ({
   useEffect(() => {
     activeUrlPage && dispatch(setActivePage(pageAfterSearch));
     activeUrlSearch && dispatch(setQuery(activeUrlSearch));
-  }, [activeUrlPage, activeUrlSearch, dispatch]);
+  }, [activeUrlPage, activeUrlSearch, dispatch, pageAfterSearch]);
 
   useEffect(() => {
-    inputValue && handleSubmit(testFormValue)();
+    inputValue && handleSubmit(autoComplete)();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedSearch]);
 
@@ -89,7 +91,7 @@ const FormMui: React.FC<IFormMui> = ({
         history.push(`/?search=${data}&page=${pageAfterSearch}`);
       }
     },
-    [dispatch, history]
+    [dispatch, history, pageAfterSearch]
   );
   const testFormValue = (data: { movie: string }) => {
     onSubmit(data.movie);
@@ -116,7 +118,7 @@ const FormMui: React.FC<IFormMui> = ({
         onInputChange={(event, value) => {
           setInputValue(value);
           setOpen(true);
-          autoComplete(value);
+          // autoComplete(value);
           !value && setOpen(false);
         }}
         renderInput={(params) => (
