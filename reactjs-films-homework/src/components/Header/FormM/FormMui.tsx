@@ -51,7 +51,6 @@ const FormMui: React.FC<IFormMui> = ({
 
   const autoComplete = useCallback(
     (searchValue: string) => {
-      console.log(searchValue);
       if (searchValue.replace(/ /g, '').length) {
         fetchAutoCompleteData(searchValue, lang).then((res) => {
           setState(res);
